@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://c6oy7lu8oqdf0"]
+
+[ext_resource type="Texture2D" uid="uid://ewb7r1w2rbkb" path="res://assets/personaje/spritesheetManty.png" id="1_tml57"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpodt"]
+atlas = ExtResource("1_tml57")
+region = Rect2(0, 0, 22, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njcx7"]
+atlas = ExtResource("1_tml57")
+region = Rect2(22, 0, 22, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xutah"]
+atlas = ExtResource("1_tml57")
+region = Rect2(44, 0, 22, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovq70"]
+atlas = ExtResource("1_tml57")
+region = Rect2(66, 0, 22, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as36m"]
+atlas = ExtResource("1_tml57")
+region = Rect2(0, 0, 22, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vor3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpodt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njcx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xutah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovq70")
+}],
+"loop": 1,
+"name": &"correr",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as36m")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Jugador" type="CharacterBody2D" unique_id=2115649704]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1528434505]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=747022163]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1964985508]
+sprite_frames = SubResource("SpriteFrames_3vor3")
+animation = &"correr"
+frame_progress = 0.99365944
