@@ -10,11 +10,14 @@ extends CharacterBody2D
 func _ready() -> void:
 	timer_disparo.timeout.connect(_on_timer_disparo_timeout)
 
-
-func _physics_process(_delta: float) -> void:
+		
+func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 	for cuerpo in area_contacto.get_overlapping_bodies():
 		if cuerpo.is_in_group("jugador"):
 			cuerpo.recibir_dano()
+	move_and_slide()
 
 func _on_timer_disparo_timeout() -> void:
 	disparar()

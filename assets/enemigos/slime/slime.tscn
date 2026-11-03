@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bi82kers54rsf"]
+
+[ext_resource type="Script" uid="uid://b3lv8dolsyqdr" path="res://assets/enemigos/slime/slime.gd" id="1_01sq4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbjxg"]
+size = Vector2(16, 15.875)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7i8go"]
+radius = 9.0
+height = 22.0
+
+[node name="Slime" type="Node2D" unique_id=1481968508]
+
+[node name="slime" type="CharacterBody2D" parent="." unique_id=1005077849]
+script = ExtResource("1_01sq4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime" unique_id=1448290381]
+position = Vector2(0, -8.0625)
+shape = SubResource("RectangleShape2D_cbjxg")
+
+[node name="ColorRect" type="ColorRect" parent="slime" unique_id=1990032391]
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+color = Color(0.30352277, 0.75686854, 0.28720775, 1)
+
+[node name="AreaContacto" type="Area2D" parent="slime" unique_id=2067270282]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime/AreaContacto" unique_id=1112693180]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_7i8go")
