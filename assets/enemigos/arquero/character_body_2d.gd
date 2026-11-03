@@ -12,38 +12,32 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	# Si el jugador toca al enemigo, pierde vida
 	for cuerpo in area_contacto.get_overlapping_bodies():
 		if cuerpo.is_in_group("jugador"):
 			cuerpo.recibir_dano()
 
 func _on_timer_disparo_timeout() -> void:
 	disparar()
-	timer_disparo.start() # Reinicia el temporizador si "One Shot" está activado
-
+	timer_disparo.start()
+	
 func disparar() -> void:
 	if not is_instance_valid(jugador):
 		return
-
-	# Comprobación de seguridad: verifica si olvidaste asignar la escena en el Inspector
 	if not escena_bala:
-		print("Error: No has asignado ninguna escena de bala al enemigo.")
+		print("E")
 		return
-
-	# Lado en el que está el jugador: 1 = derecha, -1 = izquierda
-	var lado = 1 if jugador.global_position.x > global_position.x else -1
-	var direccion = Vector2(lado, 0)
+	var ladoX = 1 if jugador.global_position.x > global_position.x else -1
+	var ladoY = 1 if jugador.global_position.y > global_position.y else -1
+	var direccion = Vector2(ladoX, ladoY).normalized()
 
 	var bala = escena_bala.instantiate()
 	get_tree().current_scene.add_child(bala)
 	
-	bala.global_position = global_position + Vector2(punto_disparo.position.x * lado, punto_disparo.position.y)
+	bala.global_position = global_position + Vector2(punto_disparo.position.x * ladoX, punto_disparo.position.y * ladoY)
 
-	# Pasar las variables de movimiento a la bala
 	if bala.has_method("configurar_direccion"):
 		bala.configurar_direccion(direccion)
 	else:
 		bala.rotation = direccion.angle()
-		# Verifica que tu script de la bala tenga declarada la variable 'direccion'
 		if "direccion" in bala:
 			bala.direccion = direccion

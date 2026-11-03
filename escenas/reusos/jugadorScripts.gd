@@ -127,7 +127,7 @@ func recibir_dano() -> void:
 		return
 	invulnerable_hasta = ahora + tiempo_invulnerable_ms
 	vida -= 1
-	print("Vida: ", vida)
+	print("Ur life", vida)
 	if vida <= 0:
 		#Aca se reinicia
 		get_tree().reload_current_scene()
