@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c2jxnlt2ueh1s"]
+
+[ext_resource type="Script" uid="uid://bd7ruoc3d6y6" path="res://assets/enemigos/arquero/character_body_2d.gd" id="1_becj5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s3efq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_contacto"]
+radius = 12.0
+height = 34.0
+
+[node name="enemigo_arquero" type="Node2D" unique_id=1661687247]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=2068356088]
+script = ExtResource("1_becj5")
+
+[node name="TimerDisparo" type="Timer" parent="CharacterBody2D" unique_id=305127210]
+wait_time = 2.505
+one_shot = true
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1613372264]
+shape = SubResource("CapsuleShape2D_s3efq")
+
+[node name="ColorRect" type="ColorRect" parent="CharacterBody2D" unique_id=643675510]
+offset_left = -8.0
+offset_top = -18.0
+offset_right = 8.0
+offset_bottom = 14.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="PuntoDisparo" type="Marker2D" parent="CharacterBody2D" unique_id=1827364501]
+position = Vector2(16, -1)
+
+[node name="AreaContacto" type="Area2D" parent="CharacterBody2D" unique_id=1827364502]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/AreaContacto" unique_id=1827364503]
+shape = SubResource("CapsuleShape2D_contacto")

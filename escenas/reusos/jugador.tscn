@@ -56,9 +56,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Jugador" type="CharacterBody2D" unique_id=2115649704 node_paths=PackedStringArray("animacion")]
+[node name="Jugador" type="CharacterBody2D" unique_id=2115649704]
 script = ExtResource("1_tvt8f")
-animacion = NodePath("animacion")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1528434505]
 position = Vector2(0.5, -21.5)

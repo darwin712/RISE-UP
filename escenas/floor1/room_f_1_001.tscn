@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bluwbg4xyuchd" path="res://assets/tilesetLayers/backgroundCastle.png" id="1_h2uu8"]
 [ext_resource type="TileSet" uid="uid://blciglvtm15im" path="res://assets/tilesetLayers/tilesetCastle.tres" id="1_veq23"]
 [ext_resource type="PackedScene" uid="uid://c6oy7lu8oqdf0" path="res://escenas/reusos/jugador.tscn" id="2_o8p3o"]
+[ext_resource type="PackedScene" uid="uid://c2jxnlt2ueh1s" path="res://assets/enemigos/arquero/enemigo.tscn" id="4_si3ip"]
 
 [node name="RoomF1_001" type="Node2D" unique_id=830565539]
 
@@ -21,3 +22,6 @@ tile_set = ExtResource("1_veq23")
 
 [node name="Jugador" parent="." unique_id=2115649704 instance=ExtResource("2_o8p3o")]
 position = Vector2(54, 150)
+
+[node name="enemigo_arquero" parent="." unique_id=1661687247 instance=ExtResource("4_si3ip")]
+position = Vector2(309, 227)
