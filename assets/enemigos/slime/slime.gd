@@ -1,7 +1,7 @@
 extends CharacterBody2D
 @onready var jugador: Node2D = get_tree().get_first_node_in_group("jugador")
 @onready var area_contacto: Area2D = $AreaContacto
-var velocidad = 50.0
+var velocidad = 30.0
 
 func _physics_process(delta: float) -> void:
 

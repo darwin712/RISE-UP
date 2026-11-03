@@ -4,6 +4,7 @@ var tiempo_invulnerable_ms = 1000
 var invulnerable_hasta = 0
 
 @onready var animacion: AnimatedSprite2D = %animacion
+@onready var hurtbox: Area2D = $DamageBox
 @export var gravedad: float = 1300.0
 @export var velocidadMax: float = 180.0
 @export var velocidadSalto: float = -360.0
@@ -37,6 +38,7 @@ var mitad_alto: float = 8.0
 var posicion_inicial: Vector2
 	
 func _ready():
+	add_to_group("jugador")
 	posicion_inicial = global_position
 	add_to_group("jugador")
 
@@ -104,6 +106,7 @@ func _physics_process(delta: float):
 		animacion.play("default")
 
 	move_and_slide()
+	detectarObstaculoDano()
 	limitarPantalla()
 
 func limitarPantalla():
@@ -114,6 +117,7 @@ func limitarPantalla():
 		velocity.y = max(velocity.y, 0)
 
 	if global_position.y > limite_inferior + mitad_alto:
+		recibir_dano()
 		respawnear()
 
 func respawnear():
@@ -130,4 +134,10 @@ func recibir_dano() -> void:
 	print("Ur life", vida)
 	if vida <= 0:
 		#Aca se reinicia
-		get_tree().reload_current_scene()
+		get_tree().reload_current_scene.call_deferred()
+		
+func detectarObstaculoDano():
+	if hurtbox.has_overlapping_bodies():
+		recibir_dano()
+		respawnear()
+		

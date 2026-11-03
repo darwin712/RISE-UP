@@ -12,6 +12,7 @@ height = 22.0
 [node name="Slime" type="Node2D" unique_id=1481968508]
 
 [node name="slime" type="CharacterBody2D" parent="." unique_id=1005077849]
+collision_mask = 3
 script = ExtResource("1_01sq4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime" unique_id=1448290381]

@@ -29,8 +29,8 @@ func disparar() -> void:
 	if not escena_bala:
 		print("E")
 		return
-	var ladoX = 0.75 if jugador.global_position.x > global_position.x else -1
-	var ladoY = 0.75 if jugador.global_position.y > global_position.y else -1
+	var ladoX = 0.75 if jugador.global_position.x > global_position.x else -1.0
+	var ladoY = 0.75 if jugador.global_position.y > global_position.y else -1.0
 	var direccion = Vector2(ladoX, ladoY).normalized()
 
 	var bala = escena_bala.instantiate()

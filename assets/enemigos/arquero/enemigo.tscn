@@ -12,6 +12,7 @@ height = 34.0
 [node name="enemigo_arquero" type="Node2D" unique_id=1661687247]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=2068356088]
+collision_mask = 3
 script = ExtResource("1_becj5")
 
 [node name="TimerDisparo" type="Timer" parent="CharacterBody2D" unique_id=305127210]

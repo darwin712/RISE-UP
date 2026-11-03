@@ -56,6 +56,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vor3"]
+size = Vector2(13, 21)
+
 [node name="Jugador" type="CharacterBody2D" unique_id=2115649704]
 script = ExtResource("1_tvt8f")
 
@@ -69,3 +72,12 @@ position = Vector2(1, -23)
 sprite_frames = SubResource("SpriteFrames_3vor3")
 animation = &"correr"
 frame_progress = 0.38617033
+
+[node name="DamageBox" type="Area2D" parent="." unique_id=785735441]
+collision_layer = 0
+collision_mask = 2
+
+[node name="ColisionDaño" type="CollisionShape2D" parent="DamageBox" unique_id=1217836430]
+position = Vector2(0.5, -21.5)
+shape = SubResource("RectangleShape2D_3vor3")
+debug_color = Color(0.2286197, 0.68728924, 0.8173392, 0.41960785)
