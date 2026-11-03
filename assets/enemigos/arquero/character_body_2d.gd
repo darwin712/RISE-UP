@@ -5,13 +5,11 @@ extends CharacterBody2D
 @onready var timer_disparo: Timer = $TimerDisparo
 @onready var area_contacto: Area2D = $AreaContacto
 
-# Buscamos al jugador al iniciar. Recuerda añadir al jugador al grupo "jugador"
 @onready var jugador: Node2D = get_tree().get_first_node_in_group("jugador")
 
 func _ready() -> void:
 	timer_disparo.timeout.connect(_on_timer_disparo_timeout)
-	# Si no activaste "Autostart" en el Inspector, descomenta la siguiente línea:
-	# timer_disparo.start()
+
 
 func _physics_process(_delta: float) -> void:
 	# Si el jugador toca al enemigo, pierde vida
@@ -24,7 +22,6 @@ func _on_timer_disparo_timeout() -> void:
 	timer_disparo.start() # Reinicia el temporizador si "One Shot" está activado
 
 func disparar() -> void:
-	# Si el jugador murió o no existe en la escena, no dispares
 	if not is_instance_valid(jugador):
 		return
 
@@ -37,11 +34,9 @@ func disparar() -> void:
 	var lado = 1 if jugador.global_position.x > global_position.x else -1
 	var direccion = Vector2(lado, 0)
 
-	# Instanciar la bala y añadirla a la escena principal
 	var bala = escena_bala.instantiate()
 	get_tree().current_scene.add_child(bala)
 	
-	# Posicionar la bala en el Marker2D del enemigo (espejado según el lado)
 	bala.global_position = global_position + Vector2(punto_disparo.position.x * lado, punto_disparo.position.y)
 
 	# Pasar las variables de movimiento a la bala

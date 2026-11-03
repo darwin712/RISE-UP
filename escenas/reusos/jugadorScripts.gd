@@ -3,7 +3,7 @@ var vida = 3
 var tiempo_invulnerable_ms = 1000
 var invulnerable_hasta = 0
 
-var animacion: AnimatedSprite2D
+@onready var animacion: AnimatedSprite2D = %animacion
 @export var gravedad: float = 1300.0
 @export var velocidadMax: float = 180.0
 @export var velocidadSalto: float = -360.0
@@ -16,6 +16,7 @@ var animacion: AnimatedSprite2D
 @export var friccionSuelo: float = 1600.0
 @export var friccionAire: float = 600.0
 @export var corteSalto: float = 0.5
+
 
 const bloqueoPared: float = 0.15
 const tiempoCoyote: float = 0.1
@@ -34,9 +35,10 @@ var mitad_ancho: float = 8.0
 var mitad_alto: float = 8.0
 
 var posicion_inicial: Vector2
-
+	
 func _ready():
 	posicion_inicial = global_position
+	add_to_group("jugador")
 
 func _physics_process(delta: float):
 	var direccion: float = Input.get_axis("Mover_izquierda", "Mover_derecha")
@@ -95,7 +97,7 @@ func _physics_process(delta: float):
 		animacion.flip_h = direccion < 0.0
 
 	if not is_on_floor():
-		animacion.play("Saltar")
+		animacion.play("saltar")
 	elif abs(velocity.x) > 1.0:
 		animacion.play("correr")
 	else:
