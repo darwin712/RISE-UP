@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dqjolg5tn5eq5"]
+
+[ext_resource type="Script" uid="uid://boh18rskqgdpe" path="res://bala.gd" id="1_pu3jq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trs4p"]
+size = Vector2(24, 1)
+
+[node name="Bala" type="Area2D" unique_id=456289909]
+position = Vector2(-2, -2)
+scale = Vector2(0.5, 1)
+script = ExtResource("1_pu3jq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1254608009]
+position = Vector2(6, 1.5)
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_trs4p")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=516206845]
+scale = Vector2(0.5, 1)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=531805544]
+offset_top = 1.0
+offset_right = 24.0
+offset_bottom = 2.0
+scale = Vector2(0.5, 1)
+metadata/_edit_use_anchors_ = true
