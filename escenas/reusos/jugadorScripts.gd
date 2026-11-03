@@ -1,4 +1,7 @@
 extends CharacterBody2D
+var vida = 3
+var tiempo_invulnerable_ms = 1000
+var invulnerable_hasta = 0
 
 var animacion: AnimatedSprite2D
 @export var gravedad: float = 1300.0
@@ -92,7 +95,7 @@ func _physics_process(delta: float):
 		animacion.flip_h = direccion < 0.0
 
 	if not is_on_floor():
-		animacion.play("saltar")
+		animacion.play("Saltar")
 	elif abs(velocity.x) > 1.0:
 		animacion.play("correr")
 	else:
@@ -114,3 +117,15 @@ func limitarPantalla():
 func respawnear():
 	global_position = posicion_inicial
 	velocity = Vector2.ZERO
+	
+	
+func recibir_dano() -> void:
+	var ahora = Time.get_ticks_msec()
+	if ahora < invulnerable_hasta:
+		return
+	invulnerable_hasta = ahora + tiempo_invulnerable_ms
+	vida -= 1
+	print("Vida: ", vida)
+	if vida <= 0:
+		#Aca se reinicia
+		get_tree().reload_current_scene()
