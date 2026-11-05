@@ -8,4 +8,3 @@ enum Direccion {
 }
 
 @export var direccion: Direccion
-@export var IdConexion: String
