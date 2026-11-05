@@ -2,7 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://ewb7r1w2rbkb" path="res://assets/personaje/spritesheetManty.png" id="1_tml57"]
 [ext_resource type="Script" uid="uid://dgtqacyxqt162" path="res://escenas/reusos/jugadorScripts.gd" id="1_tvt8f"]
+[ext_resource type="Texture2D" uid="uid://6ptarp1nwodp" path="res://assets/personaje/MantyAgachado.png" id="2_4naty"]
 [ext_resource type="Texture2D" uid="uid://dcvtmeyxlhxyv" path="res://assets/personaje/MantySalto.png" id="3_6hs5o"]
+[ext_resource type="Texture2D" uid="uid://x1sxy15s6248" path="res://assets/personaje/MantyMuerte.png" id="4_10btl"]
+[ext_resource type="Texture2D" uid="uid://kw04yssm4af" path="res://assets/personaje/MantySlide.png" id="5_10btl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3flwq"]
 size = Vector2(13, 21)
@@ -23,8 +26,48 @@ region = Rect2(66, 0, 22, 27)
 atlas = ExtResource("1_tml57")
 region = Rect2(0, 0, 22, 27)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_10btl"]
+atlas = ExtResource("4_10btl")
+region = Rect2(0, 0, 31, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqg4x"]
+atlas = ExtResource("4_10btl")
+region = Rect2(31, 0, 31, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nc0a5"]
+atlas = ExtResource("4_10btl")
+region = Rect2(62, 0, 31, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wqxo"]
+atlas = ExtResource("4_10btl")
+region = Rect2(93, 0, 31, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol2kc"]
+atlas = ExtResource("4_10btl")
+region = Rect2(124, 0, 31, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wgro"]
+atlas = ExtResource("4_10btl")
+region = Rect2(155, 0, 31, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ad1y"]
+atlas = ExtResource("4_10btl")
+region = Rect2(186, 0, 31, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp6tm"]
+atlas = ExtResource("4_10btl")
+region = Rect2(217, 0, 31, 30)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3vor3"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4naty")
+}],
+"loop": 1,
+"name": &"agachado",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_njcx7")
@@ -49,35 +92,91 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_10btl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqg4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nc0a5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wqxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol2kc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wgro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ad1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp6tm")
+}],
+"loop": 1,
+"name": &"muerte",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("3_6hs5o")
 }],
 "loop": 1,
 "name": &"saltar",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_10btl")
+}],
+"loop": 1,
+"name": &"slide",
+"speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vor3"]
-size = Vector2(13, 21)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxuq"]
+size = Vector2(10, 13)
 
-[node name="Jugador" type="CharacterBody2D" unique_id=2115649704]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mti6b"]
+size = Vector2(10, 12)
+
+[node name="Jugador" type="CharacterBody2D" unique_id=2115649704 node_paths=PackedStringArray("animacion")]
+collision_layer = 4
 script = ExtResource("1_tvt8f")
+animacion = NodePath("animacion")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1528434505]
+[node name="CollisionPersonaje" type="CollisionShape2D" parent="." unique_id=1528434505]
+unique_name_in_owner = true
+visible = false
+light_mask = 2
 position = Vector2(0.5, -21.5)
 shape = SubResource("RectangleShape2D_3flwq")
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=747022163]
+position = Vector2(195, 25)
+limit_left = 0
+limit_right = 480
+limit_bottom = 271
+
 [node name="animacion" type="AnimatedSprite2D" parent="." unique_id=1964985508]
 unique_name_in_owner = true
-position = Vector2(1, -23)
+position = Vector2(0.9999995, -23)
+scale = Vector2(0.83870965, 1)
 sprite_frames = SubResource("SpriteFrames_3vor3")
-animation = &"correr"
-frame_progress = 0.38617033
 
-[node name="DamageBox" type="Area2D" parent="." unique_id=785735441]
+[node name="CollisionPersonajeAgachado" type="CollisionShape2D" parent="." unique_id=1684356368]
+unique_name_in_owner = true
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_4kxuq")
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=756472363]
+unique_name_in_owner = true
+position = Vector2(1, -14)
 collision_layer = 0
 collision_mask = 2
 
-[node name="ColisionDaño" type="CollisionShape2D" parent="DamageBox" unique_id=1217836430]
-position = Vector2(0.5, -21.5)
-shape = SubResource("RectangleShape2D_3vor3")
-debug_color = Color(0.2286197, 0.68728924, 0.8173392, 0.41960785)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=687999248]
+position = Vector2(-1, -4)
+shape = SubResource("RectangleShape2D_mti6b")

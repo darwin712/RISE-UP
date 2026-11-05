@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b3gspx7p08il2"]
+
+[ext_resource type="Texture2D" uid="uid://bluwbg4xyuchd" path="res://assets/tilesetLayers/backgroundCastle.png" id="1_8m65x"]
+[ext_resource type="PackedScene" uid="uid://bwa3dyf4sb7fa" path="res://escenas/reusos/terrenoLimites.tscn" id="2_8m65x"]
+
+[node name="Terreno" type="Node2D" unique_id=951354240]
+
+[node name="Fondo" type="Sprite2D" parent="." unique_id=1583194013]
+visible = false
+z_index = -1
+position = Vector2(252, 133)
+scale = Vector2(0.41684985, 0.4781842)
+texture = ExtResource("1_8m65x")
+
+[node name="Bloques" parent="." unique_id=589649216 instance=ExtResource("2_8m65x")]

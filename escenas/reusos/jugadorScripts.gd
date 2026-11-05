@@ -1,128 +1,79 @@
 extends CharacterBody2D
+
 var vida = 3
 var tiempo_invulnerable_ms = 1000
 var invulnerable_hasta = 0
 
-@onready var animacion: AnimatedSprite2D = %animacion
-@onready var hurtbox: Area2D = $DamageBox
-@export var gravedad: float = 1300.0
-@export var velocidadMax: float = 180.0
-@export var velocidadSalto: float = -360.0
-@export var velocidadCaidaMax: float = 320.0
-@export var velocidadCimaSalto: float = 40.0
-@export var velocidadDeslizar: float = 40.0
-@export var velocidadWalljump: Vector2 = Vector2(200.0, -320.0)
-@export var aceleracionSuelo: float = 1800.0
-@export var aceleracionAire: float = 1100.0
-@export var friccionSuelo: float = 1600.0
-@export var friccionAire: float = 600.0
-@export var corteSalto: float = 0.5
+@onready var hurtbox: Area2D 
+
+@export var animacion: AnimatedSprite2D
+
+@export var CollisionPersonaje: CollisionObject2D
+@export var CollisionPersonajeAgachado: CollisionObject2D
 
 
-const bloqueoPared: float = 0.15
-const tiempoCoyote: float = 0.1
-const tiempoBuffer: float = 0.1
+var velocidadSalto = -390 
+var velocidadDobleSalto = -300
+var velocidad: float = 200.0
+var aceleracion = 200
+var velocidadDeDesliz = 32
+var last_wall: Vector2 = Vector2.ZERO
+var wall_normal
+@export var velocidadWalljump: Vector2 = Vector2(300.0, -350.0)
+var agachado: bool 
 
-var cronoCoyote: float = 0.0
-var cronoBuffer: float = 0.0
+
+const coyoteTiempo: float = 0.25
+const tiempoPared: float = 0.4
+const tiempoBuffer: float = 0.2
+
+
+var crono_coyote: float = 0.0
 var cronoBloqueo: float = 0.0
+var cronoBuffer: float = 0.0
 
-var limite_izquierdo: float = 0.0
-var limite_derecho: float = 480.0
-var limite_superior: float = 0.0
-var limite_inferior: float = 270.0
+var  EstaPared: bool = false
+var pausa: bool=false
 
-var mitad_ancho: float = 8.0
-var mitad_alto: float = 8.0
+var posInicial: Vector2
 
-var posicion_inicial: Vector2
+
+var en_pared: bool = is_on_wall_only()
+
+
+func _ready() -> void:
+	add_to_group("jugador")
+	posInicial = global_position
+	add_to_group("jugador")
 	
-func _ready():
-	add_to_group("jugador")
-	posicion_inicial = global_position
-	add_to_group("jugador")
 
-func _physics_process(delta: float):
-	var direccion: float = Input.get_axis("Mover_izquierda", "Mover_derecha")
 
-	#CRONOMETROS
-	if is_on_floor():
-		cronoCoyote = tiempoCoyote
-	else:
-		cronoCoyote -= delta
-
-	if Input.is_action_just_pressed("Saltar"):
-		cronoBuffer = tiempoBuffer
-	else:
-		cronoBuffer -= delta
-
-	cronoBloqueo -= delta
-
-	#GRAVEDAD
-	var g: float = gravedad
-	if Input.is_action_pressed("Saltar") and abs(velocity.y) < velocidadCimaSalto:
-		g *= 0.5
-	velocity.y = min(velocity.y + g * delta, velocidadCaidaMax)
-
-	#DESLIZAR
-	var en_pared: bool = is_on_wall_only()
-	var normal_pared: Vector2 = get_wall_normal()
-	if en_pared and velocity.y > 0.0 and direccion == -sign(normal_pared.x):
-		velocity.y = min(velocity.y, velocidadDeslizar)
-
-	#SALTOS
-	if cronoBuffer > 0.0 and cronoCoyote > 0.0:
-		velocity.y = velocidadSalto
-		cronoBuffer = 0.0
-		cronoCoyote = 0.0
-	elif cronoBuffer > 0.0 and en_pared:
-		velocity.x = normal_pared.x * velocidadWalljump.x
-		velocity.y = velocidadWalljump.y
-		cronoBuffer = 0.0
-		cronoBloqueo = bloqueoPared
-
-	#Salto variable
-	if Input.is_action_just_released("Saltar") and velocity.y < 0.0:
-		velocity.y *= corteSalto
-
-	#ACELERACION
-	if cronoBloqueo <= 0.0:
-		var aceleracion: float = aceleracionSuelo if is_on_floor() else aceleracionAire
-		var friccion: float = friccionSuelo if is_on_floor() else friccionAire
-		if direccion != 0.0:
-			velocity.x = move_toward(velocity.x, direccion * velocidadMax, aceleracion * delta)
-		else:
-			velocity.x = move_toward(velocity.x, 0.0, friccion * delta)
-
-	#ANIMACIONES
-	if direccion != 0.0 and cronoBloqueo <= 0.0:
-		animacion.flip_h = direccion < 0.0
-
-	if not is_on_floor():
-		animacion.play("saltar")
-	elif abs(velocity.x) > 1.0:
-		animacion.play("correr")
-	else:
-		animacion.play("default")
-
-	move_and_slide()
-	detectarObstaculoDano()
-	limitarPantalla()
-
-func limitarPantalla():
-	global_position.x = clamp(global_position.x,limite_izquierdo + mitad_ancho,limite_derecho - mitad_ancho)
-
-	if global_position.y < limite_superior + mitad_alto:
-		global_position.y = limite_superior + mitad_alto
-		velocity.y = max(velocity.y, 0)
-
-	if global_position.y > limite_inferior + mitad_alto:
-		recibir_dano()
-		respawnear()
-
-func respawnear():
-	global_position = posicion_inicial
+func respawn():
+	self.global_position = posInicial
 	velocity = Vector2.ZERO
+	
+func morir():
+	animacion.play("muerte")
+	pausa=true
+	await get_tree().create_timer(0.3).timeout
+	pausa = false
+	respawn()
+
+func DeslizarPared():
+	if !is_on_floor():
+		wall_normal = get_wall_normal()
+		en_pared = is_on_wall_only()
+		if is_on_wall() and velocity.y > 0 and abs(get_wall_normal().x) > 0.9:
+			velocity.y = min(velocity.y, velocidadDeDesliz)
+			EstaPared = true
+			animacion.play("slide")
+		else:
+			EstaPared = false
+	else: 
+		last_wall = Vector2.ZERO
+		EstaPared = false
+		en_pared = false
+	
 	
 	
 func recibir_dano() -> void:
@@ -138,6 +89,93 @@ func recibir_dano() -> void:
 		
 func detectarObstaculoDano():
 	if hurtbox.has_overlapping_bodies():
-		recibir_dano()
-		respawnear()
+		respawn()
+
+func _physics_process(delta: float):
+	var direccion := Input.get_axis("Mover_izquierda", "Mover_derecha")
+	#cronometro
+	if is_on_floor():
+		crono_coyote = coyoteTiempo
+	else:
+		crono_coyote -= delta
+
+	if Input.is_action_just_pressed("Saltar"):
+		cronoBuffer = tiempoBuffer
+	else:
+		cronoBuffer -= delta
+
+	cronoBloqueo -= delta
 		
+	if Input.is_action_just_pressed("Saltar"):
+		cronoBloqueo = tiempoPared
+	else:
+		cronoBloqueo -= delta
+
+	cronoBloqueo -= delta
+
+	DeslizarPared()
+
+	#animaciones
+	if not is_on_floor() and !EstaPared:
+		animacion.play("saltar")
+		animacion.offset.y=-1
+	elif velocity.x != 0:
+		animacion.play("correr")
+	elif agachado:
+		animacion.play("agachado")
+	elif EstaPared and is_on_wall_only():
+		animacion.play("slide")
+	elif Input.is_action_pressed("agacharse"):
+		animacion.play("agachado")
+		animacion.offset.y = 5
+		direccion = 0
+	else:
+		animacion.play("default")
+		animacion.offset.y = 0
+	
+	#gravedad
+	if pausa:
+		velocity = Vector2.ZERO
+		return
+	velocity += get_gravity() * delta 
+	if !Input.is_action_pressed("Saltar") and velocity.y < 0:
+		velocity.y = 0
+		
+	#salto
+	if cronoBuffer > 0.0:
+		# Salto 
+		if crono_coyote > 0.0:
+			velocity.y = velocidadSalto 
+			crono_coyote = 0.0 
+			cronoBuffer = 0.0
+		# Walljump 
+		elif en_pared or EstaPared:
+			velocity.x = wall_normal.x * velocidadWalljump.x
+			velocity.y = velocidadWalljump.y
+			cronoBuffer = 0.0
+			cronoBloqueo = tiempoPared
+		
+			
+
+	
+
+		
+	
+	# Movimiento horizontal
+	if cronoBloqueo <= 0.0:
+		if direccion: 
+			velocity.x = direccion * velocidad 
+		else:
+			velocity.x = move_toward(velocity.x, 0, velocidad)
+		
+		if direccion == 1.0:
+			animacion.flip_h = false
+		elif direccion == -1.0:
+			animacion.flip_h = true
+	
+	
+	move_and_slide()
+
+
+func _on_damage_box_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
