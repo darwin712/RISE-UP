@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://d2sok4sq4molt"]
+
+[ext_resource type="PackedScene" uid="uid://c6oy7lu8oqdf0" path="res://escenas/reusos/jugador.tscn" id="1_d7u15"]
+[ext_resource type="Script" uid="uid://vsy71qqg4254" path="res://escenas/partida_manager.gd" id="2_jumxm"]
+[ext_resource type="PackedScene" uid="uid://cn7lw60ygx5sw" path="res://escenas/Salas/Nivel0-Prototipo/test001.tscn" id="3_26pgj"]
+
+[node name="Main" type="Node2D" unique_id=1008311360]
+
+[node name="SalaActual" type="Node2D" parent="." unique_id=1119735098]
+
+[node name="Jugador" parent="." unique_id=2115649704 instance=ExtResource("1_d7u15")]
+
+[node name="ManejadorDePartida" type="Node" parent="." unique_id=1333546248]
+script = ExtResource("2_jumxm")
+sala_inicio = ExtResource("3_26pgj")

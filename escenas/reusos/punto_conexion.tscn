@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cdk5i2l8o61nc"]
+
+[ext_resource type="Script" uid="uid://cde5byus4mlkq" path="res://punto_conexion.gd" id="1_huc36"]
+
+[node name="PuntoConexion" type="Node2D" unique_id=1622183807]
+script = ExtResource("1_huc36")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1731812365]
