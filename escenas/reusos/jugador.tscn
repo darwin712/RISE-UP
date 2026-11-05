@@ -140,9 +140,9 @@ animations = [{
 size = Vector2(10, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mti6b"]
-size = Vector2(8, 21)
+size = Vector2(8, 16)
 
-[node name="Jugador" type="CharacterBody2D" unique_id=2115649704 node_paths=PackedStringArray("animacion", "CollisionPersonaje")]
+[node name="Jugador" type="CharacterBody2D" unique_id=2115649704 node_paths=PackedStringArray("animacion", "CollisionPersonaje") groups=["jugador"]]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_tvt8f")
@@ -175,11 +175,12 @@ shape = SubResource("RectangleShape2D_4kxuq")
 [node name="hurtbox" type="Area2D" parent="." unique_id=756472363]
 unique_name_in_owner = true
 position = Vector2(1, -14)
-collision_layer = 0
-collision_mask = 2
+collision_layer = 4
+collision_mask = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=687999248]
-position = Vector2(-1, -7.5)
+position = Vector2(-1, -7)
 shape = SubResource("RectangleShape2D_mti6b")
 
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

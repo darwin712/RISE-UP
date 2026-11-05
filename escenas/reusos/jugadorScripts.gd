@@ -183,4 +183,12 @@ func _physics_process(delta: float):
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	respawn()
+
+
+
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+		pass
+	
 	

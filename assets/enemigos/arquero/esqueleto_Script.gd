@@ -47,3 +47,7 @@ func disparar() -> void:
 func _on_area_contacto_body_entered(body: Node2D) -> void:
 	if body.name == "jugador":
 		body.recibir_dano()
+
+
+func _on_area_contacto_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.

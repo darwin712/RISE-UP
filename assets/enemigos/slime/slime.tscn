@@ -12,7 +12,8 @@ height = 22.0
 [node name="Slime" type="Node2D" unique_id=1481968508]
 
 [node name="slime" type="CharacterBody2D" parent="." unique_id=1005077849]
-collision_mask = 3
+collision_layer = 16
+collision_mask = 5
 script = ExtResource("1_01sq4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime" unique_id=1448290381]
@@ -25,8 +26,12 @@ offset_top = -16.0
 offset_right = 8.0
 color = Color(0.30352277, 0.75686854, 0.28720775, 1)
 
-[node name="AreaContacto" type="Area2D" parent="slime" unique_id=2067270282]
+[node name="AreaContacto" type="Area2D" parent="slime" unique_id=2067270282 groups=["dano_enemigo"]]
+collision_layer = 16
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime/AreaContacto" unique_id=1112693180]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_7i8go")
+
+[connection signal="area_entered" from="slime/AreaContacto" to="slime" method="_on_area_contacto_area_entered"]
