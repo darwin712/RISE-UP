@@ -12,10 +12,13 @@ func _ready() -> void:
 
 		
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
+	if	not is_on_floor():
 		velocity += get_gravity() * delta
-	
-	move_and_slide()
+	for cuerpo in area_contacto.get_overlapping_bodies():
+		if cuerpo.is_in_group("jugador"):
+			cuerpo.recibir_dano()
+	if jugador != null:
+		var direccion = (jugador.global_position - global_position).normalized()
 
 func _on_timer_disparo_timeout() -> void:
 	disparar()
@@ -42,12 +45,6 @@ func disparar() -> void:
 		bala.rotation = direccion.angle()
 		if "direccion" in bala:
 			bala.direccion = direccion
-
-
-func _on_area_contacto_body_entered(body: Node2D) -> void:
-	if body.name == "jugador":
-		body.recibir_dano()
-
 
 func _on_area_contacto_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
