@@ -49,6 +49,7 @@ func _ready() -> void:
 
 
 func respawn():
+	recibir_dano()
 	self.global_position = posInicial
 	velocity = Vector2.ZERO
 	
@@ -177,5 +178,9 @@ func _physics_process(delta: float):
 	move_and_slide()
 
 
-func _on_damage_box_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+
+
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	respawn()
+	

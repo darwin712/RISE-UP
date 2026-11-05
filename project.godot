@@ -56,6 +56,7 @@ agacharse={
 2d_physics/layer_2="TileDaño"
 2d_physics/layer_3="Jugador"
 2d_physics/layer_4="Item"
+2d_physics/layer_5="enemigo"
 
 [physics]
 

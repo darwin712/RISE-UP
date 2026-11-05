@@ -42,3 +42,8 @@ func disparar() -> void:
 		bala.rotation = direccion.angle()
 		if "direccion" in bala:
 			bala.direccion = direccion
+
+
+func _on_area_contacto_body_entered(body: Node2D) -> void:
+	if body.name == "jugador":
+		body.recibir_dano()

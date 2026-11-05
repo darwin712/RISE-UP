@@ -15,7 +15,7 @@ size = Vector2(13, 21)
 [node name="enemigo_arquero" type="Node2D" unique_id=1661687247]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=2068356088]
-collision_mask = 3
+collision_layer = 16
 script = ExtResource("1_becj5")
 
 [node name="TimerDisparo" type="Timer" parent="CharacterBody2D" unique_id=305127210]
@@ -38,15 +38,19 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(16, -1)
 
 [node name="AreaContacto" type="Area2D" parent="CharacterBody2D" unique_id=1827364502]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/AreaContacto" unique_id=1827364503]
 shape = SubResource("CapsuleShape2D_contacto")
 
 [node name="DamageBox" type="Area2D" parent="CharacterBody2D" unique_id=843023800]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 2
 
 [node name="ColisionDaño" type="CollisionShape2D" parent="CharacterBody2D/DamageBox" unique_id=475995700]
-position = Vector2(0.5, -21.5)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_snpa8")
 debug_color = Color(0.2286197, 0.68728924, 0.8173392, 0.41960785)
+
+[connection signal="body_entered" from="CharacterBody2D/AreaContacto" to="CharacterBody2D" method="_on_area_contacto_body_entered"]
