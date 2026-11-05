@@ -162,10 +162,9 @@ limit_bottom = 271
 
 [node name="animacion" type="AnimatedSprite2D" parent="." unique_id=1964985508]
 unique_name_in_owner = true
-position = Vector2(0.99999976, -23)
-scale = Vector2(0.9648094, 1)
+position = Vector2(0.9999995, -23)
+scale = Vector2(0.83870965, 1)
 sprite_frames = SubResource("SpriteFrames_3vor3")
-animation = &"correr"
 
 [node name="CollisionPersonajeAgachado" type="CollisionShape2D" parent="." unique_id=1684356368]
 unique_name_in_owner = true

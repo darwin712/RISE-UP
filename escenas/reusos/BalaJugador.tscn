@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://xxhhx6wl2ppl"]
+
+[ext_resource type="Script" uid="uid://boh18rskqgdpe" path="res://assets/enemigos/arquero/bala.gd" id="1_f12c7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trs4p"]
+size = Vector2(12, 1)
+
+[node name="BalaJugador" type="Area2D" unique_id=456289909]
+position = Vector2(-2, -2)
+scale = Vector2(0.5, 1)
+script = ExtResource("1_f12c7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1254608009]
+position = Vector2(3, 1.5)
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_trs4p")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=516206845]
+scale = Vector2(0.5, 1)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=531805544]
+offset_top = 1.0
+offset_right = 14.0
+offset_bottom = 2.0
+scale = Vector2(0.5, 1)
+color = Color(0.616676, 0.616676, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=2069614010]
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 28.0
+offset_bottom = 2.0
+scale = Vector2(0.5, 1)
+color = Color(0.96862745, 0.9254902, 0.6392157, 0.42745098)
+metadata/_edit_use_anchors_ = true

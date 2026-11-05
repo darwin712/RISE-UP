@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bbklhhwwbdjtm"]
+
+[ext_resource type="Script" uid="uid://if5ymq64lkkc" path="res://assets/armas/Tier1pMadera/tier_1.gd" id="1_ocl6i"]
+
+[node name="Tier1" type="Node2D" unique_id=1771006447]
+script = ExtResource("1_ocl6i")
