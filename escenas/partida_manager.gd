@@ -2,10 +2,12 @@ extends Node
 
 @export var salaInicio: PackedScene
 @export var listaSalas: Array[PackedScene]
-@onready var contenedorSala = $"../SalaActual"
-@onready var jugador = $"../Jugador"
+@onready var contenedorSala = get_node("../SalaActual")
+@onready var jugador = get_node("../Jugador")
 
 var salaActual: Node2D
+var habitaciones: Array[Node2D] = []
+var estaCambiandoSala = false
 
 func _ready():
 	iniciarRun()
@@ -16,7 +18,12 @@ func conectarEntrada(sala):
 		conexion.jugadorEntro.connect(generarSala)
 
 func generarSala(conexionActual):
-	print("RunManager recibio una conexion")
+	if conexionActual.has_meta("sala_conectada"):
+		var destino = conexionActual.get_meta("sala_conectada")
+		var conexionDestino = conexionActual.get_meta("conexion_conectada")
+		cambiarSala(destino, conexionDestino)
+		return
+	
 	var salasPosibles = buscarSalas(conexionActual.direccion)
 	
 	if salasPosibles.size() > 0:
@@ -26,8 +33,15 @@ func generarSala(conexionActual):
 		contenedorSala.add_child(nuevaSala)
 		var conexionNueva = nuevaSala.get_node("Conexiones/"+elegida.conexion)
 		
-		nuevaSala.global_position += (conexionActual.global_position - conexionNueva.global_position)
+		habitaciones.append(nuevaSala)
+		conexionActual.set_meta("sala_conectada", nuevaSala)
+		conexionActual.set_meta("conexion_conectada", conexionNueva)
+		
+		conexionNueva.set_meta("sala_conectada", salaActual)
+		conexionNueva.set_meta("conexion_conectada", conexionActual)
+
 		conectarEntrada(nuevaSala)
+		cambiarSala(nuevaSala, conexionNueva)
 		print("Sala generada")
 	else:
 		print("No hay salas compatibles")
@@ -49,6 +63,25 @@ func buscarSalas(direccionSalida):
 		instanciaSala.free()
 	return salasCompatibles
 
+func cambiarSala(destino, conexionDestino):
+	if estaCambiandoSala:
+		return
+	estaCambiandoSala = true
+	
+	if salaActual != null:
+		contenedorSala.remove_child(salaActual)
+		
+	if destino.get_parent() == null:
+		contenedorSala.add_child(destino)
+	
+	salaActual = destino
+	var puntoEntrada = conexionDestino.get_node("Marker2D")
+	jugador.global_position = puntoEntrada.global_position
+	jugador.posCheckpoint = puntoEntrada.global_position
+	
+	await get_tree().create_timer(0.3).timeout
+	estaCambiandoSala = false
+
 func direccionOpuesta(direccion):
 	match direccion:
 		0:
@@ -64,6 +97,8 @@ func direccionOpuesta(direccion):
 func iniciarRun():
 	salaActual = salaInicio.instantiate()
 	contenedorSala.add_child(salaActual)
+	habitaciones.append(salaActual)
 	var puntoInicio = salaActual.get_node("SpawnInicial")
 	jugador.global_position = puntoInicio.global_position
+	jugador.posCheckpoint = puntoInicio.global_position
 	conectarEntrada(salaActual)

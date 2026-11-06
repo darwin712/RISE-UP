@@ -115,7 +115,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wp6tm")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"muerte",
 "speed": 10.0
 }, {
@@ -165,6 +165,7 @@ unique_name_in_owner = true
 position = Vector2(0.9999995, -23)
 scale = Vector2(0.83870965, 1)
 sprite_frames = SubResource("SpriteFrames_3vor3")
+animation = &"muerte"
 
 [node name="CollisionPersonajeAgachado" type="CollisionShape2D" parent="." unique_id=1684356368]
 unique_name_in_owner = true

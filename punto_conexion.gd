@@ -8,10 +8,12 @@ enum Direccion {
 }
 
 @export var direccion: Direccion
+var fueUtilizada = false
 signal jugadorEntro(conexion)
 		
 func _on_body_entered(body: Node2D) -> void:
-	print("algo entro: ", body.name)
 	if body.is_in_group("jugador"):
-		print("se detecto jugador")
+		if Time.get_ticks_msec() < body.ignorarConexionesHasta:
+			return
+		fueUtilizada = true
 		jugadorEntro.emit.call_deferred(self)

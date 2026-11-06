@@ -2,6 +2,16 @@
 
 [ext_resource type="TileSet" uid="uid://blciglvtm15im" path="res://assets/tilesetLayers/tilesetCastle.tres" id="1_5rc3p"]
 [ext_resource type="PackedScene" uid="uid://cdk5i2l8o61nc" path="res://escenas/reusos/punto_conexion.tscn" id="2_i0qd7"]
+[ext_resource type="PackedScene" uid="uid://clsiy31y8amf8" path="res://escenas/reusos/checkpoint.tscn" id="3_i0qd7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rc3p"]
+size = Vector2(4.4375, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0qd7"]
+size = Vector2(100, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqswf"]
+size = Vector2(24, 82)
 
 [node name="Test002" type="Node2D" unique_id=997104122]
 
@@ -25,9 +35,36 @@ tile_set = ExtResource("1_5rc3p")
 position = Vector2(507, -53)
 direccion = 3
 
+[node name="Marker2D" parent="Conexiones/PuntoConexionRIGHT" index="0" unique_id=1731812365]
+position = Vector2(-37, 36)
+
+[node name="CollisionShape2D" parent="Conexiones/PuntoConexionRIGHT" index="1" unique_id=720095582]
+position = Vector2(-26.21875, 0)
+shape = SubResource("RectangleShape2D_5rc3p")
+
 [node name="PuntoConexionDOWN" parent="Conexiones" unique_id=1767587538 instance=ExtResource("2_i0qd7")]
 position = Vector2(240, 285)
 direccion = 1
 
-[node name="Areas" type="Node2D" parent="." unique_id=146467578]
+[node name="Marker2D" parent="Conexiones/PuntoConexionDOWN" index="0" unique_id=1731812365]
+position = Vector2(-65, -51)
+
+[node name="CollisionShape2D" parent="Conexiones/PuntoConexionDOWN" index="1" unique_id=720095582]
+position = Vector2(1, -17)
+shape = SubResource("RectangleShape2D_i0qd7")
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=1300101240]
+
+[node name="Checkpoint2" parent="Checkpoints" unique_id=599009433 instance=ExtResource("3_i0qd7")]
+position = Vector2(428, -46)
+
+[node name="CollisionShape2D" parent="Checkpoints/Checkpoint2" index="0" unique_id=123545460]
+position = Vector2(-8, -7)
+shape = SubResource("RectangleShape2D_cqswf")
+
+[node name="otrasAreas" type="Node2D" parent="." unique_id=146467578]
 visible = false
+
+[editable path="Conexiones/PuntoConexionRIGHT"]
+[editable path="Conexiones/PuntoConexionDOWN"]
+[editable path="Checkpoints/Checkpoint2"]
