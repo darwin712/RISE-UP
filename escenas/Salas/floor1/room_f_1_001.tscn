@@ -34,7 +34,7 @@ position = Vector2(139, 145)
 position = Vector2(46, 189)
 
 [node name="MuerteZona" parent="." unique_id=2135074123 instance=ExtResource("6_npifj")]
-position = Vector2(271, 285)
+position = Vector2(258, 289)
 
 [node name="pared_invisible" parent="." unique_id=1797554785 instance=ExtResource("7_grf3v")]
 position = Vector2(0, 134)

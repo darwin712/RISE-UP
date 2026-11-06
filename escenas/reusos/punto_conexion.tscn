@@ -2,7 +2,17 @@
 
 [ext_resource type="Script" uid="uid://cde5byus4mlkq" path="res://punto_conexion.gd" id="1_huc36"]
 
-[node name="PuntoConexion" type="Node2D" unique_id=1622183807]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vor3"]
+size = Vector2(64.875, 48)
+
+[node name="PuntoConexion" type="Area2D" unique_id=1046664548]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_huc36")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1731812365]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=720095582]
+shape = SubResource("RectangleShape2D_3vor3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

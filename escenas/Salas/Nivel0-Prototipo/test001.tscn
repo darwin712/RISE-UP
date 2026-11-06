@@ -22,15 +22,15 @@ tile_set = ExtResource("1_24v2n")
 [node name="Conexiones" type="Node2D" parent="." unique_id=1525534246]
 
 [node name="PuntoConexionLEFT" parent="Conexiones" unique_id=1622183807 instance=ExtResource("2_ivwpl")]
-position = Vector2(7, 159)
+position = Vector2(-29, 162)
 direccion = 2
 
 [node name="PuntoConexionRIGHT" parent="Conexiones" unique_id=343689869 instance=ExtResource("2_ivwpl")]
-position = Vector2(459, 165)
+position = Vector2(507, 165)
 direccion = 3
 
 [node name="PuntoConexionUP" parent="Conexiones" unique_id=1767587538 instance=ExtResource("2_ivwpl")]
-position = Vector2(240, 14)
+position = Vector2(241, -10)
 
 [node name="Areas" type="Node2D" parent="." unique_id=146467578]
 visible = false
