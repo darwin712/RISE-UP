@@ -1,4 +1,7 @@
 extends CharacterBody2D
+
+@onready var animacionSlime: AnimatedSprite2D = %animacionSlime
+
 @onready var jugador: Node2D = get_tree().get_first_node_in_group("jugador")
 @onready var area_contacto: Area2D = $AreaContacto
 var velocidad = 30.0
@@ -14,6 +17,15 @@ func _physics_process(delta: float) -> void:
 		var direccion = (jugador.global_position - global_position).normalized()
 
 		velocity.x = direccion.x * velocidad
+	if velocity.x > 0:
+		animacionSlime.play("caminar")
+		animacionSlime.flip_h = false
+	elif velocity.x <0:
+		animacionSlime.play("caminar")
+		animacionSlime.flip_h = true
+	else:
+		animacionSlime.play("idle")
+	
 
 	move_and_slide()
 

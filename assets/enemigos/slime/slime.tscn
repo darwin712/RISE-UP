@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bi82kers54rsf"]
 
 [ext_resource type="Script" uid="uid://b3lv8dolsyqdr" path="res://assets/enemigos/slime/slime.gd" id="1_01sq4"]
+[ext_resource type="SpriteFrames" uid="uid://nuofw05jo27g" path="res://assets/enemigos/slime/sprite_Frames_Slime.tres" id="2_hn0gs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbjxg"]
 size = Vector2(16, 15.875)
@@ -17,16 +18,18 @@ collision_mask = 5
 script = ExtResource("1_01sq4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime" unique_id=1448290381]
+visible = false
 position = Vector2(0, -8.0625)
 shape = SubResource("RectangleShape2D_cbjxg")
 
-[node name="ColorRect" type="ColorRect" parent="slime" unique_id=1990032391]
-offset_left = -8.0
-offset_top = -16.0
-offset_right = 8.0
-color = Color(0.30352277, 0.75686854, 0.28720775, 1)
+[node name="animacionSlime" type="AnimatedSprite2D" parent="slime" unique_id=901181474]
+unique_name_in_owner = true
+position = Vector2(1, -7)
+sprite_frames = ExtResource("2_hn0gs")
+animation = &"caminar"
 
 [node name="AreaContacto" type="Area2D" parent="slime" unique_id=2067270282 groups=["dano_enemigo"]]
+visible = false
 collision_layer = 16
 collision_mask = 5
 

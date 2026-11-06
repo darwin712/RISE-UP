@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://xwug0y86h6wd"]
+
+[ext_resource type="Texture2D" uid="uid://fachx7dt4m7t" path="res://assets/enemigos/arquero/ArqueroIdle.png" id="1_uprae"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epce6"]
+atlas = ExtResource("1_uprae")
+region = Rect2(0, 0, 29, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0xfa"]
+atlas = ExtResource("1_uprae")
+region = Rect2(29, 0, 29, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8mi8"]
+atlas = ExtResource("1_uprae")
+region = Rect2(58, 0, 29, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcokl"]
+atlas = ExtResource("1_uprae")
+region = Rect2(87, 0, 29, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5itr3"]
+atlas = ExtResource("1_uprae")
+region = Rect2(116, 0, 29, 38)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epce6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0xfa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8mi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcokl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5itr3")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 3.0
+}]
