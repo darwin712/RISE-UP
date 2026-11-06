@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var vida = 3
-var tiempo_invulnerable_ms = 1000
+var tiempo_invulnerable_ms = 1500
 var invulnerable_hasta = 0
 
 @onready var hurtbox: Area2D 
@@ -20,6 +20,7 @@ var velocidadDeDesliz = 32
 var last_wall: Vector2 = Vector2.ZERO
 var wall_normal
 @export var velocidadWalljump: Vector2 = Vector2(300.0, -350.0)
+@export var empujarDano: Vector2 = Vector2(150.0,-275.0)
 var agachado: bool 
 
 
@@ -81,16 +82,42 @@ func recibir_dano() -> void:
 	var ahora = Time.get_ticks_msec()
 	if ahora < invulnerable_hasta:
 		return
+		
 	invulnerable_hasta = ahora + tiempo_invulnerable_ms
+	
+	#empuje hacia atras
+	var direccion_x: float = 0.0
+	if velocity.x != 0:
+		direccion_x = sign(velocity.x) 
+	else:
+		direccion_x = -1.0 if animacion.flip_h else 1.0
+	
+	
+	velocity.x = -direccion_x * empujarDano.x
+	velocity.y = empujarDano.y
+	
+	cronoBloqueo = 0.5 
+	#lo del jovan
 	vida -= 1
 	print("Ur life", vida)
 	if vida <= 0:
 		#Aca se reinicia
 		get_tree().reload_current_scene.call_deferred()
+	else:
+		parpadear_invulnerabilidad()
 		
-func detectarObstaculoDano():
-	if hurtbox.has_overlapping_bodies():
-		respawn()
+func parpadear_invulnerabilidad() -> void:
+	
+	while Time.get_ticks_msec() < invulnerable_hasta:
+		animacion.modulate = Color.RED
+		await get_tree().create_timer(0.1).timeout 
+		
+		animacion.modulate = Color.WHITE
+		await get_tree().create_timer(0.1).timeout
+	animacion.modulate = Color.WHITE
+	
+	
+
 
 func _physics_process(delta: float):
 	var direccion := Input.get_axis("Mover_izquierda", "Mover_derecha")
@@ -139,7 +166,7 @@ func _physics_process(delta: float):
 		velocity = Vector2.ZERO
 		return
 	velocity += get_gravity() * delta 
-	if !Input.is_action_pressed("Saltar") and velocity.y < 0:
+	if !Input.is_action_pressed("Saltar") and velocity.y < 0 and cronoBloqueo <= 0.0:
 		velocity.y = 0
 		
 	#salto
