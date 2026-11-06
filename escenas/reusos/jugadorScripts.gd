@@ -35,8 +35,11 @@ var cronoBuffer: float = 0.0
 
 var  EstaPared: bool = false
 var pausa: bool=false
+var haMuerto: bool = false
 
 var posInicial: Vector2
+var posCheckpoint: Vector2
+var ignorarConexionesHasta: int = 0
 
 
 var en_pared: bool = is_on_wall_only()
@@ -45,21 +48,29 @@ var en_pared: bool = is_on_wall_only()
 func _ready() -> void:
 	add_to_group("jugador")
 	posInicial = global_position
+	posCheckpoint = posInicial
 	add_to_group("jugador")
+	print("Vidas restantes: ", vida)
 	
 
-
-func respawn():
-	recibir_dano()
-	self.global_position = posInicial
+	
+func regresarCheckpoint():
+	ignorarConexionesHasta = Time.get_ticks_msec() + 300
+	self.global_position = posCheckpoint
 	velocity = Vector2.ZERO
 	
+	
 func morir():
+	if haMuerto:
+		return
+	
+	haMuerto = true
+	velocity = Vector2.ZERO
+	invulnerable_hasta = 0
+	animacion.modulate = Color.WHITE
 	animacion.play("muerte")
-	pausa=true
-	await get_tree().create_timer(0.3).timeout
-	pausa = false
-	respawn()
+	await get_tree().create_timer(1.10).timeout
+	get_tree().reload_current_scene()
 
 func DeslizarPared():
 	if !is_on_floor():
@@ -99,10 +110,10 @@ func recibir_dano() -> void:
 	cronoBloqueo = 0.5 
 	#lo del jovan
 	vida -= 1
-	print("Ur life", vida)
+	print("Vidas restantes: ", vida)
 	if vida <= 0:
-		#Aca se reinicia
-		get_tree().reload_current_scene.call_deferred()
+		morir()
+		print("Has muerto!")
 	else:
 		parpadear_invulnerabilidad()
 		
@@ -118,8 +129,11 @@ func parpadear_invulnerabilidad() -> void:
 	
 	
 
-
 func _physics_process(delta: float):
+	if haMuerto:
+		velocity = Vector2.ZERO
+		return
+	
 	var direccion := Input.get_axis("Mover_izquierda", "Mover_derecha")
 	#cronometro
 	if is_on_floor():
@@ -209,7 +223,12 @@ func _physics_process(delta: float):
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	respawn()
+	if Time.get_ticks_msec() < invulnerable_hasta:
+		return
+	recibir_dano()
+	if haMuerto:
+		return
+	regresarCheckpoint()
 
 
 
