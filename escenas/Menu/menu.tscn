@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://lmdam4nk2mby"]
+
+[ext_resource type="Texture2D" path="res://assets/menu/fondo_inicio.png" id="1_fondo"]
+[ext_resource type="Script" path="res://escenas/Menu/menu.gd" id="2_script"]
+[ext_resource type="FontFile" path="res://assets/fuentes/PixelifySans.ttf" id="3_fuente"]
+[ext_resource type="Script" path="res://escenas/Menu/efectos_tormenta.gd" id="4_tormenta"]
+
+[sub_resource type="FontVariation" id="FontVariation_titulo"]
+base_font = ExtResource("3_fuente")
+variation_opentype = {
+"wght": 700.0
+}
+
+[sub_resource type="FontVariation" id="FontVariation_botones"]
+base_font = ExtResource("3_fuente")
+variation_opentype = {
+"wght": 500.0
+}
+
+[node name="Menu" type="Control" unique_id=1750085203]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_script")
+
+[node name="Fondo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_fondo")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Oscurecer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.18)
+
+[node name="EfectosTormenta" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_tormenta")
+cantidad_gotas = 72
+intervalo_minimo = 7.0
+intervalo_maximo = 14.0
+
+[node name="Contenido" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Opciones" type="VBoxContainer" parent="Contenido"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Titulo" type="Label" parent="Contenido/Opciones"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.94, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("FontVariation_titulo")
+theme_override_font_sizes/font_size = 36
+text = "RISE UP"
+horizontal_alignment = 1
+
+[node name="Separador" type="Control" parent="Contenido/Opciones"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Jugar" type="Button" parent="Contenido/Opciones"]
+custom_minimum_size = Vector2(150, 34)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Salir")
+theme_override_fonts/font = SubResource("FontVariation_botones")
+theme_override_font_sizes/font_size = 16
+text = "JUGAR"
+
+[node name="Salir" type="Button" parent="Contenido/Opciones"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Jugar")
+theme_override_fonts/font = SubResource("FontVariation_botones")
+theme_override_font_sizes/font_size = 16
+text = "SALIR"
+
+[connection signal="pressed" from="Contenido/Opciones/Jugar" to="." method="_al_jugar"]
+[connection signal="pressed" from="Contenido/Opciones/Salir" to="." method="_al_salir"]
