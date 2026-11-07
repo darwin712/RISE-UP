@@ -10,6 +10,7 @@ var salaActual: Node2D
 var habitaciones: Array[Node2D] = []
 var estaCambiandoSala = false
 var habitacionesGeneradas: Array[PackedScene] = []
+var espaciosOcupados: Array[Rect2] = []
 
 func _ready():
 	iniciarRun()
@@ -26,7 +27,7 @@ func generarSala(conexionActual):
 		cambiarSala(destino, conexionDestino)
 		return
 	
-	var salasPosibles = buscarSalas(conexionActual.direccion)
+	var salasPosibles = buscarSalas(conexionActual)
 	
 	if salasPosibles.size() > 0:
 		var elegida = salasPosibles.pick_random()
@@ -34,6 +35,8 @@ func generarSala(conexionActual):
 		
 		var nuevaSala = elegida.escena.instantiate()
 		var conexionNueva = nuevaSala.get_node("Conexiones/"+elegida.conexion)
+		nuevaSala.set_meta("pos_mapa", elegida.pos)
+		espaciosOcupados.append(espacioEnMapa(nuevaSala))
 		
 		habitaciones.append(nuevaSala)
 		conexionActual.set_meta("sala_conectada", nuevaSala)
@@ -48,7 +51,7 @@ func generarSala(conexionActual):
 	else:
 		print("No hay salas compatibles")
 
-func buscarSalas(direccionSalida):
+func buscarSalas(conexionActual):
 	var salasCompatibles = []
 	
 	for sala in listaSalas:
@@ -58,12 +61,17 @@ func buscarSalas(direccionSalida):
 		var conexiones = instanciaSala.get_node("Conexiones")
 		
 		for conexion in conexiones.get_children():
-			if conexion.direccion == direccionOpuesta(direccionSalida):
-				salasCompatibles.append({
-					"escena": sala,
-					"conexion": conexion.name
-				})
-				break
+			if conexion.direccion == direccionOpuesta(conexionActual.direccion):
+				var pos = calcularPosicion(conexionActual, instanciaSala, conexion)
+				var espacio = espacioLocal(instanciaSala)
+				espacio.position += pos
+				if cabeEnEspacio(espacio):
+					salasCompatibles.append({
+						"escena": sala,
+						"conexion": conexion.name,
+						"pos": pos
+					})
+					break
 		instanciaSala.free()
 	return salasCompatibles
 
@@ -109,11 +117,54 @@ func direccionOpuesta(direccion):
 			return 2
 	return -1
 
+#todo esto es para que posicione bien las salas y pos tenga sentido
+func espacioLocal(sala: Node2D) -> Rect2:
+	var terreno = sala.get_node("Terreno")
+	var tilemap: TileMapLayer = terreno.get_node("Bloques")
+	var usado = tilemap.get_used_rect()
+	var tamano = Vector2(tilemap.tile_set.tile_size)
+	return Rect2(terreno.position + tilemap.position + Vector2(usado.position) * tamano, Vector2(usado.size) * tamano)
+
+func espacioEnMapa(sala: Node2D) -> Rect2:
+	var espacio = espacioLocal(sala)
+	espacio.position += sala.get_meta("pos_mapa")
+	return espacio
+
+func calcularPosicion(conexionA, salaB, conexionB) -> Vector2:
+	var offA: Vector2 = salaActual.get_meta("pos_mapa")
+	var rA = espacioLocal(salaActual)
+	var rB = espacioLocal(salaB)
+	var pos = Vector2.ZERO
+	match conexionA.direccion:
+		0:
+			pos.y = offA.y + rA.position.y - rB.end.y
+			pos.x = offA.x + conexionA.position.x - conexionB.position.x
+		1:
+			pos.y = offA.y + rA.end.y - rB.position.y
+			pos.x = offA.x + conexionA.position.x - conexionB.position.x
+		2:
+			pos.x = offA.x + rA.position.x - rB.end.x
+			pos.y = offA.y + conexionA.position.y - conexionB.position.y
+		3:
+			pos.x = offA.x + rA.end.x - rB.position.x
+			pos.y = offA.y + conexionA.position.y - conexionB.position.y
+	return pos
+
+func cabeEnEspacio(espacio: Rect2) -> bool:
+	for e in espaciosOcupados:
+		if e.intersects(espacio):
+			return false
+	return true
+
 func iniciarRun():
 	habitacionesGeneradas.clear()
 	habitacionesGeneradas.append(salaInicio)
+	espaciosOcupados.clear()
 	
 	salaActual = salaInicio.instantiate()
+	salaActual.set_meta("pos_mapa", Vector2.ZERO)
+	espaciosOcupados.append(espacioEnMapa(salaActual))
+	
 	contenedorSala.add_child(salaActual)
 	habitaciones.append(salaActual)
 	var puntoInicio = salaActual.get_node("SpawnInicial")

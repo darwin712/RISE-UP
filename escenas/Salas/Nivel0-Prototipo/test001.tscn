@@ -2,6 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://blciglvtm15im" path="res://assets/tilesetLayers/tilesetCastle.tres" id="1_24v2n"]
 [ext_resource type="PackedScene" uid="uid://cdk5i2l8o61nc" path="res://escenas/reusos/punto_conexion.tscn" id="2_ivwpl"]
+[ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="3_pmxiv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivwpl"]
 size = Vector2(100.4375, 7)
@@ -65,7 +66,17 @@ shape = SubResource("RectangleShape2D_jngyu")
 [node name="Checkpoints" type="Node2D" parent="." unique_id=1507032498]
 
 [node name="otrasAreas" type="Node2D" parent="." unique_id=146467578]
-visible = false
+
+[node name="pared_invisible" parent="otrasAreas" unique_id=1797554785 instance=ExtResource("3_pmxiv")]
+position = Vector2(-2, 163)
+rotation = 1.5707964
+
+[node name="pared_invisible2" parent="otrasAreas" unique_id=1553736935 instance=ExtResource("3_pmxiv")]
+position = Vector2(482, 161)
+rotation = 1.5707964
+
+[node name="pared_invisible3" parent="otrasAreas" unique_id=2058927226 instance=ExtResource("3_pmxiv")]
+position = Vector2(241, -1)
 
 [node name="SpawnInicial" type="Marker2D" parent="." unique_id=2031727554]
 position = Vector2(242, 163)

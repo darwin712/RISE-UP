@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://blciglvtm15im" path="res://assets/tilesetLayers/tilesetCastle.tres" id="1_5rc3p"]
 [ext_resource type="PackedScene" uid="uid://cdk5i2l8o61nc" path="res://escenas/reusos/punto_conexion.tscn" id="2_i0qd7"]
 [ext_resource type="PackedScene" uid="uid://clsiy31y8amf8" path="res://escenas/reusos/checkpoint.tscn" id="3_i0qd7"]
+[ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="4_64xiq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0qd7"]
 size = Vector2(99, 2)
@@ -66,7 +67,13 @@ shape = SubResource("RectangleShape2D_cqswf")
 position = Vector2(10, 16)
 
 [node name="otrasAreas" type="Node2D" parent="." unique_id=146467578]
-visible = false
+
+[node name="pared_invisible" parent="otrasAreas" unique_id=1797554785 instance=ExtResource("4_64xiq")]
+position = Vector2(253, 272)
+
+[node name="pared_invisible2" parent="otrasAreas" unique_id=806319592 instance=ExtResource("4_64xiq")]
+position = Vector2(481, -62)
+rotation = 1.5707964
 
 [editable path="Conexiones/ConexionDOWN"]
 [editable path="Conexiones/ConexionRIGHT"]
