@@ -74,7 +74,7 @@ func morir():
 	animacion.modulate = Color.WHITE
 	animacion.play("muerte")
 	await get_tree().create_timer(1.10).timeout
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://escenas/Menu/menu.tscn")
 
 func reproducir_sfx(sonido: AudioStream, volumen: float) -> void:
 	if sonido != null:
