@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://lmdam4nk2mby"]
+[gd_scene format=3 uid="uid://lmdam4nk2mby"]
 
 [ext_resource type="Texture2D" path="res://assets/menu/fondo_inicio.png" id="1_fondo"]
 [ext_resource type="Script" path="res://escenas/Menu/menu.gd" id="2_script"]
