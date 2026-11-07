@@ -16,3 +16,13 @@ position = Vector2(233, 125)
 script = ExtResource("2_jumxm")
 salaInicio = ExtResource("3_26pgj")
 listaSalas = Array[PackedScene]([ExtResource("4_26pgj")])
+
+[node name="Transicion" type="CanvasLayer" parent="." unique_id=503434963]
+layer = 100
+
+[node name="Desvanecer" type="ColorRect" parent="Transicion" unique_id=1576987617]
+modulate = Color(1, 1, 1, 0)
+offset_right = 480.0
+offset_bottom = 271.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

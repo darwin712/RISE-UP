@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cdk5i2l8o61nc" path="res://escenas/reusos/punto_conexion.tscn" id="2_ivwpl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivwpl"]
-size = Vector2(6.4375, 79)
+size = Vector2(100.4375, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmxiv"]
-size = Vector2(4.4375, 70)
+size = Vector2(4.4375, 67)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jngyu"]
-size = Vector2(99, 6)
+size = Vector2(4, 68)
 
 [node name="Test001" type="Node2D" unique_id=997104122]
 
@@ -30,36 +30,36 @@ tile_set = ExtResource("1_24v2n")
 
 [node name="Conexiones" type="Node2D" parent="." unique_id=1525534246]
 
-[node name="PuntoConexionLEFT" parent="Conexiones" unique_id=1622183807 instance=ExtResource("2_ivwpl")]
-position = Vector2(-29, 162)
-direccion = 2
+[node name="ConexionUP" parent="Conexiones" unique_id=1046664548 instance=ExtResource("2_ivwpl")]
+position = Vector2(223, 29)
 
-[node name="Marker2D" parent="Conexiones/PuntoConexionLEFT" index="0" unique_id=1731812365]
-position = Vector2(42, 26)
+[node name="Entrada" parent="Conexiones/ConexionUP" index="0" unique_id=1731812365]
+position = Vector2(18, 14)
 
-[node name="CollisionShape2D" parent="Conexiones/PuntoConexionLEFT" index="1" unique_id=720095582]
-position = Vector2(29.21875, -0.5)
+[node name="CollisionShape2D" parent="Conexiones/ConexionUP" index="1" unique_id=720095582]
+position = Vector2(18, -1)
 shape = SubResource("RectangleShape2D_ivwpl")
 
-[node name="PuntoConexionRIGHT" parent="Conexiones" unique_id=343689869 instance=ExtResource("2_ivwpl")]
-position = Vector2(507, 165)
-direccion = 3
+[node name="ConexionLEFT" parent="Conexiones" unique_id=1262328484 instance=ExtResource("2_ivwpl")]
+position = Vector2(32, 167)
+direccion = 2
 
-[node name="Marker2D" parent="Conexiones/PuntoConexionRIGHT" index="0" unique_id=1731812365]
-position = Vector2(-38, 25)
+[node name="Entrada" parent="Conexiones/ConexionLEFT" index="0" unique_id=1731812365]
+position = Vector2(-16, 23)
 
-[node name="CollisionShape2D" parent="Conexiones/PuntoConexionRIGHT" index="1" unique_id=720095582]
-position = Vector2(-27.21875, -4)
+[node name="CollisionShape2D" parent="Conexiones/ConexionLEFT" index="1" unique_id=720095582]
+position = Vector2(-30.21875, -5.5)
 shape = SubResource("RectangleShape2D_pmxiv")
 
-[node name="PuntoConexionUP" parent="Conexiones" unique_id=1767587538 instance=ExtResource("2_ivwpl")]
-position = Vector2(241, -10)
+[node name="ConexionRIGHT" parent="Conexiones" unique_id=1596137541 instance=ExtResource("2_ivwpl")]
+position = Vector2(466, 169)
+direccion = 3
 
-[node name="Marker2D" parent="Conexiones/PuntoConexionUP" index="0" unique_id=1731812365]
-position = Vector2(0, 21)
+[node name="Entrada" parent="Conexiones/ConexionRIGHT" index="0" unique_id=1731812365]
+position = Vector2(3, 23)
 
-[node name="CollisionShape2D" parent="Conexiones/PuntoConexionUP" index="1" unique_id=720095582]
-position = Vector2(-0.5, 12)
+[node name="CollisionShape2D" parent="Conexiones/ConexionRIGHT" index="1" unique_id=720095582]
+position = Vector2(13, -7)
 shape = SubResource("RectangleShape2D_jngyu")
 
 [node name="Checkpoints" type="Node2D" parent="." unique_id=1507032498]
@@ -70,6 +70,6 @@ visible = false
 [node name="SpawnInicial" type="Marker2D" parent="." unique_id=2031727554]
 position = Vector2(242, 163)
 
-[editable path="Conexiones/PuntoConexionLEFT"]
-[editable path="Conexiones/PuntoConexionRIGHT"]
-[editable path="Conexiones/PuntoConexionUP"]
+[editable path="Conexiones/ConexionUP"]
+[editable path="Conexiones/ConexionLEFT"]
+[editable path="Conexiones/ConexionRIGHT"]
