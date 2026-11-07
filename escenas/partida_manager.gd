@@ -12,6 +12,8 @@ var estaCambiandoSala = false
 var habitacionesGeneradas: Array[PackedScene] = []
 var espaciosOcupados: Array[Rect2] = []
 
+
+
 func _ready():
 	iniciarRun()
 
