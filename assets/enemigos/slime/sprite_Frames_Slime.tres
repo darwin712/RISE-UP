@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://nuofw05jo27g"]
+
+[ext_resource type="Texture2D" uid="uid://su8dg3fd6o2m" path="res://assets/enemigos/slime/Slime.png" id="1_dvir8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65fs3"]
+atlas = ExtResource("1_dvir8")
+region = Rect2(0, 0, 30, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhgdb"]
+atlas = ExtResource("1_dvir8")
+region = Rect2(30, 0, 30, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onuba"]
+atlas = ExtResource("1_dvir8")
+region = Rect2(60, 0, 30, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvir8"]
+atlas = ExtResource("1_dvir8")
+region = Rect2(60, 0, 30, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65fs3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhgdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onuba")
+}],
+"loop": 1,
+"name": &"caminar",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvir8")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]

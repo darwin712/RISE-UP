@@ -3,9 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://ewb7r1w2rbkb" path="res://assets/personaje/spritesheetManty.png" id="1_tml57"]
 [ext_resource type="Script" uid="uid://dgtqacyxqt162" path="res://escenas/reusos/jugadorScripts.gd" id="1_tvt8f"]
 [ext_resource type="Texture2D" uid="uid://6ptarp1nwodp" path="res://assets/personaje/MantyAgachado.png" id="2_4naty"]
+[ext_resource type="AudioStream" uid="uid://dwtexc607mfva" path="res://assets/SFX/jugador/danoSFX.mp3" id="3_2wqxo"]
 [ext_resource type="Texture2D" uid="uid://dcvtmeyxlhxyv" path="res://assets/personaje/MantySalto.png" id="3_6hs5o"]
 [ext_resource type="Texture2D" uid="uid://x1sxy15s6248" path="res://assets/personaje/MantyMuerte.png" id="4_10btl"]
+[ext_resource type="AudioStream" uid="uid://bo5nnbmsk6wc3" path="res://assets/SFX/jugador/walljumpSFX.mp3" id="4_ol2kc"]
 [ext_resource type="Texture2D" uid="uid://kw04yssm4af" path="res://assets/personaje/MantySlide.png" id="5_10btl"]
+[ext_resource type="AudioStream" uid="uid://duc5u6ilssaj6" path="res://assets/SFX/jugador/saltoSFX.mp3" id="7_mqg4x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3flwq"]
 size = Vector2(10, 21)
@@ -115,7 +118,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wp6tm")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"muerte",
 "speed": 10.0
 }, {
@@ -148,6 +151,9 @@ collision_mask = 17
 script = ExtResource("1_tvt8f")
 animacion = NodePath("animacion")
 CollisionPersonaje = NodePath("hurtbox")
+saltoSFX = ExtResource("7_mqg4x")
+danoSFX = ExtResource("3_2wqxo")
+walljumpSFX = ExtResource("4_ol2kc")
 
 [node name="CollisionPersonaje" type="CollisionShape2D" parent="." unique_id=1528434505]
 unique_name_in_owner = true
@@ -165,6 +171,7 @@ unique_name_in_owner = true
 position = Vector2(0.9999995, -23)
 scale = Vector2(0.83870965, 1)
 sprite_frames = SubResource("SpriteFrames_3vor3")
+animation = &"muerte"
 
 [node name="CollisionPersonajeAgachado" type="CollisionShape2D" parent="." unique_id=1684356368]
 unique_name_in_owner = true
@@ -181,6 +188,10 @@ collision_mask = 18
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=687999248]
 position = Vector2(-1, -7)
 shape = SubResource("RectangleShape2D_mti6b")
+
+[node name="sfxJugador" type="AudioStreamPlayer2D" parent="." unique_id=888553624]
+unique_name_in_owner = true
+stream = ExtResource("7_mqg4x")
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

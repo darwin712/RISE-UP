@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
 var vida = 3
-var tiempo_invulnerable_ms = 1000
+var tiempo_invulnerable_ms = 1500
 var invulnerable_hasta = 0
 
 @onready var hurtbox: Area2D 
-
+@onready var sfxJugador: AudioStreamPlayer2D = %sfxJugador
 @export var animacion: AnimatedSprite2D
 
 @export var CollisionPersonaje: CollisionObject2D
@@ -14,16 +14,18 @@ var invulnerable_hasta = 0
 
 var velocidadSalto = -390 
 var velocidadDobleSalto = -300
-var velocidad: float = 200.0
+var velocidad: float = 185.72
 var aceleracion = 200
 var velocidadDeDesliz = 32
 var last_wall: Vector2 = Vector2.ZERO
 var wall_normal
 @export var velocidadWalljump: Vector2 = Vector2(300.0, -350.0)
+@export var empujarDano: Vector2 = Vector2(150.0,-275.0)
 var agachado: bool 
 
+var dobleSalto: bool = false
 
-const coyoteTiempo: float = 0.25
+const coyoteTiempo: float = 0.2
 const tiempoPared: float = 0.4
 const tiempoBuffer: float = 0.2
 
@@ -34,9 +36,15 @@ var cronoBuffer: float = 0.0
 
 var  EstaPared: bool = false
 var pausa: bool=false
+var haMuerto: bool = false
 
 var posInicial: Vector2
+var posCheckpoint: Vector2
+var ignorarConexionesHasta: int = 0
 
+@export var saltoSFX: AudioStream
+@export var danoSFX: AudioStream
+@export var walljumpSFX: AudioStream
 
 var en_pared: bool = is_on_wall_only()
 
@@ -44,21 +52,35 @@ var en_pared: bool = is_on_wall_only()
 func _ready() -> void:
 	add_to_group("jugador")
 	posInicial = global_position
+	posCheckpoint = posInicial
 	add_to_group("jugador")
+	print("Vidas restantes: ", vida)
 	
 
-
-func respawn():
-	recibir_dano()
-	self.global_position = posInicial
+	
+func regresarCheckpoint():
+	ignorarConexionesHasta = Time.get_ticks_msec() + 300
+	self.global_position = posCheckpoint
 	velocity = Vector2.ZERO
 	
+	
 func morir():
+	if haMuerto:
+		return
+	
+	haMuerto = true
+	velocity = Vector2.ZERO
+	invulnerable_hasta = 0
+	animacion.modulate = Color.WHITE
 	animacion.play("muerte")
-	pausa=true
-	await get_tree().create_timer(0.3).timeout
-	pausa = false
-	respawn()
+	await get_tree().create_timer(1.10).timeout
+	get_tree().reload_current_scene()
+
+func reproducir_sfx(sonido: AudioStream, volumen: float) -> void:
+	if sonido != null:
+		sfxJugador.stream = sonido
+		sfxJugador.volume_db = volumen
+		sfxJugador.play()
 
 func DeslizarPared():
 	if !is_on_floor():
@@ -78,21 +100,51 @@ func DeslizarPared():
 	
 	
 func recibir_dano() -> void:
+	reproducir_sfx(danoSFX, -20)
 	var ahora = Time.get_ticks_msec()
 	if ahora < invulnerable_hasta:
 		return
-	invulnerable_hasta = ahora + tiempo_invulnerable_ms
-	vida -= 1
-	print("Ur life", vida)
-	if vida <= 0:
-		#Aca se reinicia
-		get_tree().reload_current_scene.call_deferred()
 		
-func detectarObstaculoDano():
-	if hurtbox.has_overlapping_bodies():
-		respawn()
+	invulnerable_hasta = ahora + tiempo_invulnerable_ms
+	
+	#empuje hacia atras
+	var direccion_x: float = 0.0
+	if velocity.x != 0:
+		direccion_x = sign(velocity.x) 
+	else:
+		direccion_x = -1.0 if animacion.flip_h else 1.0
+	
+	
+	velocity.x = -direccion_x * empujarDano.x
+	velocity.y = empujarDano.y
+	
+	cronoBloqueo = 0.5 
+	#lo del jovan
+	vida -= 1
+	print("Vidas restantes: ", vida)
+	if vida <= 0:
+		morir()
+		print("Has muerto!")
+	else:
+		parpadear_invulnerabilidad()
+		
+func parpadear_invulnerabilidad() -> void:
+	
+	while Time.get_ticks_msec() < invulnerable_hasta:
+		animacion.modulate = Color.RED
+		await get_tree().create_timer(0.1).timeout 
+		
+		animacion.modulate = Color.WHITE
+		await get_tree().create_timer(0.1).timeout
+	animacion.modulate = Color.WHITE
+	
+	
 
 func _physics_process(delta: float):
+	if haMuerto:
+		velocity = Vector2.ZERO
+		return
+	
 	var direccion := Input.get_axis("Mover_izquierda", "Mover_derecha")
 	#cronometro
 	if is_on_floor():
@@ -139,22 +191,30 @@ func _physics_process(delta: float):
 		velocity = Vector2.ZERO
 		return
 	velocity += get_gravity() * delta 
-	if !Input.is_action_pressed("Saltar") and velocity.y < 0:
+	if !Input.is_action_pressed("Saltar") and velocity.y < 0 and cronoBloqueo <= 0.0:
 		velocity.y = 0
 		
 	#salto
 	if cronoBuffer > 0.0:
-		# Salto 
-		if crono_coyote > 0.0:
+		
+		# Walljump 
+		if en_pared or EstaPared:
+			
+			velocity.x = wall_normal.x * velocidadWalljump.x
+			
+			velocity.y = velocidadWalljump.y
+			reproducir_sfx(walljumpSFX,-10)
+			cronoBuffer = 0.0
+			cronoBloqueo = tiempoPared
+			# Salto 
+		elif crono_coyote > 0.0 or dobleSalto:
+			reproducir_sfx(saltoSFX,0)
 			velocity.y = velocidadSalto 
 			crono_coyote = 0.0 
 			cronoBuffer = 0.0
-		# Walljump 
-		elif en_pared or EstaPared:
-			velocity.x = wall_normal.x * velocidadWalljump.x
-			velocity.y = velocidadWalljump.y
-			cronoBuffer = 0.0
-			cronoBloqueo = tiempoPared
+			dobleSalto = false
+		
+		
 		
 			
 
@@ -182,7 +242,12 @@ func _physics_process(delta: float):
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	respawn()
+	if Time.get_ticks_msec() < invulnerable_hasta:
+		return
+	recibir_dano()
+	if haMuerto:
+		return
+	regresarCheckpoint()
 
 
 

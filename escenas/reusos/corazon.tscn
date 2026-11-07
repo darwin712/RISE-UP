@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://yd24m3jq5284"]
+
+[ext_resource type="Script" uid="uid://jd63alyp7djb" path="res://burbujaScript.gd" id="1_ge2br"]
+[ext_resource type="Texture2D" uid="uid://wwe732gvmr5m" path="res://assets/Sprite-0001.png" id="2_m8lxk"]
+[ext_resource type="AudioStream" uid="uid://baamsgb8xpv82" path="res://assets/SFX/burbuja_sonido.mp3" id="3_cpkrb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62yky"]
+atlas = ExtResource("2_m8lxk")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4kxuq"]
+radius = 5.0
+
+[node name="burbuja" type="Node2D" unique_id=700056803]
+script = ExtResource("1_ge2br")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1004552222]
+texture = SubResource("AtlasTexture_62yky")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1398451877]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1617609354]
+shape = SubResource("CircleShape2D_4kxuq")
+
+[node name="sfxBurbuja" type="AudioStreamPlayer2D" parent="." unique_id=1332254732]
+stream = ExtResource("3_cpkrb")

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 @export var escena_bala: PackedScene = preload("res://assets/enemigos/arquero/Bala.tscn") 
 
+@onready var animacionEsqueleto: AnimatedSprite2D = %AnimacionEsqueleto
 @onready var punto_disparo: Marker2D = $PuntoDisparo
 @onready var timer_disparo: Timer = $TimerDisparo
 @onready var area_contacto: Area2D = $AreaContacto
@@ -12,12 +13,14 @@ func _ready() -> void:
 
 		
 func _physics_process(delta: float) -> void:
-	if	not is_on_floor():
+	if not is_on_floor():
 		velocity += get_gravity() * delta
 	for cuerpo in area_contacto.get_overlapping_bodies():
 		if cuerpo.is_in_group("jugador"):
 			cuerpo.recibir_dano()
 	if jugador != null:
+		animacionEsqueleto.play("default")
+		animacionEsqueleto.flip_h = jugador.global_position.x < global_position.x
 		var direccion = (jugador.global_position - global_position).normalized()
 
 func _on_timer_disparo_timeout() -> void:

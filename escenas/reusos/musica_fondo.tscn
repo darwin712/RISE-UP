@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dvgloulkrt5cp"]
+
+[ext_resource type="AudioStream" uid="uid://u3hcak1n3pq7" path="res://assets/SFX/MusicaPrincipal.mp3" id="1_mgmlb"]
+
+[node name="MusicaFondo" type="AudioStreamPlayer" unique_id=974949538]
+stream = ExtResource("1_mgmlb")
+volume_db = -17.463
+autoplay = true

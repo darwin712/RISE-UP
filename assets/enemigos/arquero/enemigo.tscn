@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c2jxnlt2ueh1s"]
 
 [ext_resource type="Script" uid="uid://bd7ruoc3d6y6" path="res://assets/enemigos/arquero/esqueleto_Script.gd" id="1_becj5"]
+[ext_resource type="SpriteFrames" uid="uid://xwug0y86h6wd" path="res://assets/enemigos/arquero/FramesArquero.tres" id="2_xsbl5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s3efq"]
 radius = 11.0
@@ -10,10 +11,16 @@ height = 36.0
 radius = 14.0
 height = 42.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1000898366]
+[node name="EnemigoEsqueleto" type="CharacterBody2D" unique_id=1000898366]
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_becj5")
+
+[node name="AnimacionEsqueleto" type="AnimatedSprite2D" parent="." unique_id=1055697280]
+unique_name_in_owner = true
+position = Vector2(0, -2)
+sprite_frames = ExtResource("2_xsbl5")
+frame_progress = 0.61360866
 
 [node name="TimerDisparo" type="Timer" parent="." unique_id=422180172]
 wait_time = 2.505
@@ -21,10 +28,12 @@ one_shot = true
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1514341748]
+visible = false
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_s3efq")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1365915958]
+visible = false
 offset_left = -8.0
 offset_top = -18.0
 offset_right = 8.0
@@ -33,9 +42,11 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="PuntoDisparo" type="Marker2D" parent="." unique_id=96769921]
+visible = false
 position = Vector2(16, -1)
 
 [node name="AreaContacto" type="Area2D" parent="." unique_id=100784210 groups=["dano_enemigo"]]
+visible = false
 collision_layer = 16
 collision_mask = 5
 
