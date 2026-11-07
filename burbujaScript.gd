@@ -13,5 +13,7 @@ func agarrar(body: Node2D) -> void:
 		area_2d.set_deferred("monitoring", false)
 		hide()
 		sfx_burbuja.play()
-		await sfx_burbuja.finished
-		queue_free() # Destruye este objeto solo después de modificar al jugador
+		await get_tree().create_timer(1.27).timeout
+		show()
+		area_2d.set_deferred("monitoring", true)
+		
