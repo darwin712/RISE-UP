@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://blciglvtm15im" path="res://assets/tilesetLayers/tilesetCastle.tres" id="1_24v2n"]
 [ext_resource type="PackedScene" uid="uid://cdk5i2l8o61nc" path="res://escenas/reusos/punto_conexion.tscn" id="2_ivwpl"]
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="3_pmxiv"]
+[ext_resource type="PackedScene" uid="uid://yrxodmgjotv0" path="res://escenas/reusos/burbuja.tscn" id="4_jngyu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivwpl"]
 size = Vector2(100.4375, 7)
@@ -80,6 +81,9 @@ position = Vector2(241, -1)
 
 [node name="SpawnInicial" type="Marker2D" parent="." unique_id=2031727554]
 position = Vector2(242, 163)
+
+[node name="burbuja" parent="." unique_id=700056803 instance=ExtResource("4_jngyu")]
+position = Vector2(154, 166)
 
 [editable path="Conexiones/ConexionUP"]
 [editable path="Conexiones/ConexionLEFT"]

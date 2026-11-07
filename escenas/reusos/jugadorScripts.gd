@@ -5,7 +5,7 @@ var tiempo_invulnerable_ms = 1500
 var invulnerable_hasta = 0
 
 @onready var hurtbox: Area2D 
-
+@onready var sfxJugador: AudioStreamPlayer2D = %sfxJugador
 @export var animacion: AnimatedSprite2D
 
 @export var CollisionPersonaje: CollisionObject2D
@@ -14,7 +14,7 @@ var invulnerable_hasta = 0
 
 var velocidadSalto = -390 
 var velocidadDobleSalto = -300
-var velocidad: float = 200.0
+var velocidad: float = 185.72
 var aceleracion = 200
 var velocidadDeDesliz = 32
 var last_wall: Vector2 = Vector2.ZERO
@@ -23,8 +23,9 @@ var wall_normal
 @export var empujarDano: Vector2 = Vector2(150.0,-275.0)
 var agachado: bool 
 
+var dobleSalto: bool = false
 
-const coyoteTiempo: float = 0.25
+const coyoteTiempo: float = 0.2
 const tiempoPared: float = 0.4
 const tiempoBuffer: float = 0.2
 
@@ -41,6 +42,9 @@ var posInicial: Vector2
 var posCheckpoint: Vector2
 var ignorarConexionesHasta: int = 0
 
+@export var saltoSFX: AudioStream
+@export var danoSFX: AudioStream
+@export var walljumpSFX: AudioStream
 
 var en_pared: bool = is_on_wall_only()
 
@@ -72,6 +76,12 @@ func morir():
 	await get_tree().create_timer(1.10).timeout
 	get_tree().reload_current_scene()
 
+func reproducir_sfx(sonido: AudioStream, volumen: float) -> void:
+	if sonido != null:
+		sfxJugador.stream = sonido
+		sfxJugador.volume_db = volumen
+		sfxJugador.play()
+
 func DeslizarPared():
 	if !is_on_floor():
 		wall_normal = get_wall_normal()
@@ -90,6 +100,7 @@ func DeslizarPared():
 	
 	
 func recibir_dano() -> void:
+	reproducir_sfx(danoSFX, -20)
 	var ahora = Time.get_ticks_msec()
 	if ahora < invulnerable_hasta:
 		return
@@ -185,17 +196,25 @@ func _physics_process(delta: float):
 		
 	#salto
 	if cronoBuffer > 0.0:
-		# Salto 
-		if crono_coyote > 0.0:
+		
+		# Walljump 
+		if en_pared or EstaPared:
+			
+			velocity.x = wall_normal.x * velocidadWalljump.x
+			
+			velocity.y = velocidadWalljump.y
+			reproducir_sfx(walljumpSFX,-10)
+			cronoBuffer = 0.0
+			cronoBloqueo = tiempoPared
+			# Salto 
+		elif crono_coyote > 0.0 or dobleSalto:
+			reproducir_sfx(saltoSFX,0)
 			velocity.y = velocidadSalto 
 			crono_coyote = 0.0 
 			cronoBuffer = 0.0
-		# Walljump 
-		elif en_pared or EstaPared:
-			velocity.x = wall_normal.x * velocidadWalljump.x
-			velocity.y = velocidadWalljump.y
-			cronoBuffer = 0.0
-			cronoBloqueo = tiempoPared
+			dobleSalto = false
+		
+		
 		
 			
 

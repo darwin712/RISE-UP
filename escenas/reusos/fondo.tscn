@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://btce23luptpyy"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cqswf"]
+
+[node name="Fondo" type="Sprite2D" unique_id=323774128]
+z_index = -1
+position = Vector2(398.14325, 259.79245)
+scale = Vector2(1.3744406, 1.4929985)
+texture = SubResource("NoiseTexture2D_cqswf")
