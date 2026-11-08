@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://xxhhx6wl2ppl"]
 
-[ext_resource type="Script" uid="uid://boh18rskqgdpe" path="res://assets/enemigos/arquero/bala.gd" id="1_f12c7"]
+[ext_resource type="Script" uid="uid://dhuvqgu00v5wh" path="res://escenas/reusos/BalaJugador.gd" id="1_f12c7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trs4p"]
 size = Vector2(12, 1)
 
 [node name="BalaJugador" type="Area2D" unique_id=456289909]
+collision_layer = 0
+collision_mask = 17
 position = Vector2(-2, -2)
 scale = Vector2(0.5, 1)
 script = ExtResource("1_f12c7")

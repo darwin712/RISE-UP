@@ -18,9 +18,17 @@ shape = SubResource("RectangleShape2D_trs4p")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=516206845]
 scale = Vector2(0.5, 1)
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=531805544]
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=310031637]
 offset_top = 1.0
-offset_right = 24.0
+offset_right = 8.0
+offset_bottom = 2.0
+color = Color(0.71889037, 0.7188904, 3.85046e-07, 1)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=531805544]
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 26.0
 offset_bottom = 2.0
 scale = Vector2(0.5, 1)
+color = Color(1, 1, 1, 0.30588236)
 metadata/_edit_use_anchors_ = true

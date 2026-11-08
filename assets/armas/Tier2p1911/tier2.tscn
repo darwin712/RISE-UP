@@ -1,3 +1,13 @@
 [gd_scene format=3 uid="uid://c6sn14w1ffe6g"]
 
-[node name="Tier2" type="Node2D" unique_id=1834318830]
+[ext_resource type="Script" uid="uid://c3elubjectsbc" path="res://assets/armas/Tier2p1911/tier_2.gd" id="1_tier2"]
+
+[node name="Tier2" type="Node2D" unique_id=1834318830 groups=["arma_suelo"]]
+position = Vector2(0, -2)
+script = ExtResource("1_tier2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1280704894]
+offset_left = -4.0
+offset_top = -11.0
+offset_right = 4.0
+offset_bottom = -3.0

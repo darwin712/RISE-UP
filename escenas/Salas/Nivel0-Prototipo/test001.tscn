@@ -3,7 +3,10 @@
 [ext_resource type="TileSet" uid="uid://blciglvtm15im" path="res://assets/tilesetLayers/tilesetCastle.tres" id="1_24v2n"]
 [ext_resource type="TileSet" uid="uid://ba5mn17haptkr" path="res://assets/tilesetLayers/tilesetFondo.tres" id="1_jc884"]
 [ext_resource type="PackedScene" uid="uid://cdk5i2l8o61nc" path="res://escenas/reusos/punto_conexion.tscn" id="2_ivwpl"]
+[ext_resource type="PackedScene" uid="uid://cggrhrbc6qtwy" path="res://assets/armas/loDeMarioWorld/flotar.tscn" id="3_70clu"]
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="3_pmxiv"]
+[ext_resource type="PackedScene" uid="uid://v06s16evl2ak" path="res://assets/armas/Tier3HKMP5/tier3.tscn" id="6_r4ibv"]
+[ext_resource type="PackedScene" uid="uid://c6sn14w1ffe6g" path="res://assets/armas/Tier2p1911/tier2.tscn" id="7_veyjx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivwpl"]
 size = Vector2(100.4375, 7)
@@ -82,6 +85,15 @@ position = Vector2(241, -1)
 
 [node name="SpawnInicial" type="Marker2D" parent="." unique_id=2031727554]
 position = Vector2(242, 205)
+
+[node name="Tier3" parent="." unique_id=665103025 instance=ExtResource("6_r4ibv")]
+position = Vector2(120, 224)
+
+[node name="flotar" parent="." unique_id=1753112761 instance=ExtResource("3_70clu")]
+position = Vector2(373, 213)
+
+[node name="Tier2" parent="." unique_id=1834318830 instance=ExtResource("7_veyjx")]
+position = Vector2(270, 198)
 
 [editable path="Conexiones/ConexionUP"]
 [editable path="Conexiones/ConexionLEFT"]

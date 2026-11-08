@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c6dtfcivl6wsk"]
+
+[ext_resource type="Script" uid="uid://sk2qoofsb3om" path="res://assets/armas/loDeMarioWorld/flotar.gd" id="1_t7261"]
+
+[node name="flotar" type="Node2D" unique_id=1753112761]
+script = ExtResource("1_t7261")
+duracion = null
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=309897400]
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 1.0
+color = Color(0, 1, 1, 1)

@@ -1,5 +1,12 @@
 extends CharacterBody2D
 
+@export var vida: int = 2
+
+func quitar_vida(dano: int) -> void:
+	vida -= dano
+	if vida <= 0:
+		queue_free()
+
 @onready var animacionSlime: AnimatedSprite2D = %animacionSlime
 
 @onready var jugador: Node2D = get_tree().get_first_node_in_group("jugador")
