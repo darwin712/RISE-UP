@@ -5,6 +5,7 @@ extends Node
 @onready var contenedorSala = get_node("../SalaActual")
 @onready var jugador = get_node("../Jugador")
 @onready var transicion = get_node("../Transicion/Desvanecer")
+@onready var sfxActual: AudioStreamPlayer2D = $sfxActual
 
 var salaActual: Node2D
 var habitaciones: Array[Node2D] = []
@@ -12,9 +13,12 @@ var estaCambiandoSala = false
 var habitacionesGeneradas: Array[PackedScene] = []
 var espaciosOcupados: Array[Rect2] = []
 
-
+func reproducir(stream: AudioStream) -> void:
+	sfxActual.stream = stream
+	sfxActual.play()
 
 func _ready():
+	add_to_group("main")
 	iniciarRun()
 
 func conectarEntrada(sala):

@@ -1,6 +1,8 @@
 [gd_resource type="TileSet" format=3 uid="uid://blciglvtm15im"]
 
 [ext_resource type="Texture2D" uid="uid://t733bbfs4ust" path="res://assets/tilesetLayers/CastleTileSheet.png" id="1_l31i6"]
+[ext_resource type="PackedScene" uid="uid://yd24m3jq5284" path="res://escenas/reusos/corazon.tscn" id="2_glnjf"]
+[ext_resource type="PackedScene" uid="uid://yrxodmgjotv0" path="res://escenas/reusos/burbuja.tscn" id="3_kt023"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2n7v"]
 texture = ExtResource("1_l31i6")
@@ -38,12 +40,15 @@ texture = ExtResource("1_l31i6")
 6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:3/0 = 0
 6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:6/next_alternative_id = 2
 4:6/0 = 0
 4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.9163971, -8, 8, -8, 8, -0.08705139, 4.1767616, -0.14741516, 2.2112255, -1.9163961)
 4:6/0/physics_layer_0/polygon_0/one_way = true
+5:6/next_alternative_id = 2
 5:6/0 = 0
 5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -0.08705139, -8, 0.08705139)
 5:6/0/physics_layer_0/polygon_0/one_way = true
+6:6/next_alternative_id = 2
 6:6/0 = 0
 6:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.9163971, -8, -8, -8, -8, -0.08705139, -4.1767616, -0.14741516, -2.2112255, -1.9163961)
 6:6/0/physics_layer_0/polygon_0/one_way = true
@@ -65,6 +70,11 @@ texture = ExtResource("1_l31i6")
 2:6/0 = 0
 2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_i66hn"]
+resource_name = "Interactuables"
+scenes/1/scene = ExtResource("2_glnjf")
+scenes/2/scene = ExtResource("3_kt023")
+
 [resource]
 physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 2
@@ -72,3 +82,4 @@ physics_layer_1/collision_mask = 4
 custom_data_layer_0/name = "haceDano"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_e2n7v")
+sources/1 = SubResource("TileSetScenesCollectionSource_i66hn")

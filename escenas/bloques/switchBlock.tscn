@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://csyctx66pvwqm"]
+
+[ext_resource type="Script" uid="uid://b68k2wr2pculp" path="res://escenas/bloques/switch_block.gd" id="1_bd40n"]
+[ext_resource type="Texture2D" uid="uid://ds7jrm8m2r7ge" path="res://assets/tilesetLayers/switchBlockON.png" id="2_4c47r"]
+[ext_resource type="Texture2D" uid="uid://doi4nno84uk0l" path="res://assets/tilesetLayers/switchBlockOFF.png" id="2_bd40n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiua5"]
+atlas = ExtResource("2_bd40n")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cimtx"]
+size = Vector2(16, 16)
+
+[node name="switchBlock" type="StaticBody2D" unique_id=1927611114]
+script = ExtResource("1_bd40n")
+texturaActiva = ExtResource("2_4c47r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2045893944]
+texture = SubResource("AtlasTexture_wiua5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652667098]
+shape = SubResource("RectangleShape2D_cimtx")
+disabled = true

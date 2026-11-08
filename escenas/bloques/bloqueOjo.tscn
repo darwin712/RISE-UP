@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c4kshtw780dqn"]
+
+[ext_resource type="Script" uid="uid://cn7qbr71jgf4m" path="res://escenas/bloques/bloque_ojo.gd" id="1_nuci7"]
+[ext_resource type="Texture2D" uid="uid://c3xyw35ollcry" path="res://assets/tilesetLayers/EyeClosed.png" id="2_ixu8f"]
+[ext_resource type="Texture2D" uid="uid://c5h84o5wb4ty3" path="res://assets/tilesetLayers/Eye.png" id="2_pnkgd"]
+[ext_resource type="AudioStream" uid="uid://bt57myfoxaro4" path="res://assets/SFX/switch.wav" id="4_ixu8f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62yky"]
+atlas = ExtResource("2_pnkgd")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kems2"]
+size = Vector2(8, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4uwhc"]
+size = Vector2(8, 16)
+
+[node name="ojo" type="StaticBody2D" unique_id=1566993557]
+script = ExtResource("1_nuci7")
+texturaActiva = ExtResource("2_ixu8f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1004552222]
+texture = SubResource("AtlasTexture_62yky")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2085395516]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_kems2")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1398451877]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1617609354]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_4uwhc")
+
+[node name="sfxSwitch" type="AudioStreamPlayer2D" parent="." unique_id=931769769]
+stream = ExtResource("4_ixu8f")
