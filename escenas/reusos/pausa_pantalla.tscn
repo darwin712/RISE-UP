@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c5mn66kwdhp1o"]
+
+[ext_resource type="PackedScene" uid="uid://og4bt3h8yx8u" path="res://escenas/reusos/Pausa.tscn" id="1_45po8"]
+
+[node name="PausaPantalla" type="CanvasLayer" unique_id=901839446]
+
+[node name="Pausa" parent="." unique_id=2069802197 instance=ExtResource("1_45po8")]

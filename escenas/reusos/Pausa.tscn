@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://og4bt3h8yx8u"]
+
+[ext_resource type="Script" uid="uid://x8fjk0m4a1i0" path="res://escenas/reusos/Scripts/pausaScript.gd" id="1_cl53r"]
+[ext_resource type="Texture2D" uid="uid://d7eh4yjentv3" path="res://assets/LetreroPausa.png" id="1_hh2ip"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kxuq"]
+bg_color = Color(0.10073569, 0.29882237, 0.5523685, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.08824543, 0.16908234, 0.19103023, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mti6b"]
+bg_color = Color(0.16758549, 0.4073999, 0.6547298, 1)
+
+[node name="Pausa" type="Control" unique_id=2069802197]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cl53r")
+
+[node name="Panel" type="Panel" parent="." unique_id=1684147366]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1007182349]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.75
+offset_top = -75.75
+offset_right = 60.75
+offset_bottom = 75.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4kxuq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1378980906]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 14
+
+[node name="btnContinuar" type="Button" parent="PanelContainer/VBoxContainer" unique_id=178991549]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_styles/hover = SubResource("StyleBoxFlat_mti6b")
+text = "Continuar"
+
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/VBoxContainer" unique_id=1818949950]
+position = Vector2(49.75, -29.25)
+texture = ExtResource("1_hh2ip")
+
+[node name="btnReiniciar" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1276743943]
+layout_mode = 2
+text = "Reiniciar"
+
+[node name="btnSalir" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1614484752]
+layout_mode = 2
+text = "Salir"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/btnContinuar" to="." method="_on_btn_continuar_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/btnReiniciar" to="." method="_on_btn_reiniciar_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/btnSalir" to="." method="_on_btn_salir_pressed"]
