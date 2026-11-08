@@ -62,7 +62,7 @@ func regresarCheckpoint():
 	ignorarConexionesHasta = Time.get_ticks_msec() + 300
 	self.global_position = posCheckpoint
 	velocity = Vector2.ZERO
-	
+
 	
 func morir():
 	if haMuerto:

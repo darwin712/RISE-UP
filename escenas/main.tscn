@@ -18,6 +18,8 @@ script = ExtResource("2_jumxm")
 salaInicio = ExtResource("3_26pgj")
 listaSalas = Array[PackedScene]([ExtResource("4_26pgj"), ExtResource("5_dkga6")])
 
+[node name="sfxActual" type="AudioStreamPlayer2D" parent="ManejadorDePartida" unique_id=2131133215]
+
 [node name="Transicion" type="CanvasLayer" parent="." unique_id=503434963]
 layer = 100
 
