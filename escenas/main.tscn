@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dyuv1hv2oggfx" path="res://escenas/Salas/Nivel0-Prototipo/test002.tscn" id="4_26pgj"]
 [ext_resource type="PackedScene" uid="uid://4whpnvyhpghi" path="res://escenas/Salas/Nivel0-Prototipo/test003.tscn" id="5_dkga6"]
 [ext_resource type="PackedScene" path="res://escenas/UI/hud_vidas.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://escenas/UI/pantalla_muerte.tscn" id="7_muerte"]
 
 [node name="Main" type="Node2D" unique_id=1008311360]
 
@@ -20,6 +21,8 @@ salaInicio = ExtResource("3_26pgj")
 listaSalas = Array[PackedScene]([ExtResource("4_26pgj"), ExtResource("5_dkga6")])
 
 [node name="HUDVidas" parent="." instance=ExtResource("6_hud")]
+
+[node name="PantallaMuerte" parent="." instance=ExtResource("7_muerte")]
 
 [node name="Transicion" type="CanvasLayer" parent="." unique_id=503434963]
 layer = 100
