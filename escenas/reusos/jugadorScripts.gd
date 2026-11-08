@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal vida_cambiada(vida_actual: int, vida_maxima: int)
+signal murio
 
 const ARMA_BASE = preload("res://assets/armas/Tier1pMadera/tier1.tscn")
 
@@ -91,7 +92,7 @@ func morir():
 	animacion.modulate = Color.WHITE
 	animacion.play("muerte")
 	await get_tree().create_timer(1.10).timeout
-	get_tree().change_scene_to_file("res://escenas/Menu/menu.tscn")
+	murio.emit()
 
 func reproducir_sfx(sonido: AudioStream, volumen: float) -> void:
 	if sonido != null:
