@@ -1,11 +1,13 @@
 extends RigidBody2D
 
-@export var raycast_jugador: RayCast2D  
-@export var raycast_suelo: RayCast2D   
+@export var RaycastJugador: RayCast2D  
+@export var RaycastPiso: RayCast2D   
 @export var caida: float = 300.0
 @export var velocidad_subida: float = 100.0
 @export var tiempo_espera: float = 2.0
 @export var sprite: AnimatedSprite2D
+@export var sonido: AudioStreamPlayer2D
+
 var posInicial: Vector2
 var cayendo: bool = false
 var subiendo: bool = false
@@ -21,14 +23,15 @@ func _physics_process(delta: float) -> void:
 
 	#si te mira cae
 	if not cayendo and not subiendo and not esperando:
-		if raycast_jugador != null and raycast_jugador.is_colliding():
-			var col = raycast_jugador.get_collider()
+		if RaycastJugador != null and RaycastJugador.is_colliding():
+			var col = RaycastJugador.get_collider()
 			if col != null and (col.is_in_group("jugador") or col.get_parent().is_in_group("jugador")):
 				cayendo = true
+				sonido.play()
 
 	# ve si hay suelo a 10 pixeles
 	if cayendo:
-		if raycast_suelo != null and raycast_suelo.is_colliding():
+		if RaycastPiso != null and RaycastPiso.is_colliding():
 			detener_y_esperar()
 		else:
 			global_position.y += caida * delta
@@ -41,12 +44,15 @@ func _physics_process(delta: float) -> void:
 			
 	if cayendo:
 		sprite.play("agresivo")
+		
 	else:
 		sprite.play("default")
+		sonido.stop()
 
 # daño
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if cayendo:
+		
 		if body.is_in_group("jugador") or body.get_parent().is_in_group("jugador"):
 			var jugador = body if body.is_in_group("jugador") else body.get_parent()
 			if jugador.has_method("_on_hurtbox_body_entered"):

@@ -97,7 +97,7 @@ position = Vector2(373, 213)
 position = Vector2(270, 198)
 
 [node name="RigidBody2D" parent="." unique_id=1463565123 instance=ExtResource("8_0b805")]
-position = Vector2(108, 113)
+position = Vector2(108, 57)
 
 [editable path="Conexiones/ConexionUP"]
 [editable path="Conexiones/ConexionLEFT"]
