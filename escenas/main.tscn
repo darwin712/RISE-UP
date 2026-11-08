@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2sok4sq4molt"]
 
 [ext_resource type="PackedScene" uid="uid://c6oy7lu8oqdf0" path="res://escenas/reusos/jugador.tscn" id="1_d7u15"]
-[ext_resource type="Script" uid="uid://d2pueydie0vq5" path="res://escenas/partida_manager.gd" id="2_jumxm"]
+[ext_resource type="Script" path="res://escenas/partida_manager.gd" id="2_jumxm"]
 [ext_resource type="PackedScene" uid="uid://cn7lw60ygx5sw" path="res://escenas/Salas/Nivel0-Prototipo/test001.tscn" id="3_26pgj"]
 [ext_resource type="PackedScene" uid="uid://dyuv1hv2oggfx" path="res://escenas/Salas/Nivel0-Prototipo/test002.tscn" id="4_26pgj"]
 [ext_resource type="PackedScene" uid="uid://4whpnvyhpghi" path="res://escenas/Salas/Nivel0-Prototipo/test003.tscn" id="5_dkga6"]

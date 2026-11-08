@@ -5,9 +5,6 @@
 [node name="Tier3" type="Node2D" unique_id=665103025 groups=["arma_suelo"]]
 position = Vector2(0, -8)
 script = ExtResource("1_8nb0b")
-escena_bala = null
-balasM = null
-tiempoEntreDis = null
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1038896275]
 offset_left = -4.0

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c3elubjectsbc" path="res://assets/armas/Tier2p1911/tier_2.gd" id="1_tier2"]
 
 [node name="Tier2" type="Node2D" unique_id=1834318830 groups=["arma_suelo"]]
-<<<<<<< Updated upstream
 position = Vector2(0, -2)
 script = ExtResource("1_tier2")
 
@@ -12,12 +11,3 @@ offset_left = -4.0
 offset_top = -11.0
 offset_right = 4.0
 offset_bottom = -3.0
-=======
-script = ExtResource("1_tier2")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1280704894]
-offset_left = -20.0
-offset_top = -21.0
-offset_right = 12.0
-offset_bottom = -5.0
->>>>>>> Stashed changes

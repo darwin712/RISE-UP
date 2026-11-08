@@ -2,15 +2,10 @@ extends Node2D
  
 @export var escena_bala: PackedScene = preload("res://escenas/reusos/BalaJugador.tscn")
 @export var balasM: int = 30
-<<<<<<< Updated upstream
-@export var tiempoEntreDis: float = 0.05
- 
-var balas: int = 20
-=======
-@export var tiempoEntreDis: float = 0.8
+@export var tiempoEntreDis: float = 0.1
  
 var balas: int = 30
->>>>>>> Stashed changes
+
 var espera_disparo: float = 0.0
 var espera_recarga: float = 0.0
  

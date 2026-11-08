@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("flotar"):
-		body.flotar(duracion)
+		body.flotar(duracion, acension)
 		$Area2D.set_deferred("monitoring", false)
 		hide()
 		await get_tree().create_timer(2.27).timeout

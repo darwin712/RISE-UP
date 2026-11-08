@@ -1,6 +1,13 @@
 extends CharacterBody2D
 
+const ARMA_BASE = preload("res://assets/armas/Tier1pMadera/tier1.tscn")
+
 var vida = 3
+@export var alcanceRecoger: float = 42.0
+var armaBase
+var armaActual
+var tiempoFlote: float = 0.0
+var fuerzaAscenso: float = 0.0
 var tiempo_invulnerable_ms = 1500
 var invulnerable_hasta = 0
 
@@ -55,8 +62,14 @@ func _ready() -> void:
 	posCheckpoint = posInicial
 	add_to_group("jugador")
 	print("Vidas restantes: ", vida)
+	armaBase = ARMA_BASE.instantiate()
+	add_child(armaBase)
+	armaActual = armaBase
 	
 
+func flotar(segundos: float, fuerza: float = 0.0) -> void:
+	tiempoFlote = segundos
+	fuerzaAscenso = fuerza
 	
 func regresarCheckpoint():
 	ignorarConexionesHasta = Time.get_ticks_msec() + 300
@@ -233,12 +246,39 @@ func _physics_process(delta: float):
 			animacion.flip_h = false
 		elif direccion == -1.0:
 			animacion.flip_h = true
-	
-	
+	if tiempoFlote > 0.0:
+		tiempoFlote -= delta
+		velocity.y = -fuerzaAscenso
+
+	manejar_armas()
 	move_and_slide()
 
-
-
+func manejar_armas() -> void:
+	var direccion := Vector2.LEFT if animacion.flip_h else Vector2.RIGHT
+	armaActual.position = Vector2(10 * direccion.x, -14)
+	if Input.is_action_just_pressed("agarrar"):
+		recoger_arma()
+	if Input.is_action_pressed("shoot"):
+		armaActual.disparar(direccion)
+		if armaActual != armaBase and armaActual.balas <= 0:
+			armaActual.queue_free()
+			armaActual = armaBase
+	
+func recoger_arma() -> void:
+	var cercana = null
+	var menor := alcanceRecoger
+	for arma in get_tree().get_nodes_in_group("arma_suelo"):
+		var distancia := global_position.distance_to(arma.global_position)
+		if distancia < menor:
+			menor = distancia
+			cercana = arma
+	if cercana == null:
+		return
+	if armaActual != armaBase:
+		armaActual.queue_free()
+	cercana.remove_from_group("arma_suelo")
+	cercana.reparent(self, false)
+	armaActual = cercana
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
