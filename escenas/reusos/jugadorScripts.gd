@@ -58,6 +58,7 @@ var ignorarConexionesHasta: int = 0
 @export var walljumpSFX: AudioStream
 
 var en_pared: bool = is_on_wall_only()
+var impulsoExterno: bool = false
 
 
 func _ready() -> void:
@@ -71,6 +72,10 @@ func _ready() -> void:
 	add_child(armaBase)
 	armaActual = armaBase
 	
+func impulsar(fuerza: float) -> void:
+	velocity.y = -absf(fuerza)
+	impulsoExterno = true
+	cronoBuffer = 0.0
 
 func flotar(segundos: float, fuerza: float = 0.0) -> void:
 	tiempoFlote = segundos
@@ -230,8 +235,11 @@ func _physics_process(delta: float):
 	if pausa:
 		velocity = Vector2.ZERO
 		return
-	velocity += get_gravity() * delta 
-	if !Input.is_action_pressed("Saltar") and velocity.y < 0 and cronoBloqueo <= 0.0:
+	velocity += get_gravity() * delta
+	
+	if velocity.y >= 0.0:
+		impulsoExterno = false
+	if !Input.is_action_pressed("Saltar") and velocity.y < 0 and cronoBloqueo <= 0.0 and !impulsoExterno:
 		velocity.y = 0
 		
 	#salto
