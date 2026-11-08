@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://mpbhc1cawcj8"]
+
+[ext_resource type="Texture2D" uid="uid://c3roxj1nnhmwd" path="res://assets/enemigos/John/john_normal.png" id="1_wc0ah"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wc0ah"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qffcm"]
+size = Vector2(32, 5)
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=1463565123]
+collision_mask = 5
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=195673220]
+texture = ExtResource("1_wc0ah")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=14476813]
+shape = SubResource("RectangleShape2D_wc0ah")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2128120580]
+collision_layer = 2
+collision_mask = 4
+
+[node name="colisionDaño" type="CollisionShape2D" parent="Area2D" unique_id=1369603872]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_qffcm")
+debug_color = Color(0.9304728, 0.20804533, 0.42011243, 0.41960785)
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1353422389]
+target_position = Vector2(0, 100)
+collision_mask = 4

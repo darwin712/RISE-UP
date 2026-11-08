@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://og4bt3h8yx8u"]
+
+[ext_resource type="Script" uid="uid://x8fjk0m4a1i0" path="res://escenas/UI/Pausa/pausaScript.gd" id="1_cl53r"]
+[ext_resource type="FontFile" uid="uid://dblboicyen1tp" path="res://assets/fuentes/PixelifySans.ttf" id="2_8fu4q"]
+
+[sub_resource type="FontVariation" id="FontVariation_8fu4q"]
+base_font = ExtResource("2_8fu4q")
+variation_opentype = {
+"wght": 700.0
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mti6b"]
+bg_color = Color(0.16758549, 0.4073999, 0.6547298, 1)
+
+[node name="Pausa" type="Control" unique_id=2069802197]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cl53r")
+
+[node name="Panel" type="Panel" parent="." unique_id=1684147366]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1378980906]
+layout_mode = 0
+offset_left = 169.5
+offset_top = 49.0
+offset_right = 310.5
+offset_bottom = 221.0
+size_flags_horizontal = 4
+theme_override_constants/separation = 14
+
+[node name="Titulo" type="Label" parent="VBoxContainer" unique_id=292106081]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38775298, 0.6455056, 0.87603414, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("FontVariation_8fu4q")
+theme_override_font_sizes/font_size = 30
+text = "Pausa"
+horizontal_alignment = 1
+
+[node name="btnContinuar" type="Button" parent="VBoxContainer" unique_id=178991549]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_styles/hover = SubResource("StyleBoxFlat_mti6b")
+text = "Continuar"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer" unique_id=1818949950]
+position = Vector2(49.75, -29.25)
+
+[node name="btnReiniciar" type="Button" parent="VBoxContainer" unique_id=1276743943]
+layout_mode = 2
+text = "Reiniciar"
+
+[node name="btnSalir" type="Button" parent="VBoxContainer" unique_id=1614484752]
+layout_mode = 2
+text = "Salir"
+
+[connection signal="pressed" from="VBoxContainer/btnContinuar" to="." method="_on_btn_continuar_pressed"]
+[connection signal="pressed" from="VBoxContainer/btnReiniciar" to="." method="_on_btn_reiniciar_pressed"]
+[connection signal="pressed" from="VBoxContainer/btnSalir" to="." method="_on_btn_salir_pressed"]

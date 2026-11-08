@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://lmdam4nk2mby"]
 
-[ext_resource type="Texture2D" path="res://assets/menu/fondo_inicio.png" id="1_fondo"]
-[ext_resource type="Script" path="res://escenas/Menu/menu.gd" id="2_script"]
-[ext_resource type="FontFile" path="res://assets/fuentes/PixelifySans.ttf" id="3_fuente"]
-[ext_resource type="Script" path="res://escenas/Menu/efectos_tormenta.gd" id="4_tormenta"]
+[ext_resource type="Texture2D" uid="uid://ft8ll53bm66v" path="res://assets/menu/fondo_inicio.png" id="1_fondo"]
+[ext_resource type="Script" uid="uid://dtmnpihogwb00" path="res://escenas/Menu/menu.gd" id="2_script"]
+[ext_resource type="FontFile" uid="uid://dblboicyen1tp" path="res://assets/fuentes/PixelifySans.ttf" id="3_fuente"]
+[ext_resource type="Script" uid="uid://dpeve6666ywdr" path="res://escenas/Menu/efectos_tormenta.gd" id="4_tormenta"]
 
 [sub_resource type="FontVariation" id="FontVariation_titulo"]
 base_font = ExtResource("3_fuente")
@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_script")
 
-[node name="Fondo" type="TextureRect" parent="."]
+[node name="Fondo" type="TextureRect" parent="." unique_id=404596361]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +38,7 @@ texture = ExtResource("1_fondo")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Oscurecer" type="ColorRect" parent="."]
+[node name="Oscurecer" type="ColorRect" parent="." unique_id=993595312]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,7 +48,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.18)
 
-[node name="EfectosTormenta" type="Control" parent="."]
+[node name="EfectosTormenta" type="Control" parent="." unique_id=1888275851]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,11 +57,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("4_tormenta")
-cantidad_gotas = 72
-intervalo_minimo = 7.0
-intervalo_maximo = 14.0
 
-[node name="Contenido" type="CenterContainer" parent="."]
+[node name="Contenido" type="CenterContainer" parent="." unique_id=580825676]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,13 +66,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Opciones" type="VBoxContainer" parent="Contenido"]
+[node name="Opciones" type="VBoxContainer" parent="Contenido" unique_id=1195763738]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Titulo" type="Label" parent="Contenido/Opciones"]
+[node name="Titulo" type="Label" parent="Contenido/Opciones" unique_id=847358547]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.91, 0.94, 0.9, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85)
@@ -86,12 +83,12 @@ theme_override_font_sizes/font_size = 36
 text = "RISE UP"
 horizontal_alignment = 1
 
-[node name="Separador" type="Control" parent="Contenido/Opciones"]
+[node name="Separador" type="Control" parent="Contenido/Opciones" unique_id=1680347850]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Jugar" type="Button" parent="Contenido/Opciones"]
+[node name="Jugar" type="Button" parent="Contenido/Opciones" unique_id=788470688]
 custom_minimum_size = Vector2(150, 34)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Salir")
@@ -99,7 +96,7 @@ theme_override_fonts/font = SubResource("FontVariation_botones")
 theme_override_font_sizes/font_size = 16
 text = "JUGAR"
 
-[node name="Salir" type="Button" parent="Contenido/Opciones"]
+[node name="Salir" type="Button" parent="Contenido/Opciones" unique_id=41147581]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
 focus_neighbor_top = NodePath("../Jugar")

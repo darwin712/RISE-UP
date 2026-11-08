@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="3_pmxiv"]
 [ext_resource type="PackedScene" uid="uid://v06s16evl2ak" path="res://assets/armas/Tier3HKMP5/tier3.tscn" id="6_r4ibv"]
 [ext_resource type="PackedScene" uid="uid://c6sn14w1ffe6g" path="res://assets/armas/Tier2p1911/tier2.tscn" id="7_veyjx"]
+[ext_resource type="PackedScene" uid="uid://mpbhc1cawcj8" path="res://escenas/reusos/john.tscn" id="8_0b805"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivwpl"]
 size = Vector2(100.4375, 7)
@@ -94,6 +95,9 @@ position = Vector2(373, 213)
 
 [node name="Tier2" parent="." unique_id=1834318830 instance=ExtResource("7_veyjx")]
 position = Vector2(270, 198)
+
+[node name="RigidBody2D" parent="." unique_id=1463565123 instance=ExtResource("8_0b805")]
+position = Vector2(108, 113)
 
 [editable path="Conexiones/ConexionUP"]
 [editable path="Conexiones/ConexionLEFT"]

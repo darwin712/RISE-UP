@@ -75,6 +75,22 @@ func _ready() -> void:
 func flotar(segundos: float, fuerza: float = 0.0) -> void:
 	tiempoFlote = segundos
 	fuerzaAscenso = fuerza
+	while tiempoFlote > 0.0:
+		if tiempoFlote <= 3.0:
+			# Parpadeo amarillo (dura 0.2 segundos)
+			animacion.modulate = Color.YELLOW
+			await get_tree().create_timer(0.1).timeout 
+			
+			animacion.modulate = Color.WHITE
+			await get_tree().create_timer(0.1).timeout
+			
+			# Le restamos a la variable los 0.2s transcurridos
+			tiempoFlote -= 0.2
+		else:
+			# Si aún le queda más de 3 segundos, esperamos el siguiente fotograma
+			# para evitar que el bucle congelé el juego
+			await get_tree().process_frame
+			tiempoFlote -= get_process_delta_time()
 	
 func regresarCheckpoint():
 	ignorarConexionesHasta = Time.get_ticks_msec() + 300
