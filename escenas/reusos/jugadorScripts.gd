@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
+signal vida_cambiada(vida_actual: int, vida_maxima: int)
+
 const ARMA_BASE = preload("res://assets/armas/Tier1pMadera/tier1.tscn")
 
-var vida = 3
+@export_range(1, 20, 1) var vida_maxima: int = 3
+var vida: int
 @export var alcanceRecoger: float = 42.0
 var armaBase
 var armaActual
@@ -57,11 +60,12 @@ var en_pared: bool = is_on_wall_only()
 
 
 func _ready() -> void:
+	vida = vida_maxima
 	add_to_group("jugador")
 	posInicial = global_position
 	posCheckpoint = posInicial
-	add_to_group("jugador")
 	print("Vidas restantes: ", vida)
+	vida_cambiada.emit(vida, vida_maxima)
 	armaBase = ARMA_BASE.instantiate()
 	add_child(armaBase)
 	armaActual = armaBase
@@ -133,13 +137,19 @@ func recibir_dano() -> void:
 	
 	cronoBloqueo = 0.5 
 	#lo del jovan
-	vida -= 1
+	vida = maxi(vida - 1, 0)
+	vida_cambiada.emit(vida, vida_maxima)
 	print("Vidas restantes: ", vida)
 	if vida <= 0:
 		morir()
 		print("Has muerto!")
 	else:
 		parpadear_invulnerabilidad()
+
+
+func curar(cantidad: int = 1) -> void:
+	vida = mini(vida + cantidad, vida_maxima)
+	vida_cambiada.emit(vida, vida_maxima)
 		
 func parpadear_invulnerabilidad() -> void:
 	
