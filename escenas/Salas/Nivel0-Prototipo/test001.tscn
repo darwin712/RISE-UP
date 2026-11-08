@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cggrhrbc6qtwy" path="res://assets/armas/loDeMarioWorld/flotar.tscn" id="3_70clu"]
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="3_pmxiv"]
 [ext_resource type="PackedScene" uid="uid://v06s16evl2ak" path="res://assets/armas/Tier3HKMP5/tier3.tscn" id="6_r4ibv"]
-[ext_resource type="PackedScene" uid="uid://xxhhx6wl2ppl" path="res://escenas/reusos/BalaJugador.tscn" id="6_veyjx"]
+[ext_resource type="PackedScene" uid="uid://c6sn14w1ffe6g" path="res://assets/armas/Tier2p1911/tier2.tscn" id="7_veyjx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivwpl"]
 size = Vector2(100.4375, 7)
@@ -88,12 +88,12 @@ position = Vector2(242, 205)
 
 [node name="Tier3" parent="." unique_id=665103025 instance=ExtResource("6_r4ibv")]
 position = Vector2(120, 224)
-escena_bala = ExtResource("6_veyjx")
-balasM = 30
-tiempoEntreDis = 0.8
 
 [node name="flotar" parent="." unique_id=1753112761 instance=ExtResource("3_70clu")]
 position = Vector2(373, 213)
+
+[node name="Tier2" parent="." unique_id=1834318830 instance=ExtResource("7_veyjx")]
+position = Vector2(270, 198)
 
 [editable path="Conexiones/ConexionUP"]
 [editable path="Conexiones/ConexionLEFT"]

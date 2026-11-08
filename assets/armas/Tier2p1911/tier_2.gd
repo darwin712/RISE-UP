@@ -4,7 +4,7 @@ extends Node2D
 
 
 @export var balasM: int = 8
-@export var tiempoEntreDis: float = 0.8
+@export var tiempoEntreDis: float = 0.5
 
  
 var balas: int = 8
