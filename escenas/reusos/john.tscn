@@ -1,6 +1,27 @@
 [gd_scene format=3 uid="uid://mpbhc1cawcj8"]
 
+[ext_resource type="Script" uid="uid://b37n1sgimv6dj" path="res://escenas/reusos/johnScript.gd" id="1_qffcm"]
 [ext_resource type="Texture2D" uid="uid://c3roxj1nnhmwd" path="res://assets/enemigos/John/john_normal.png" id="1_wc0ah"]
+[ext_resource type="Texture2D" uid="uid://dqkc6siufbgvr" path="res://assets/enemigos/John/john_activo.png" id="2_7ejqt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4kxuq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7ejqt")
+}],
+"loop": 1,
+"name": &"agresivo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wc0ah")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wc0ah"]
 size = Vector2(32, 32)
@@ -8,25 +29,35 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qffcm"]
 size = Vector2(32, 5)
 
-[node name="RigidBody2D" type="RigidBody2D" unique_id=1463565123]
+[node name="RigidBody2D" type="RigidBody2D" unique_id=1463565123 node_paths=PackedStringArray("raycast_jugador", "raycast_suelo", "sprite")]
 collision_mask = 5
+lock_rotation = true
 freeze = true
+script = ExtResource("1_qffcm")
+raycast_jugador = NodePath("RayCastJugador")
+raycast_suelo = NodePath("RayCastPiso")
+sprite = NodePath("AnimatedSprite2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=195673220]
-texture = ExtResource("1_wc0ah")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=216859704]
+sprite_frames = SubResource("SpriteFrames_4kxuq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=14476813]
 shape = SubResource("RectangleShape2D_wc0ah")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2128120580]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 5
 
 [node name="colisionDaño" type="CollisionShape2D" parent="Area2D" unique_id=1369603872]
 position = Vector2(0, 15)
 shape = SubResource("RectangleShape2D_qffcm")
 debug_color = Color(0.9304728, 0.20804533, 0.42011243, 0.41960785)
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1353422389]
-target_position = Vector2(0, 100)
+[node name="RayCastJugador" type="RayCast2D" parent="." unique_id=1353422389]
+target_position = Vector2(0, 150)
 collision_mask = 4
+
+[node name="RayCastPiso" type="RayCast2D" parent="." unique_id=1968098931]
+target_position = Vector2(0, 5)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
