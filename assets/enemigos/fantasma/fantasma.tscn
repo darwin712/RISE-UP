@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bk7pj0xuoh2ja"]
+
+[ext_resource type="Script" uid="uid://biql6wpgnqbe6" path="res://assets/enemigos/fantasma/fantasma.gd" id="1_dq35c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rmxvh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cbjxg"]
+
+[node name="Fantasma" type="Node2D" unique_id=235600142]
+
+[node name="enemigoFantasma" type="CharacterBody2D" parent="." unique_id=97082220]
+script = ExtResource("1_dq35c")
+
+[node name="ColorRect" type="ColorRect" parent="enemigoFantasma" unique_id=1945028418]
+offset_left = -4.0
+offset_top = -16.0
+offset_right = 4.0
+
+[node name="AreaContacto" type="Area2D" parent="enemigoFantasma" unique_id=224082129 groups=["dano_enemigo"]]
+collision_layer = 16
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigoFantasma/AreaContacto" unique_id=228364228]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_rmxvh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigoFantasma" unique_id=1988166661]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_cbjxg")
