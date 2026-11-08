@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cggrhrbc6qtwy"]
+
+[ext_resource type="Script" uid="uid://sk2qoofsb3om" path="res://assets/armas/loDeMarioWorld/flotar.gd" id="1_t7261"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_flotar"]
+
+[node name="flotar" type="Node2D" unique_id=1753112761]
+script = ExtResource("1_t7261")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=309897400]
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+color = Color(0, 1, 1, 1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1574735786]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=825495262]
+shape = SubResource("CircleShape2D_flotar")

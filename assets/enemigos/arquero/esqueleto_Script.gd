@@ -1,5 +1,6 @@
 extends CharacterBody2D
 @export var escena_bala: PackedScene = preload("res://assets/enemigos/arquero/Bala.tscn") 
+@export var vida: int = 3
 
 @onready var animacionEsqueleto: AnimatedSprite2D = %AnimacionEsqueleto
 @onready var punto_disparo: Marker2D = $PuntoDisparo
@@ -22,6 +23,11 @@ func _physics_process(delta: float) -> void:
 		animacionEsqueleto.play("default")
 		animacionEsqueleto.flip_h = jugador.global_position.x < global_position.x
 		var direccion = (jugador.global_position - global_position).normalized()
+
+func quitar_vida(dano: int) -> void:
+	vida -= dano
+	if vida <= 0:
+		queue_free()
 
 func _on_timer_disparo_timeout() -> void:
 	disparar()
