@@ -11,7 +11,7 @@ func curarse(body: Node2D) -> void:
 		area_2d.set_deferred("monitoring", false)
 		hide()
 		if body.vida < 3:
-			body.vida += 1
+			body.aumentar_vida(1)
 			print("Has conseguido una vida!")
 			print("Vidas restantes: ", body.vida)
 		get_tree().get_first_node_in_group("main").reproducir(sfx_corazon.stream)

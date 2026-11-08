@@ -307,4 +307,6 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 		pass
 	
-	
+func aumentar_vida(cantidad: int):
+	vida = mini(vida + cantidad, vida_maxima)
+	vida_cambiada.emit(vida, vida_maxima)

@@ -1,13 +1,19 @@
 [gd_scene format=3 uid="uid://c6sn14w1ffe6g"]
 
 [ext_resource type="Script" uid="uid://c3elubjectsbc" path="res://assets/armas/Tier2p1911/tier_2.gd" id="1_tier2"]
+[ext_resource type="Texture2D" uid="uid://cw4m2oggt2gg" path="res://assets/armas/tier1upgrade.png" id="2_aavo7"]
 
 [node name="Tier2" type="Node2D" unique_id=1834318830 groups=["arma_suelo"]]
 position = Vector2(0, -2)
 script = ExtResource("1_tier2")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1280704894]
+visible = false
 offset_left = -4.0
 offset_top = -11.0
 offset_right = 4.0
 offset_bottom = -3.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2078118792]
+scale = Vector2(1.125, 1.125)
+texture = ExtResource("2_aavo7")
