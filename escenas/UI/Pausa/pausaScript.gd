@@ -24,6 +24,6 @@ func _on_btn_reiniciar_pressed() -> void:
 
 
 func _on_btn_salir_pressed() -> void:
-	pausa()
+	get_tree().paused = false
 	visible = false
 	get_tree().change_scene_to_file("res://escenas/Menu/menu.tscn")
