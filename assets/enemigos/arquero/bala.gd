@@ -6,10 +6,11 @@ var direccion = Vector2.RIGHT
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	get_tree().create_timer(4.0).timeout.connect(queue_free)
-
+	collision_layer = 16  
+	collision_mask = 5
 func _physics_process(delta: float) -> void:
 	position += direccion * velocidad * delta
-
+	
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("jugador"):
 		body.recibir_dano()

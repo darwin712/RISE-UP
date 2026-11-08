@@ -22,7 +22,13 @@ func _physics_process(delta: float) -> void:
 	if jugador != null:
 		animacionEsqueleto.play("default")
 		animacionEsqueleto.flip_h = jugador.global_position.x < global_position.x
-		var direccion = (jugador.global_position - global_position).normalized()
+		var direccion = (jugador.global_position - punto_disparo.global_position).normalized()
+		var angulo = direccion.angle()
+		var paso = deg_to_rad(30)
+		angulo = round(angulo / paso) *paso
+		direccion = Vector2.RIGHT.rotated(angulo)
+		animacionEsqueleto.flip_h = direccion.x < 0
+		punto_disparo.rotation = angulo	
 
 func quitar_vida(dano: int) -> void:
 	vida -= dano
@@ -39,15 +45,18 @@ func disparar() -> void:
 	if not escena_bala:
 		print("E")
 		return
-	var ladoX = 0.75 if jugador.global_position.x > global_position.x else -1
-	var ladoY = 0.75 if jugador.global_position.y > global_position.y else -1
-	var direccion = Vector2(ladoX, ladoY).normalized()
+	#var ladoX = 0.75 if jugador.global_position.x > global_position.x else -1
+	#var ladoY = 0.75 if jugador.global_position.y > global_position.y else -1
+	var direccion = (jugador.global_position - punto_disparo.global_position).normalized()
+	var angulo = direccion.angle()
+	var paso = deg_to_rad(10)
+	angulo = round(angulo / paso) * paso
+	direccion = Vector2.RIGHT.rotated(angulo)
 
 	var bala = escena_bala.instantiate()
 	get_tree().current_scene.add_child(bala)
 	
-	bala.global_position = global_position + Vector2(punto_disparo.position.x * ladoX, punto_disparo.position.y * ladoY)
-
+	bala.global_position = punto_disparo.global_position
 	if bala.has_method("configurar_direccion"):
 		bala.configurar_direccion(direccion)
 	else:
