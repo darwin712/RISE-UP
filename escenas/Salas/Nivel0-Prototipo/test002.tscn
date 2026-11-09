@@ -40,6 +40,7 @@ tile_set = ExtResource("1_5rc3p")
 [node name="ConexionDOWN" parent="Conexiones" unique_id=1046664548 instance=ExtResource("2_i0qd7")]
 position = Vector2(241, 267)
 direccion = 1
+tipo = 1
 
 [node name="Entrada" parent="Conexiones/ConexionDOWN" index="0" unique_id=1731812365]
 position = Vector2(-97, -29)
@@ -51,6 +52,7 @@ shape = SubResource("RectangleShape2D_i0qd7")
 [node name="ConexionRIGHT" parent="Conexiones" unique_id=1485106295 instance=ExtResource("2_i0qd7")]
 position = Vector2(492, -49)
 direccion = 3
+tipo = 2
 
 [node name="Entrada" parent="Conexiones/ConexionRIGHT" index="0" unique_id=1731812365]
 position = Vector2(-30, 34)

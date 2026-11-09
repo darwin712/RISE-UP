@@ -38,6 +38,7 @@ tile_set = ExtResource("2_ulqyd")
 [node name="ConexionLEFT" parent="Conexiones" unique_id=1046664548 instance=ExtResource("4_px8lb")]
 position = Vector2(39, 174)
 direccion = 2
+tipo = 1
 
 [node name="Entrada" parent="Conexiones/ConexionLEFT" index="0" unique_id=1731812365]
 position = Vector2(-30, 18)
@@ -50,6 +51,7 @@ shape = SubResource("RectangleShape2D_x6xlf")
 position = Vector2(486, -261)
 rotation = 1.5707964
 direccion = 3
+tipo = 2
 
 [node name="Checkpoints" type="Node2D" parent="." unique_id=1507032498]
 
