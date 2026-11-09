@@ -1,13 +1,14 @@
 extends Area2D
-
+ 
 enum Direccion {
 	ARRIBA,
 	ABAJO,
 	IZQUIERDA,
 	DERECHA
 }
-
+ 
 @export var direccion: Direccion
+@export var salaForzada: PackedScene 
 var fueUtilizada = false
 signal jugadorEntro(conexion)
 		
@@ -17,3 +18,4 @@ func _on_body_entered(body: Node2D) -> void:
 			return
 		fueUtilizada = true
 		jugadorEntro.emit.call_deferred(self)
+ 

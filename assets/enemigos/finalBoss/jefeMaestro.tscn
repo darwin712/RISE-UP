@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://hxfu1clj6avx"]
+
+[ext_resource type="Script" uid="uid://bjbiwtvds7wpm" path="res://assets/enemigos/finalBoss/finalboss.gd" id="1_roxrh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_enxpa"]
+size = Vector2(45, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbjxg"]
+size = Vector2(32, 56)
+
+[node name="JefeMaestro" type="Node2D" unique_id=26576577]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1376745584]
+collision_layer = 16
+script = ExtResource("1_roxrh")
+
+[node name="AreaContacto" type="Area2D" parent="CharacterBody2D" unique_id=342999163 groups=["dano_enemigo"]]
+collision_layer = 16
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/AreaContacto" unique_id=493491486]
+position = Vector2(12.5, -20.5)
+shape = SubResource("RectangleShape2D_enxpa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=372856412]
+position = Vector2(19, -18)
+shape = SubResource("RectangleShape2D_cbjxg")
+
+[node name="ColorRect" type="ColorRect" parent="CharacterBody2D" unique_id=551887765]
+offset_left = 3.0
+offset_top = -46.0
+offset_right = 35.0
+offset_bottom = 10.0
+color = Color(0.12, 0.12, 0.12, 0.62352943)
+
+[node name="TimerFuego" type="Timer" parent="CharacterBody2D" unique_id=2028073937]
+one_shot = true
+
+[node name="TimerMagia" type="Timer" parent="CharacterBody2D" unique_id=988051176]
+one_shot = true

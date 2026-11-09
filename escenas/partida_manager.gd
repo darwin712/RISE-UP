@@ -1,31 +1,31 @@
 extends Node
-
+ 
 @export var salaInicio: PackedScene
 @export var listaSalas: Array[PackedScene]
 @onready var contenedorSala = get_node("../SalaActual")
 @onready var jugador = get_node("../Jugador")
 @onready var transicion = get_node("../Transicion/Desvanecer")
 @onready var sfxActual: AudioStreamPlayer2D = $sfxActual
-
+ 
 var salaActual: Node2D
 var habitaciones: Array[Node2D] = []
 var estaCambiandoSala = false
 var habitacionesGeneradas: Array[PackedScene] = []
 var espaciosOcupados: Array[Rect2] = []
-
+ 
 func reproducir(stream: AudioStream) -> void:
 	sfxActual.stream = stream
 	sfxActual.play()
-
+ 
 func _ready():
 	add_to_group("main")
 	iniciarRun()
-
+ 
 func conectarEntrada(sala):
 	var conexiones = sala.get_node("Conexiones")
 	for conexion in conexiones.get_children():
 		conexion.jugadorEntro.connect(generarSala)
-
+ 
 func generarSala(conexionActual):
 	if conexionActual.has_meta("sala_conectada"):
 		var destino = conexionActual.get_meta("sala_conectada")
@@ -50,17 +50,20 @@ func generarSala(conexionActual):
 		
 		conexionNueva.set_meta("sala_conectada", salaActual)
 		conexionNueva.set_meta("conexion_conectada", conexionActual)
-
+ 
 		conectarEntrada(nuevaSala)
 		cambiarSala(nuevaSala, conexionNueva)
 		print("Sala generada")
 	else:
 		print("No hay salas compatibles")
-
+ 
 func buscarSalas(conexionActual):
 	var salasCompatibles = []
+	var candidatas = listaSalas
+	if conexionActual.salaForzada != null:
+		candidatas = [conexionActual.salaForzada]
 	
-	for sala in listaSalas:
+	for sala in candidatas:
 		if habitacionesGeneradas.has(sala):
 			continue
 		var instanciaSala = sala.instantiate()
@@ -80,7 +83,7 @@ func buscarSalas(conexionActual):
 					break
 		instanciaSala.free()
 	return salasCompatibles
-
+ 
 func cambiarSala(destino, conexionDestino):
 	if estaCambiandoSala:
 		return
@@ -110,7 +113,7 @@ func cambiarSala(destino, conexionDestino):
 	jugador.set_physics_process(true)
 	await get_tree().create_timer(0.1).timeout
 	estaCambiandoSala = false
-
+ 
 func direccionOpuesta(direccion):
 	match direccion:
 		0:
@@ -122,7 +125,7 @@ func direccionOpuesta(direccion):
 		3:
 			return 2
 	return -1
-
+ 
 #todo esto es para que posicione bien las salas y pos tenga sentido
 func espacioLocal(sala: Node2D) -> Rect2:
 	var terreno = sala.get_node("Terreno")
@@ -130,12 +133,12 @@ func espacioLocal(sala: Node2D) -> Rect2:
 	var usado = tilemap.get_used_rect()
 	var tamano = Vector2(tilemap.tile_set.tile_size)
 	return Rect2(terreno.position + tilemap.position + Vector2(usado.position) * tamano, Vector2(usado.size) * tamano)
-
+ 
 func espacioEnMapa(sala: Node2D) -> Rect2:
 	var espacio = espacioLocal(sala)
 	espacio.position += sala.get_meta("pos_mapa")
 	return espacio
-
+ 
 func calcularPosicion(conexionA, salaB, conexionB) -> Vector2:
 	var offA: Vector2 = salaActual.get_meta("pos_mapa")
 	var rA = espacioLocal(salaActual)
@@ -155,13 +158,13 @@ func calcularPosicion(conexionA, salaB, conexionB) -> Vector2:
 			pos.x = offA.x + rA.end.x - rB.position.x
 			pos.y = offA.y + conexionA.position.y - conexionB.position.y
 	return pos
-
+ 
 func cabeEnEspacio(espacio: Rect2) -> bool:
 	for e in espaciosOcupados:
 		if e.intersects(espacio):
 			return false
 	return true
-
+ 
 func iniciarRun():
 	habitacionesGeneradas.clear()
 	habitacionesGeneradas.append(salaInicio)

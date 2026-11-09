@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bdif4axe3ppga"]
+
+[ext_resource type="Script" uid="uid://dfm48kj0triea" path="res://assets/enemigos/finalBoss/fuego.gd" id="1_fuego"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbjxg"]
+size = Vector2(8, 8)
+
+[node name="Fuego" type="Area2D" unique_id=463263670]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_fuego")
+
+[node name="Fuego" type="CanvasGroup" parent="." unique_id=1061709501]
+
+[node name="ColorRect" type="ColorRect" parent="Fuego" unique_id=1192878001]
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+color = Color(1, 0.45, 0.1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=540448574]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_cbjxg")
