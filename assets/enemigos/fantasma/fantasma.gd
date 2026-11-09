@@ -6,7 +6,7 @@ enum Estado {
 	desaparece,
 	reaparece
 }
-
+@onready var animacionFantasma: AnimatedSprite2D = %spriteFantasma
 @onready var area_contacto: Area2D = $AreaContacto
 @onready var colision: CollisionShape2D = $CollisionShape2D
 @onready var colision_area: CollisionShape2D = $AreaContacto/CollisionShape2D
@@ -63,6 +63,15 @@ func _physics_process(delta: float) -> void:
 				colision_area.set_deferred("disabled", false)
 
 				estado = Estado.perseguir
+				
+	if velocity.x > 0:
+		animacionFantasma.play("default")
+		animacionFantasma.flip_h = false
+	elif velocity.x <0:
+		animacionFantasma.play("default")
+		animacionFantasma.flip_h = true
+	
+	
 	move_and_slide()
 
 	for cuerpo in area_contacto.get_overlapping_bodies():

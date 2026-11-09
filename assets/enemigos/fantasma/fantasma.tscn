@@ -1,20 +1,69 @@
 [gd_scene format=3 uid="uid://bk7pj0xuoh2ja"]
 
 [ext_resource type="Script" uid="uid://biql6wpgnqbe6" path="res://assets/enemigos/fantasma/fantasma.gd" id="1_dq35c"]
+[ext_resource type="Texture2D" uid="uid://r02ac541hs4y" path="res://assets/enemigos/fantasma/Sprite-Fantasma.png" id="2_5kipp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rmxvh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cbjxg"]
+radius = 9.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kipp"]
+atlas = ExtResource("2_5kipp")
+region = Rect2(2, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fymxi"]
+atlas = ExtResource("2_5kipp")
+region = Rect2(29, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wguft"]
+atlas = ExtResource("2_5kipp")
+region = Rect2(56, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o2p4"]
+atlas = ExtResource("2_5kipp")
+region = Rect2(83, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a2kt"]
+atlas = ExtResource("2_5kipp")
+region = Rect2(110, 0, 25, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnto8"]
+atlas = ExtResource("2_5kipp")
+region = Rect2(137, 0, 25, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4kxuq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kipp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fymxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wguft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7o2p4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a2kt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnto8")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Fantasma" type="Node2D" unique_id=235600142]
 
 [node name="enemigoFantasma" type="CharacterBody2D" parent="." unique_id=97082220]
+collision_layer = 16
+collision_mask = 5
 script = ExtResource("1_dq35c")
-
-[node name="ColorRect" type="ColorRect" parent="enemigoFantasma" unique_id=1945028418]
-offset_left = -4.0
-offset_top = -16.0
-offset_right = 4.0
 
 [node name="AreaContacto" type="Area2D" parent="enemigoFantasma" unique_id=224082129 groups=["dano_enemigo"]]
 collision_layer = 16
@@ -23,7 +72,15 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemigoFantasma/AreaContacto" unique_id=228364228]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_rmxvh")
+debug_color = Color(0.8567671, 0.33365786, 0.40437356, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemigoFantasma" unique_id=1988166661]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_cbjxg")
+
+[node name="spriteFantasma" type="AnimatedSprite2D" parent="enemigoFantasma" unique_id=2086385053]
+unique_name_in_owner = true
+position = Vector2(1, -7.9999995)
+scale = Vector2(1.47, 1.4166665)
+sprite_frames = SubResource("SpriteFrames_4kxuq")
+frame_progress = 0.84196246
