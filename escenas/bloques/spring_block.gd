@@ -3,7 +3,7 @@ extends StaticBody2D
 @onready var area_2d: Area2D = $Area2D
 @onready var animacion: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sfxImpulso: AudioStreamPlayer2D = $sfxImpulso
-@export var fuerzaImpulso: float = 450.0
+@export var fuerzaImpulso: float = 485.0
 
 var activo: bool = false
 

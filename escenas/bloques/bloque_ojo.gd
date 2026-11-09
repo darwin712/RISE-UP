@@ -4,7 +4,7 @@ extends StaticBody2D
 @onready var sfxSwitch: AudioStreamPlayer2D = $sfxSwitch
 
 enum TipoAccion {
-	ACTIVAR_SWITCH
+	ACTIVAR_SWITCH, DESACTIVAR_SWITCH
 }
 
 @export var tipoAccion: TipoAccion
@@ -17,15 +17,20 @@ var estaActivado = false
 func _ready():
 	area_2d.add_to_group("ojo")
 
+
 func recibirDisparo():
 	if estaActivado:
 		return
-
+	
 	estaActivado = true
 	sprite.texture = texturaActiva
+	
 	get_tree().get_first_node_in_group("main").reproducir(sfxSwitch.stream)
 
 	match tipoAccion:
 		TipoAccion.ACTIVAR_SWITCH:
 			for objetivo in objetivos:
 				objetivo.activar()
+		TipoAccion.DESACTIVAR_SWITCH:
+			for objetivo in objetivos:
+				objetivo.desactivar()

@@ -13,6 +13,7 @@ size = Vector2(16, 16)
 [node name="switchBlock" type="StaticBody2D" unique_id=1927611114]
 script = ExtResource("1_bd40n")
 texturaActiva = ExtResource("2_4c47r")
+texturaInactiva = ExtResource("2_bd40n")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2045893944]
 texture = SubResource("AtlasTexture_wiua5")
