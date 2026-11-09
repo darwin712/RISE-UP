@@ -6,15 +6,8 @@ enum Direccion {
 	IZQUIERDA,
 	DERECHA
 }
-
-enum Tipo{
-	NORMAL,
-	ENTRADA,
-	SALIDA
-}
  
 @export var direccion: Direccion
-@export var tipo: Tipo
 @export var salaForzada: PackedScene 
 var fueUtilizada = false
 signal jugadorEntro(conexion)

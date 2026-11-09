@@ -70,8 +70,6 @@ func buscarSalas(conexionActual):
 		var conexiones = instanciaSala.get_node("Conexiones")
 		
 		for conexion in conexiones.get_children():
-			if conexion.tipo == 2:
-				continue
 			if conexion.direccion == direccionOpuesta(conexionActual.direccion):
 				var pos = calcularPosicion(conexionActual, instanciaSala, conexion)
 				var espacio = espacioLocal(instanciaSala)
