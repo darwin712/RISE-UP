@@ -1,5 +1,5 @@
 extends CharacterBody2D
-@export var vida: int = 90
+@export var vida: int = 15
 @export var escena_fuego: PackedScene = preload("res://assets/enemigos/finalBoss/fuego.tscn")
 @export var escena_magia: PackedScene = preload("res://assets/enemigos/finalBoss/magia.tscn")
  

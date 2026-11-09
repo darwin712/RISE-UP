@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d1eewytefm1qh" path="res://escenas/reusos/muerte_zona.tscn" id="4_jj0lh"]
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="5_jj0lh"]
 [ext_resource type="PackedScene" uid="uid://g5cpc0tknddr" path="res://escenas/Salas/Nivel0-Prototipo/final001.tscn" id="6_final"]
+[ext_resource type="PackedScene" uid="uid://cggrhrbc6qtwy" path="res://assets/armas/loDeMarioWorld/flotar.tscn" id="9_8mjpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_up"]
 size = Vector2(100.4375, 7)
@@ -39,7 +40,7 @@ tile_set = ExtResource("1_m3fre")
 position = Vector2(232, 115)
 
 [node name="Fantasma" parent="Enemigos" unique_id=235600142 instance=ExtResource("4_2yqns")]
-position = Vector2(93, 73)
+position = Vector2(386, 154)
 
 [node name="Conexiones" type="Node2D" parent="." unique_id=1525534246]
 
@@ -90,6 +91,9 @@ rotation = 1.5707964
 [node name="pared_invisible2" parent="otrasAreas" unique_id=1207818960 instance=ExtResource("5_jj0lh")]
 position = Vector2(-1, 119)
 rotation = 1.5707964
+
+[node name="flotar" parent="." unique_id=1753112761 instance=ExtResource("9_8mjpd")]
+position = Vector2(238, 286)
 
 [editable path="Conexiones/ConexionUP"]
 [editable path="Conexiones/ConexionLEFT"]

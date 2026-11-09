@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://b5f60p4tg0da0"]
+
+[ext_resource type="Script" uid="uid://cx52c0oqn3ov" path="res://escenas/UI/pantalla_ganaste.gd" id="1_r55ij"]
+[ext_resource type="Texture2D" uid="uid://jprk1wl1fe5o" path="res://assets/UI/CorazonNegro.png" id="2_rco3a"]
+[ext_resource type="FontFile" uid="uid://dblboicyen1tp" path="res://assets/fuentes/PixelifySans.ttf" id="3_4aimw"]
+
+[sub_resource type="Shader" id="Shader_desaturar"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, filter_nearest;
+
+void fragment() {
+	vec4 escena = texture(screen_texture, SCREEN_UV);
+	float gris = dot(escena.rgb, vec3(0.299, 0.587, 0.114));
+	vec3 apagado = mix(escena.rgb, vec3(gris), 0.82);
+	vec3 oscuro = mix(apagado, vec3(0.025, 0.030, 0.055), 0.62);
+	COLOR = vec4(oscuro, 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_desaturar"]
+shader = SubResource("Shader_desaturar")
+
+[sub_resource type="FontVariation" id="FontVariation_titulo"]
+base_font = ExtResource("3_4aimw")
+variation_opentype = {
+"wght": 700.0
+}
+
+[sub_resource type="FontVariation" id="FontVariation_texto"]
+base_font = ExtResource("3_4aimw")
+variation_opentype = {
+"wght": 500.0
+}
+
+[node name="PantallaVictoria" type="CanvasLayer" unique_id=1805852168]
+process_mode = 3
+layer = 90
+script = ExtResource("1_r55ij")
+
+[node name="Capa" type="Control" parent="." unique_id=70507257]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FondoDesaturado" type="ColorRect" parent="Capa" unique_id=759789821]
+material = SubResource("ShaderMaterial_desaturar")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Flash" type="ColorRect" parent="Capa" unique_id=1136456469]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.20817682, 0.57274216, 0.23028415, 0.34117648)
+
+[node name="Fragmentos" type="Control" parent="Capa" unique_id=1600819069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Contenido" type="CenterContainer" parent="Capa" unique_id=1771675176]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Opciones" type="VBoxContainer" parent="Capa/Contenido" unique_id=1828105299]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+theme_override_constants/separation = 7
+alignment = 1
+
+[node name="Corazon" type="TextureRect" parent="Capa/Contenido/Opciones" unique_id=1729249187]
+texture_filter = 1
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("2_rco3a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Titulo" type="Label" parent="Capa/Contenido/Opciones" unique_id=1219812833]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38775298, 0.6455056, 0.87603414, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("FontVariation_titulo")
+theme_override_font_sizes/font_size = 30
+text = "HAS GANADO"
+horizontal_alignment = 1
+
+[node name="Mensaje" type="Label" parent="Capa/Contenido/Opciones" unique_id=1719171217]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.81, 0.82, 1)
+theme_override_fonts/font = SubResource("FontVariation_texto")
+theme_override_font_sizes/font_size = 12
+text = "Felicidades"
+horizontal_alignment = 1
+
+[node name="Separador" type="Control" parent="Capa/Contenido/Opciones" unique_id=51873456]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Reintentar" type="Button" parent="Capa/Contenido/Opciones" unique_id=819942152]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MenuPrincipal")
+theme_override_fonts/font = SubResource("FontVariation_texto")
+theme_override_font_sizes/font_size = 14
+text = "REININICIAR"
+
+[node name="MenuPrincipal" type="Button" parent="Capa/Contenido/Opciones" unique_id=1671554609]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Reintentar")
+theme_override_fonts/font = SubResource("FontVariation_texto")
+theme_override_font_sizes/font_size = 14
+text = "SALIR"
+
+[connection signal="pressed" from="Capa/Contenido/Opciones/Reintentar" to="." method="_al_reintentar"]
+[connection signal="pressed" from="Capa/Contenido/Opciones/MenuPrincipal" to="." method="_al_menu_principal"]

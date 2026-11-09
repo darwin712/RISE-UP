@@ -31,10 +31,36 @@ offset_left = 3.0
 offset_top = -46.0
 offset_right = 35.0
 offset_bottom = 10.0
-color = Color(0.12, 0.12, 0.12, 0.62352943)
+color = Color(0, 0, 0, 1)
 
 [node name="TimerFuego" type="Timer" parent="CharacterBody2D" unique_id=2028073937]
 one_shot = true
 
 [node name="TimerMagia" type="Timer" parent="CharacterBody2D" unique_id=988051176]
 one_shot = true
+
+[node name="ColorRect2" type="ColorRect" parent="CharacterBody2D" unique_id=1404509226]
+offset_left = 11.0
+offset_top = -39.0
+offset_right = 16.0
+offset_bottom = -33.0
+
+[node name="ColorRect3" type="ColorRect" parent="CharacterBody2D" unique_id=1904192871]
+offset_left = 24.0
+offset_top = -39.0
+offset_right = 29.0
+offset_bottom = -33.0
+
+[node name="ColorRect4" type="ColorRect" parent="CharacterBody2D" unique_id=1917501672]
+offset_left = 24.0
+offset_top = -39.0
+offset_right = 26.0
+offset_bottom = -37.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="CharacterBody2D" unique_id=1481615501]
+offset_left = 14.0
+offset_top = -39.0
+offset_right = 16.0
+offset_bottom = -37.0
+color = Color(0, 0, 0, 1)

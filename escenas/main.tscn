@@ -5,9 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://cn7lw60ygx5sw" path="res://escenas/Salas/Nivel0-Prototipo/test001.tscn" id="3_26pgj"]
 [ext_resource type="PackedScene" uid="uid://dyuv1hv2oggfx" path="res://escenas/Salas/Nivel0-Prototipo/test002.tscn" id="4_26pgj"]
 [ext_resource type="PackedScene" uid="uid://4whpnvyhpghi" path="res://escenas/Salas/Nivel0-Prototipo/test003.tscn" id="5_dkga6"]
-[ext_resource type="PackedScene" path="res://escenas/Salas/Nivel0-Prototipo/test004.tscn" id="6_68mvh"]
+[ext_resource type="PackedScene" uid="uid://3cqf28vxees5" path="res://escenas/Salas/Nivel0-Prototipo/test004.tscn" id="6_68mvh"]
 [ext_resource type="PackedScene" path="res://escenas/UI/hud_vidas.tscn" id="6_hud"]
+[ext_resource type="PackedScene" uid="uid://emnf83nivrn6" path="res://escenas/Salas/Nivel0-Prototipo/test005.tscn" id="7_lyxkq"]
 [ext_resource type="PackedScene" uid="uid://c1pfsprpw5d4j" path="res://escenas/UI/pantalla_muerte.tscn" id="7_muerte"]
+[ext_resource type="PackedScene" uid="uid://cw0n38iwewu8p" path="res://escenas/Salas/Nivel0-Prototipo/test006.tscn" id="8_dg7ii"]
 
 [node name="Main" type="Node2D" unique_id=1008311360]
 
@@ -19,7 +21,7 @@ position = Vector2(233, 125)
 [node name="ManejadorDePartida" type="Node" parent="." unique_id=1333546248]
 script = ExtResource("2_jumxm")
 salaInicio = ExtResource("3_26pgj")
-listaSalas = Array[PackedScene]([ExtResource("4_26pgj"), ExtResource("5_dkga6"), ExtResource("6_68mvh")])
+listaSalas = Array[PackedScene]([ExtResource("4_26pgj"), ExtResource("5_dkga6"), ExtResource("6_68mvh"), ExtResource("7_lyxkq"), ExtResource("8_dg7ii")])
 
 [node name="sfxActual" type="AudioStreamPlayer2D" parent="ManejadorDePartida" unique_id=80585716]
 
