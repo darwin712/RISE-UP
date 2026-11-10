@@ -158,6 +158,7 @@ func obtenerSala(idSala: int) -> Node2D:
 		var nuevaSala = escena.instantiate() as Node2D
 		instanciasSalas[idSala] = nuevaSala
 		conectarEntrada(nuevaSala, idSala)
+		configurarCierres(nuevaSala, idSala)
 	return instanciasSalas[idSala]
 
 func conectarEntrada(sala: Node2D, idSala: int):
@@ -170,6 +171,18 @@ func conectarEntrada(sala: Node2D, idSala: int):
 			var destino = conexionesMapa[conexion.name]
 			conexion.set_meta("sala_destino", destino["sala"])
 			conexion.set_meta("conexion_destino", destino["conexion"])
+
+func configurarCierres(sala: Node2D, idSala: int):
+	var conexionesMapa: Dictionary = mapaSalas[idSala]["conexiones"]
+
+	for conexion in sala.get_node("Conexiones").get_children():
+		var pared: TileMapLayer = conexion.paredCierre
+		if pared == null:
+			continue
+
+		var cerrada: bool = not conexionesMapa.has(conexion.name)
+		pared.visible = cerrada
+		pared.collision_enabled = cerrada
 
 func alEntrarConexion(conexionActual):
 	if estaCambiandoSala:
