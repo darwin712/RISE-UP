@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d1eewytefm1qh" path="res://escenas/reusos/muerte_zona.tscn" id="7_2m7re"]
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="8_d6112"]
 [ext_resource type="PackedScene" uid="uid://csyctx66pvwqm" path="res://escenas/bloques/switchBlock.tscn" id="9_vair3"]
+[ext_resource type="Script" path="res://escenas/reusos/spawn_enemigo_aleatorio.gd" id="99_spawn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6xlf"]
 size = Vector2(3, 68)
@@ -39,20 +40,13 @@ objetivos = [NodePath("../../switchBlock"), NodePath("../../switchBlock2"), Node
 
 [node name="Enemigos" type="Node2D" parent="." unique_id=829273017]
 
-[node name="Slime" parent="Enemigos" unique_id=1481968508 instance=ExtResource("4_6uwnt")]
+[node name="SpawnAleatorio1" type="Marker2D" parent="Enemigos"]
 position = Vector2(195, 165)
+script = ExtResource("99_spawn")
 
-[node name="EnemigoEsqueleto" parent="Enemigos" unique_id=1000898366 instance=ExtResource("3_6uwnt")]
+[node name="SpawnAleatorio2" type="Marker2D" parent="Enemigos"]
 position = Vector2(297, 100)
-
-[node name="Slime2" parent="Enemigos" unique_id=1618258747 instance=ExtResource("4_6uwnt")]
-position = Vector2(206, 7)
-
-[node name="Slime3" parent="Enemigos" unique_id=1875487185 instance=ExtResource("4_6uwnt")]
-position = Vector2(230, 9)
-
-[node name="Slime4" parent="Enemigos" unique_id=675222051 instance=ExtResource("4_6uwnt")]
-position = Vector2(217, -10)
+script = ExtResource("99_spawn")
 
 [node name="Conexiones" type="Node2D" parent="." unique_id=1525534246]
 

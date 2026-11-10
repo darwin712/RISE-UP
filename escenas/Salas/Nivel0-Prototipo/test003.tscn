@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="5_jj0lh"]
 [ext_resource type="PackedScene" uid="uid://g5cpc0tknddr" path="res://escenas/Salas/Nivel0-Prototipo/final001.tscn" id="6_final"]
 [ext_resource type="PackedScene" uid="uid://cggrhrbc6qtwy" path="res://assets/armas/loDeMarioWorld/flotar.tscn" id="9_8mjpd"]
+[ext_resource type="Script" path="res://escenas/reusos/spawn_enemigo_aleatorio.gd" id="99_spawn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_up"]
 size = Vector2(70, 7)
@@ -35,8 +36,15 @@ tile_set = ExtResource("1_m3fre")
 
 [node name="Enemigos" type="Node2D" parent="." unique_id=829273017]
 
-[node name="EnemigoEsqueleto" parent="Enemigos" unique_id=1000898366 instance=ExtResource("2_yyx7t")]
+[node name="SpawnAleatorio1" type="Marker2D" parent="Enemigos"]
 position = Vector2(240, 115)
+script = ExtResource("99_spawn")
+permitir_slime = false
+
+[node name="SpawnAleatorio2" type="Marker2D" parent="Enemigos"]
+position = Vector2(240, 180)
+script = ExtResource("99_spawn")
+permitir_slime = false
 
 [node name="Conexiones" type="Node2D" parent="." unique_id=1525534246]
 

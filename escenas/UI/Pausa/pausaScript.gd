@@ -1,5 +1,7 @@
 extends Control
 
+@onready var boton_continuar: Button = $VBoxContainer/btnContinuar
+
 
 func _ready() -> void:
 	visible = false
@@ -9,6 +11,8 @@ func _ready() -> void:
 func pausa():
 	get_tree().paused =!get_tree().paused
 	visible=get_tree().paused
+	if visible:
+		boton_continuar.grab_focus()
 	
 
 func _input(event):
