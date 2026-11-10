@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const ESCENA_MENU := "res://escenas/Menu/menu.tscn"
+
 @onready var capa: Control = $Capa
 @onready var flash: ColorRect = $Capa/Flash
 @onready var fragmentos: Control = $Capa/Fragmentos
@@ -10,7 +12,7 @@ var mostrando := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	capa.visible = false
 
 func mostrar() -> void:
 	if mostrando:
@@ -34,7 +36,37 @@ func mostrar() -> void:
 	boton_reintentar.disabled = false
 	boton_menu.disabled = false
 	boton_reintentar.grab_focus()
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _crear_fragmentos() -> void:
+	for fragmento in fragmentos.get_children():
+		fragmento.queue_free()
+
+	var centro := get_viewport().get_visible_rect().size * 0.5
+	for indice in range(18):
+		var bloque := ColorRect.new()
+		var lado := float(randi_range(2, 4))
+		bloque.size = Vector2(lado, lado)
+		bloque.position = centro + Vector2(randf_range(-72.0, 72.0), randf_range(-62.0, 12.0))
+		bloque.color = Color(0.78, 0.52, 0.60, randf_range(0.35, 0.75)) if indice % 3 == 0 else Color(0.58, 0.62, 0.65, randf_range(0.25, 0.60))
+		bloque.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		fragmentos.add_child(bloque)
+
+		var destino := bloque.position + Vector2(randf_range(-20.0, 20.0), randf_range(42.0, 105.0))
+		var duracion := randf_range(0.9, 1.5)
+		var caida := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		caida.set_parallel(true)
+		caida.tween_property(bloque, "position", destino, duracion).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		caida.tween_property(bloque, "modulate:a", 0.0, duracion)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if mostrando and event.is_action_pressed("ui_cancel") and not boton_menu.disabled:
+		_al_menu_principal()
+
+
+func _al_reintentar() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+
+func _al_menu_principal() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(ESCENA_MENU)

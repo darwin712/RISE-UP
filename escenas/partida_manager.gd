@@ -17,6 +17,8 @@ var instanciasSalas: Array[Node2D] = []
 var plantillas: Array[Node2D] = []
 
 var estaCambiandoSala: bool = false
+var salaGuardada: Node2D
+var salaEspecial: Node2D
 
 
 func _ready():
@@ -247,3 +249,75 @@ func iniciarRun():
 	jugador.global_position = puntoInicio.global_position
 	jugador.posCheckpoint = puntoInicio.global_position
 	jugador.velocity = Vector2.ZERO
+
+
+	estaCambiandoSala = false
+
+func enviarASalaEspecial(escena: PackedScene):
+
+	if estaCambiandoSala or salaGuardada != null:
+		return
+
+	estaCambiandoSala = true
+	jugador.set_physics_process(false)
+
+	var tween = create_tween()
+	tween.tween_property(transicion, "modulate:a", 1.0, 0.2)
+	await tween.finished
+
+	get_tree().call_group("ataque_jefe", "queue_free")
+
+	salaGuardada = salaActual
+	contenedorSala.remove_child(salaGuardada)
+
+	salaEspecial = escena.instantiate() as Node2D
+	contenedorSala.add_child(salaEspecial)
+	salaActual = salaEspecial
+
+	var spawn = salaEspecial.get_node("SpawnJugador")
+
+	jugador.global_position = spawn.global_position
+	jugador.posCheckpoint = spawn.global_position
+	jugador.velocity = Vector2.ZERO
+
+	tween = create_tween()
+	tween.tween_property(transicion, "modulate:a", 0.0, 0.2)
+	await tween.finished
+
+	jugador.set_physics_process(true)
+	estaCambiandoSala = false
+
+
+func volverDeSalaEspecial():
+
+	if estaCambiandoSala or salaGuardada == null:
+		return
+
+	estaCambiandoSala = true
+	jugador.set_physics_process(false)
+
+	var tween = create_tween()
+	tween.tween_property(transicion, "modulate:a", 1.0, 0.2)
+	await tween.finished
+
+	contenedorSala.remove_child(salaEspecial)
+	salaEspecial.queue_free()
+	salaEspecial = null
+
+	contenedorSala.add_child(salaGuardada)
+	salaActual = salaGuardada
+	salaGuardada = null
+
+	var entrada = salaActual.get_node("Conexiones").get_child(0).get_node("Entrada")
+
+	jugador.global_position = entrada.global_position
+	jugador.posCheckpoint = entrada.global_position
+	jugador.velocity = Vector2.ZERO
+	jugador.ignorarConexionesHasta = Time.get_ticks_msec() + 500
+
+	tween = create_tween()
+	tween.tween_property(transicion, "modulate:a", 0.0, 0.2)
+	await tween.finished
+
+	jugador.set_physics_process(true)
+	estaCambiandoSala = false

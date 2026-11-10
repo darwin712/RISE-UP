@@ -3,11 +3,11 @@ extends Node2D
 @export var escena_bala: PackedScene = preload("res://escenas/reusos/BalaJugador.tscn")
 
 
-@export var balasM: int = 8
-@export var tiempoEntreDis: float = 0.5
+@export var balasM: int = 12
+@export var tiempoEntreDis: float = 0.4
 
  
-var balas: int = 8
+var balas: int = 12
 var espera_disparo: float = 0.0
 var espera_recarga: float = 0.0
  
