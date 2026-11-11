@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var salaFase2: PackedScene = preload("res://escenas/Salas/Nivel0-Prototipo/final002.tscn")
 @export var salaFase3: PackedScene = preload("res://escenas/Salas/Nivel0-Prototipo/final003.tscn")
 @export var escena_ganaste: PackedScene = preload("res://escenas/UI/pantalla_Ganaste.tscn")
- 
+@export var animacion: AnimatedSprite2D
 @onready var area_contacto: Area2D = $AreaContacto
 @onready var timer_fuego: Timer = $TimerFuego
 @onready var timer_magia: Timer = $TimerMagia
@@ -51,6 +51,8 @@ func _ready() -> void:
 	timer_magia.timeout.connect(_on_timer_magia_timeout)
 	timer_fuego.start(primerFuego)
 	timer_magia.start(primerMagia)
+	animacion.play()
+	
  
  
 func _physics_process(delta: float) -> void: 

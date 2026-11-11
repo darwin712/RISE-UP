@@ -1,22 +1,52 @@
 [gd_scene format=3 uid="uid://bdif4axe3ppga"]
 
 [ext_resource type="Script" uid="uid://dfm48kj0triea" path="res://assets/enemigos/finalBoss/fuego.gd" id="1_fuego"]
+[ext_resource type="Texture2D" uid="uid://c1b2mimg8wq27" path="res://assets/enemigos/finalBoss/spriteFuego-sheet.png" id="2_apquv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crkwx"]
+atlas = ExtResource("2_apquv")
+region = Rect2(0, 0, 14, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7w1f"]
+atlas = ExtResource("2_apquv")
+region = Rect2(14, 0, 14, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8g5n0"]
+atlas = ExtResource("2_apquv")
+region = Rect2(28, 0, 14, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4kxuq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crkwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7w1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8g5n0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 3.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbjxg"]
 size = Vector2(8, 8)
 
-[node name="Fuego" type="Area2D" unique_id=463263670]
+[node name="Fuego" type="Area2D" unique_id=463263670 node_paths=PackedStringArray("animacion")]
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_fuego")
+animacion = NodePath("Fuego/AnimatedSprite2D")
 
 [node name="Fuego" type="CanvasGroup" parent="." unique_id=1061709501]
 
-[node name="ColorRect" type="ColorRect" parent="Fuego" unique_id=1192878001]
-offset_left = -4.0
-offset_top = -8.0
-offset_right = 4.0
-color = Color(1, 0.45, 0.1, 1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Fuego" unique_id=988229426]
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_4kxuq")
+frame_progress = 0.8704741
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=540448574]
 position = Vector2(0, -4)

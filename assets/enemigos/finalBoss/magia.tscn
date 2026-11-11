@@ -1,23 +1,60 @@
 [gd_scene format=3 uid="uid://cbji6rs5jntxv"]
 
-[ext_resource type="Script" path="res://assets/enemigos/finalBoss/magia.gd" id="1_magia"]
+[ext_resource type="Script" uid="uid://c2ewxste7loaf" path="res://assets/enemigos/finalBoss/magia.gd" id="1_magia"]
+[ext_resource type="Texture2D" uid="uid://d1rp1c7vlcw2f" path="res://assets/enemigos/finalBoss/magia.png" id="2_pnh10"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5lug"]
+atlas = ExtResource("2_pnh10")
+region = Rect2(0, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5x46"]
+atlas = ExtResource("2_pnh10")
+region = Rect2(19, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ithjx"]
+atlas = ExtResource("2_pnh10")
+region = Rect2(38, 0, 19, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvy4c"]
+atlas = ExtResource("2_pnh10")
+region = Rect2(57, 0, 19, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4kxuq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5lug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5x46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ithjx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvy4c")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qmsr"]
 size = Vector2(8, 8)
 
-[node name="Magia" type="Area2D"]
+[node name="Magia" type="Area2D" unique_id=303648241 node_paths=PackedStringArray("animacion")]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_magia")
+animacion = NodePath("Magia/AnimatedSprite2D")
 
-[node name="Magia" type="CanvasGroup" parent="."]
+[node name="Magia" type="CanvasGroup" parent="." unique_id=1312622892]
 
-[node name="ColorRect" type="ColorRect" parent="Magia"]
-offset_left = -4.0
-offset_top = -8.0
-offset_right = 4.0
-color = Color(0.6, 0.2, 0.9, 1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Magia" unique_id=1423724781]
+position = Vector2(2, -3)
+sprite_frames = SubResource("SpriteFrames_4kxuq")
+frame_progress = 0.3046339
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=765173082]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_5qmsr")

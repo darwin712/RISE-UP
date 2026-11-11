@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://hxfu1clj6avx"]
 
 [ext_resource type="Script" uid="uid://bjbiwtvds7wpm" path="res://assets/enemigos/finalBoss/finalboss.gd" id="1_roxrh"]
+[ext_resource type="Texture2D" uid="uid://b2ood73qxtwcs" path="res://assets/enemigos/finalBoss/jefePrueba.png" id="2_87buv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enxpa"]
 size = Vector2(45, 61)
@@ -8,11 +9,55 @@ size = Vector2(45, 61)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbjxg"]
 size = Vector2(32, 56)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_n863g"]
+atlas = ExtResource("2_87buv")
+region = Rect2(0, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76lfi"]
+atlas = ExtResource("2_87buv")
+region = Rect2(64, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1ikg"]
+atlas = ExtResource("2_87buv")
+region = Rect2(128, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lepxj"]
+atlas = ExtResource("2_87buv")
+region = Rect2(192, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsjar"]
+atlas = ExtResource("2_87buv")
+region = Rect2(256, 0, 64, 83)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4kxuq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n863g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76lfi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1ikg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lepxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsjar")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}]
+
 [node name="JefeMaestro" type="Node2D" unique_id=26576577]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1376745584]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1376745584 node_paths=PackedStringArray("animacion")]
 collision_layer = 16
 script = ExtResource("1_roxrh")
+animacion = NodePath("AnimatedSprite2D")
 
 [node name="AreaContacto" type="Area2D" parent="CharacterBody2D" unique_id=342999163 groups=["dano_enemigo"]]
 collision_layer = 16
@@ -26,13 +71,6 @@ shape = SubResource("RectangleShape2D_enxpa")
 position = Vector2(19, -18)
 shape = SubResource("RectangleShape2D_cbjxg")
 
-[node name="ColorRect" type="ColorRect" parent="CharacterBody2D" unique_id=551887765]
-offset_left = 3.0
-offset_top = -46.0
-offset_right = 35.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
 [node name="TimerFuego" type="Timer" parent="CharacterBody2D" unique_id=2028073937]
 one_shot = true
 
@@ -45,22 +83,7 @@ offset_top = -39.0
 offset_right = 16.0
 offset_bottom = -33.0
 
-[node name="ColorRect3" type="ColorRect" parent="CharacterBody2D" unique_id=1904192871]
-offset_left = 24.0
-offset_top = -39.0
-offset_right = 29.0
-offset_bottom = -33.0
-
-[node name="ColorRect4" type="ColorRect" parent="CharacterBody2D" unique_id=1917501672]
-offset_left = 24.0
-offset_top = -39.0
-offset_right = 26.0
-offset_bottom = -37.0
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect5" type="ColorRect" parent="CharacterBody2D" unique_id=1481615501]
-offset_left = 14.0
-offset_top = -39.0
-offset_right = 16.0
-offset_bottom = -37.0
-color = Color(0, 0, 0, 1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=2078449421]
+position = Vector2(12, -25)
+sprite_frames = SubResource("SpriteFrames_4kxuq")
+frame_progress = 0.7656013
