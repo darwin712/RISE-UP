@@ -2,15 +2,14 @@
 
 [ext_resource type="Script" uid="uid://x8fjk0m4a1i0" path="res://escenas/UI/Pausa/pausaScript.gd" id="1_cl53r"]
 [ext_resource type="FontFile" uid="uid://dblboicyen1tp" path="res://assets/fuentes/PixelifySans.ttf" id="2_8fu4q"]
+[ext_resource type="Theme" path="res://escenas/UI/botones_piedra.tres" id="3_tema"]
+[ext_resource type="Script" path="res://escenas/UI/boton_piedra.gd" id="4_boton"]
 
 [sub_resource type="FontVariation" id="FontVariation_8fu4q"]
 base_font = ExtResource("2_8fu4q")
 variation_opentype = {
 "wght": 700.0
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mti6b"]
-bg_color = Color(0.16758549, 0.4073999, 0.6547298, 1)
 
 [node name="Pausa" type="Control" unique_id=2069802197]
 layout_mode = 3
@@ -31,12 +30,12 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1378980906]
 layout_mode = 0
-offset_left = 169.5
-offset_top = 49.0
-offset_right = 310.5
-offset_bottom = 221.0
+offset_left = 152.0
+offset_top = 39.0
+offset_right = 328.0
+offset_bottom = 231.0
 size_flags_horizontal = 4
-theme_override_constants/separation = 14
+theme_override_constants/separation = 12
 
 [node name="Titulo" type="Label" parent="VBoxContainer" unique_id=292106081]
 layout_mode = 2
@@ -50,21 +49,32 @@ text = "Pausa"
 horizontal_alignment = 1
 
 [node name="btnContinuar" type="Button" parent="VBoxContainer" unique_id=178991549]
+custom_minimum_size = Vector2(176, 42)
 layout_mode = 2
-theme_override_constants/h_separation = 10
-theme_override_styles/hover = SubResource("StyleBoxFlat_mti6b")
-text = "Continuar"
+focus_neighbor_bottom = NodePath("../btnReiniciar")
+theme = ExtResource("3_tema")
+text = "CONTINUAR"
+script = ExtResource("4_boton")
 
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer" unique_id=1818949950]
 position = Vector2(49.75, -29.25)
 
 [node name="btnReiniciar" type="Button" parent="VBoxContainer" unique_id=1276743943]
+custom_minimum_size = Vector2(176, 42)
 layout_mode = 2
-text = "Reiniciar"
+focus_neighbor_top = NodePath("../btnContinuar")
+focus_neighbor_bottom = NodePath("../btnSalir")
+theme = ExtResource("3_tema")
+text = "REINICIAR"
+script = ExtResource("4_boton")
 
 [node name="btnSalir" type="Button" parent="VBoxContainer" unique_id=1614484752]
+custom_minimum_size = Vector2(176, 42)
 layout_mode = 2
-text = "Salir"
+focus_neighbor_top = NodePath("../btnReiniciar")
+theme = ExtResource("3_tema")
+text = "SALIR"
+script = ExtResource("4_boton")
 
 [connection signal="pressed" from="VBoxContainer/btnContinuar" to="." method="_on_btn_continuar_pressed"]
 [connection signal="pressed" from="VBoxContainer/btnReiniciar" to="." method="_on_btn_reiniciar_pressed"]

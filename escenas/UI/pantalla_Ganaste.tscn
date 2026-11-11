@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b5f60p4tg0da0"]
 
 [ext_resource type="Script" uid="uid://cx52c0oqn3ov" path="res://escenas/UI/pantalla_ganaste.gd" id="1_r55ij"]
-[ext_resource type="Texture2D" uid="uid://jprk1wl1fe5o" path="res://assets/UI/CorazonNegro.png" id="2_rco3a"]
+[ext_resource type="Texture2D" uid="uid://dx3wv1hsewsfb" path="res://assets/UI/Corazon.png" id="2_r55ij"]
 [ext_resource type="FontFile" uid="uid://dblboicyen1tp" path="res://assets/fuentes/PixelifySans.ttf" id="3_4aimw"]
 
 [sub_resource type="Shader" id="Shader_desaturar"]
@@ -94,7 +94,7 @@ alignment = 1
 texture_filter = 1
 custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
-texture = ExtResource("2_rco3a")
+texture = ExtResource("2_r55ij")
 expand_mode = 1
 stretch_mode = 5
 

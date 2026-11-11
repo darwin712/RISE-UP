@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var jugador: Node2D = get_tree().get_first_node_in_group("jugador")
 
 func _ready() -> void:
+	floor_snap_length = 4.0
 	timer_disparo.timeout.connect(_on_timer_disparo_timeout)
 
 		
@@ -29,6 +30,7 @@ func _physics_process(delta: float) -> void:
 		direccion = Vector2.RIGHT.rotated(angulo)
 		animacionEsqueleto.flip_h = direccion.x < 0
 		punto_disparo.rotation = angulo	
+	move_and_slide()
 
 func quitar_vida(dano: int) -> void:
 	vida -= dano

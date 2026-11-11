@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://6ahbcd0lxnio" path="res://escenas/UI/pantalla_muerte.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://jprk1wl1fe5o" path="res://assets/UI/CorazonNegro.png" id="2_corazon"]
 [ext_resource type="FontFile" uid="uid://dblboicyen1tp" path="res://assets/fuentes/PixelifySans.ttf" id="3_fuente"]
+[ext_resource type="Theme" path="res://escenas/UI/botones_piedra.tres" id="4_tema"]
+[ext_resource type="Script" path="res://escenas/UI/boton_piedra.gd" id="5_boton"]
 
 [sub_resource type="Shader" id="Shader_desaturar"]
 code = "shader_type canvas_item;
@@ -85,9 +87,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Opciones" type="VBoxContainer" parent="Capa/Contenido" unique_id=1828105299]
-custom_minimum_size = Vector2(190, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_constants/separation = 7
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Corazon" type="TextureRect" parent="Capa/Contenido/Opciones" unique_id=1729249187]
@@ -123,20 +125,31 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Reintentar" type="Button" parent="Capa/Contenido/Opciones" unique_id=819942152]
-custom_minimum_size = Vector2(150, 30)
+custom_minimum_size = Vector2(176, 42)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../MenuPrincipal")
-theme_override_fonts/font = SubResource("FontVariation_texto")
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("4_tema")
 text = "REINTENTAR"
+script = ExtResource("5_boton")
 
 [node name="MenuPrincipal" type="Button" parent="Capa/Contenido/Opciones" unique_id=1671554609]
-custom_minimum_size = Vector2(150, 30)
+custom_minimum_size = Vector2(176, 42)
 layout_mode = 2
 focus_neighbor_top = NodePath("../Reintentar")
-theme_override_fonts/font = SubResource("FontVariation_texto")
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("4_tema")
 text = "MENÚ PRINCIPAL"
+script = ExtResource("5_boton")
+
+[node name="BrilloReintento" type="ColorRect" parent="Capa"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.68, 0.82, 1, 1)
 
 [connection signal="pressed" from="Capa/Contenido/Opciones/Reintentar" to="." method="_al_reintentar"]
 [connection signal="pressed" from="Capa/Contenido/Opciones/MenuPrincipal" to="." method="_al_menu_principal"]

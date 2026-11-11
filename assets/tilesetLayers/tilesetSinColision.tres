@@ -1,0 +1,34 @@
+[gd_resource type="TileSet" format=3 uid="uid://butdjwjt6gcxq"]
+
+[ext_resource type="Texture2D" uid="uid://t733bbfs4ust" path="res://assets/tilesetLayers/CastleTileSheet.png" id="1_8qucq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2n7v"]
+texture = ExtResource("1_8qucq")
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+3:2/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+2:6/0 = 0
+5:3/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+6:3/0 = 0
+8:3/0 = 0
+8:2/0 = 0
+8:1/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+
+[resource]
+physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 4
+custom_data_layer_0/name = "haceDano"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_e2n7v")

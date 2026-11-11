@@ -15,7 +15,9 @@ enum Tipo {
  
 @export var direccion: Direccion
 @export var tipo: Tipo
-@export var salaForzada: PackedScene 
+@export var paredCierre: TileMapLayer
+@export var salaForzada: PackedScene
+
 var fueUtilizada = false
 signal jugadorEntro(conexion)
 		

@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://dtmnpihogwb00" path="res://escenas/Menu/menu.gd" id="2_script"]
 [ext_resource type="FontFile" uid="uid://dblboicyen1tp" path="res://assets/fuentes/PixelifySans.ttf" id="3_fuente"]
 [ext_resource type="Script" uid="uid://dpeve6666ywdr" path="res://escenas/Menu/efectos_tormenta.gd" id="4_tormenta"]
+[ext_resource type="Texture2D" path="res://assets/tilesetLayers/CastleTileSheet.png" id="5_castillo"]
+[ext_resource type="Script" path="res://escenas/UI/boton_piedra.gd" id="6_boton"]
 
 [sub_resource type="FontVariation" id="FontVariation_titulo"]
 base_font = ExtResource("3_fuente")
@@ -16,6 +18,57 @@ base_font = ExtResource("3_fuente")
 variation_opentype = {
 "wght": 500.0
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piedra"]
+atlas = ExtResource("5_castillo")
+region = Rect2(16, 16, 48, 48)
+filter_clip = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_boton_normal"]
+texture = SubResource("AtlasTexture_piedra")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color(0.62, 0.65, 0.78, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_boton_hover"]
+texture = SubResource("AtlasTexture_piedra")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color(0.82, 0.78, 1, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_boton_pressed"]
+texture = SubResource("AtlasTexture_piedra")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color(0.38, 0.43, 0.68, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_foco"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.56, 0.48, 1, 0.9)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="Menu" type="Control" unique_id=1750085203]
 layout_mode = 3
@@ -67,9 +120,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Opciones" type="VBoxContainer" parent="Contenido" unique_id=1195763738]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(176, 0)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Titulo" type="Label" parent="Contenido/Opciones" unique_id=847358547]
@@ -89,20 +142,64 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Jugar" type="Button" parent="Contenido/Opciones" unique_id=788470688]
-custom_minimum_size = Vector2(150, 34)
+custom_minimum_size = Vector2(176, 42)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Salir")
+theme_override_colors/font_color = Color(0.82, 0.86, 0.95, 1)
+theme_override_colors/font_hover_color = Color(0.96, 0.95, 1, 1)
+theme_override_colors/font_focus_color = Color(0.96, 0.95, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.72, 0.78, 1, 1)
+theme_override_colors/font_outline_color = Color(0.035, 0.03, 0.075, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_botones")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_boton_normal")
+theme_override_styles/hover = SubResource("StyleBox_boton_hover")
+theme_override_styles/pressed = SubResource("StyleBox_boton_pressed")
+theme_override_styles/focus = SubResource("StyleBox_foco")
 text = "JUGAR"
+script = ExtResource("6_boton")
 
 [node name="Salir" type="Button" parent="Contenido/Opciones" unique_id=41147581]
-custom_minimum_size = Vector2(150, 30)
+custom_minimum_size = Vector2(176, 42)
 layout_mode = 2
 focus_neighbor_top = NodePath("../Jugar")
+theme_override_colors/font_color = Color(0.82, 0.86, 0.95, 1)
+theme_override_colors/font_hover_color = Color(0.96, 0.95, 1, 1)
+theme_override_colors/font_focus_color = Color(0.96, 0.95, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.72, 0.78, 1, 1)
+theme_override_colors/font_outline_color = Color(0.035, 0.03, 0.075, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_botones")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_boton_normal")
+theme_override_styles/hover = SubResource("StyleBox_boton_hover")
+theme_override_styles/pressed = SubResource("StyleBox_boton_pressed")
+theme_override_styles/focus = SubResource("StyleBox_foco")
 text = "SALIR"
+script = ExtResource("6_boton")
+
+[node name="FlashTrueno" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.82, 0.9, 1, 1)
+
+[node name="FundidoNegro" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.006, 0.008, 0.02, 1)
 
 [connection signal="pressed" from="Contenido/Opciones/Jugar" to="." method="_al_jugar"]
 [connection signal="pressed" from="Contenido/Opciones/Salir" to="." method="_al_salir"]
