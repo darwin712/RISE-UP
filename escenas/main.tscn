@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c1pfsprpw5d4j" path="res://escenas/UI/pantalla_muerte.tscn" id="7_muerte"]
 [ext_resource type="PackedScene" uid="uid://cw0n38iwewu8p" path="res://escenas/Salas/Nivel0-Prototipo/test006.tscn" id="8_dg7ii"]
 [ext_resource type="PackedScene" uid="uid://srb6egl56h2x" path="res://escenas/Salas/Nivel0-Prototipo/test0111.tscn" id="9_woaio"]
+[ext_resource type="PackedScene" uid="uid://cedrityn0np0q" path="res://escenas/Salas/Nivel0-Prototipo/test1212.tscn" id="10_7an46"]
 
 [node name="Main" type="Node2D" unique_id=1008311360]
 
@@ -22,7 +23,7 @@ position = Vector2(233, 125)
 [node name="ManejadorDePartida" type="Node" parent="." unique_id=1333546248]
 script = ExtResource("2_jumxm")
 salaInicio = ExtResource("3_26pgj")
-listaSalas = Array[PackedScene]([ExtResource("4_26pgj"), ExtResource("5_dkga6"), ExtResource("6_68mvh"), ExtResource("7_lyxkq"), ExtResource("8_dg7ii"), ExtResource("9_woaio")])
+listaSalas = Array[PackedScene]([ExtResource("4_26pgj"), ExtResource("5_dkga6"), ExtResource("6_68mvh"), ExtResource("7_lyxkq"), ExtResource("8_dg7ii"), ExtResource("9_woaio"), ExtResource("10_7an46")])
 
 [node name="sfxActual" type="AudioStreamPlayer2D" parent="ManejadorDePartida" unique_id=80585716]
 volume_db = 7.373
