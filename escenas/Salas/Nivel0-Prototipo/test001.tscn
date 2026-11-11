@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="3_pmxiv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivwpl"]
-size = Vector2(70, 7)
+size = Vector2(70, 3.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmxiv"]
 size = Vector2(4.4375, 67)
@@ -41,7 +41,7 @@ paredCierre = NodePath("../../Cierres/CierreUP")
 position = Vector2(18, 14)
 
 [node name="CollisionShape2D" parent="Conexiones/ConexionUP" index="1" unique_id=720095582]
-position = Vector2(18, -1)
+position = Vector2(18, -3)
 shape = SubResource("RectangleShape2D_ivwpl")
 
 [node name="ConexionLEFT" parent="Conexiones" unique_id=1262328484 node_paths=PackedStringArray("paredCierre") instance=ExtResource("2_ivwpl")]
@@ -81,7 +81,7 @@ position = Vector2(482, 161)
 rotation = 1.5707964
 
 [node name="pared_invisible3" parent="otrasAreas" unique_id=2058927226 instance=ExtResource("3_pmxiv")]
-position = Vector2(241, 18)
+position = Vector2(241, 23)
 
 [node name="SpawnInicial" type="Marker2D" parent="." unique_id=2031727554]
 position = Vector2(242, 205)

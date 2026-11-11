@@ -3,10 +3,14 @@ extends CharacterBody2D
 @export var vida: int = 2
 
 func quitar_vida(dano: int) -> void:
-	vida -= dano
 	if vida <= 0:
 		haMuerto.emit()
 		queue_free()
+		return
+	vida -= dano
+	animacionSlime.modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	animacionSlime.modulate = Color.WHITE
 
 @onready var animacionSlime: AnimatedSprite2D = %animacionSlime
 

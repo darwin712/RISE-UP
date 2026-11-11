@@ -49,7 +49,7 @@ position = Vector2(195, 165)
 script = ExtResource("99_spawn")
 
 [node name="SpawnAleatorio2" type="Marker2D" parent="Enemigos" unique_id=679055342]
-position = Vector2(297, 100)
+position = Vector2(297, 94)
 script = ExtResource("99_spawn")
 
 [node name="Conexiones" type="Node2D" parent="." unique_id=1525534246]

@@ -86,10 +86,14 @@ func _physics_process(delta: float) -> void:
 
 
 func quitar_vida(dano: int) -> void:
-	vida -= dano
-	estado = Estado.desaparece
-	tiempo_estado = 1
-	velocity = Vector2.ZERO
 	if vida <= 0:
 		haMuerto.emit()
 		queue_free()
+		return
+	vida -= dano
+	animacionFantasma.modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	animacionFantasma.modulate = Color.WHITE
+	estado = Estado.desaparece
+	tiempo_estado = 1
+	velocity = Vector2.ZERO
