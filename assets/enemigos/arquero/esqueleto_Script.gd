@@ -35,10 +35,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func quitar_vida(dano: int) -> void:
-	vida -= dano
 	if vida <= 0:
 		haMuerto.emit()
 		queue_free()
+		return
+	vida -= dano
+	animacionEsqueleto.modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	animacionEsqueleto.modulate = Color.WHITE
 
 func _on_timer_disparo_timeout() -> void:
 	disparar()
