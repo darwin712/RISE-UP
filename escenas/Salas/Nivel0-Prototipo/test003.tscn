@@ -93,7 +93,7 @@ position = Vector2(-1, 119)
 rotation = 1.5707964
 
 [node name="flotar" parent="." unique_id=1753112761 instance=ExtResource("9_8mjpd")]
-position = Vector2(238, 286)
+position = Vector2(238, 253)
 
 [editable path="Conexiones/ConexionUP"]
 [editable path="Conexiones/ConexionLEFT"]

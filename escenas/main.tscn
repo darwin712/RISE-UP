@@ -24,6 +24,7 @@ salaInicio = ExtResource("3_26pgj")
 listaSalas = Array[PackedScene]([ExtResource("4_26pgj"), ExtResource("5_dkga6"), ExtResource("6_68mvh"), ExtResource("7_lyxkq"), ExtResource("8_dg7ii")])
 
 [node name="sfxActual" type="AudioStreamPlayer2D" parent="ManejadorDePartida" unique_id=80585716]
+volume_db = 7.373
 
 [node name="HUDVidas" parent="." unique_id=2140723486 instance=ExtResource("6_hud")]
 
