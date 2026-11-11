@@ -4,6 +4,6 @@
 
 [node name="MusicaFondo" type="AudioStreamPlayer" unique_id=974949538]
 stream = ExtResource("1_mgmlb")
-volume_db = -17.463
+volume_db = 0.756
 autoplay = true
 parameters/looping = false
