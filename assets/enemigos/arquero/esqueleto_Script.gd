@@ -8,8 +8,10 @@ extends CharacterBody2D
 @onready var area_contacto: Area2D = $AreaContacto
 
 @onready var jugador: Node2D = get_tree().get_first_node_in_group("jugador")
+signal haMuerto
 
 func _ready() -> void:
+	add_to_group("enemigos")
 	floor_snap_length = 4.0
 	timer_disparo.timeout.connect(_on_timer_disparo_timeout)
 
@@ -35,6 +37,7 @@ func _physics_process(delta: float) -> void:
 func quitar_vida(dano: int) -> void:
 	vida -= dano
 	if vida <= 0:
+		haMuerto.emit()
 		queue_free()
 
 func _on_timer_disparo_timeout() -> void:

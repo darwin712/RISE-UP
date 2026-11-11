@@ -4,7 +4,6 @@
 [ext_resource type="TileSet" uid="uid://ba5mn17haptkr" path="res://assets/tilesetLayers/tilesetFondo.tres" id="1_jc884"]
 [ext_resource type="PackedScene" uid="uid://cdk5i2l8o61nc" path="res://escenas/reusos/punto_conexion.tscn" id="2_ivwpl"]
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="3_pmxiv"]
-[ext_resource type="Script" path="res://escenas/reusos/spawn_enemigo_aleatorio.gd" id="99_spawn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivwpl"]
 size = Vector2(70, 7)
@@ -31,14 +30,6 @@ tile_map_data = PackedByteArray("AAAAABAAAAACAAIAAAABABAAAAACAAIAAAACABAAAAACAAI
 tile_set = ExtResource("1_24v2n")
 
 [node name="Enemigos" type="Node2D" parent="." unique_id=829273017]
-
-[node name="SpawnAleatorio1" type="Marker2D" parent="Enemigos"]
-position = Vector2(125, 210)
-script = ExtResource("99_spawn")
-
-[node name="SpawnAleatorio2" type="Marker2D" parent="Enemigos"]
-position = Vector2(355, 210)
-script = ExtResource("99_spawn")
 
 [node name="Conexiones" type="Node2D" parent="." unique_id=1525534246]
 

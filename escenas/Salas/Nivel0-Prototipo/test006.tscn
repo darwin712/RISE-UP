@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d1eewytefm1qh" path="res://escenas/reusos/muerte_zona.tscn" id="6_uqg1p"]
 [ext_resource type="PackedScene" uid="uid://dpqk3rkqxpk1b" path="res://escenas/bloques/springBlock.tscn" id="7_s30f7"]
 [ext_resource type="PackedScene" uid="uid://yd24m3jq5284" path="res://escenas/reusos/corazon.tscn" id="8_iwp36"]
-[ext_resource type="Script" path="res://escenas/reusos/spawn_enemigo_aleatorio.gd" id="99_spawn"]
+[ext_resource type="Script" uid="uid://bikuitt7cx4mw" path="res://escenas/reusos/spawn_enemigo_aleatorio.gd" id="99_spawn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6xlf"]
 size = Vector2(3, 68)
@@ -37,12 +37,12 @@ tile_set = ExtResource("2_ulqyd")
 
 [node name="Enemigos" type="Node2D" parent="." unique_id=829273017]
 
-[node name="SpawnAleatorio1" type="Marker2D" parent="Enemigos"]
+[node name="SpawnAleatorio1" type="Marker2D" parent="Enemigos" unique_id=1380912006]
 position = Vector2(135, 245)
 script = ExtResource("99_spawn")
 permitir_slime = false
 
-[node name="SpawnAleatorio2" type="Marker2D" parent="Enemigos"]
+[node name="SpawnAleatorio2" type="Marker2D" parent="Enemigos" unique_id=155134193]
 position = Vector2(350, 245)
 script = ExtResource("99_spawn")
 permitir_slime = false

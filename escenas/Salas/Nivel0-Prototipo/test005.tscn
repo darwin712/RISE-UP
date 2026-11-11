@@ -2,20 +2,24 @@
 
 [ext_resource type="TileSet" uid="uid://ba5mn17haptkr" path="res://assets/tilesetLayers/tilesetFondo.tres" id="1_xcpab"]
 [ext_resource type="TileSet" uid="uid://blciglvtm15im" path="res://assets/tilesetLayers/tilesetCastle.tres" id="2_web1o"]
-[ext_resource type="PackedScene" uid="uid://c2jxnlt2ueh1s" path="res://assets/enemigos/arquero/enemigo.tscn" id="3_6uwnt"]
 [ext_resource type="PackedScene" uid="uid://c4kshtw780dqn" path="res://escenas/bloques/bloqueOjo.tscn" id="3_web1o"]
-[ext_resource type="PackedScene" uid="uid://bi82kers54rsf" path="res://assets/enemigos/slime/slime.tscn" id="4_6uwnt"]
 [ext_resource type="PackedScene" uid="uid://cdk5i2l8o61nc" path="res://escenas/reusos/punto_conexion.tscn" id="5_n5ovd"]
 [ext_resource type="PackedScene" uid="uid://d1eewytefm1qh" path="res://escenas/reusos/muerte_zona.tscn" id="7_2m7re"]
 [ext_resource type="PackedScene" uid="uid://c554r0lagv0l3" path="res://escenas/reusos/pared_invisible.tscn" id="8_d6112"]
+[ext_resource type="PackedScene" uid="uid://ctsv532khhl31" path="res://escenas/reusos/area_combate.tscn" id="8_vair3"]
 [ext_resource type="PackedScene" uid="uid://csyctx66pvwqm" path="res://escenas/bloques/switchBlock.tscn" id="9_vair3"]
-[ext_resource type="Script" path="res://escenas/reusos/spawn_enemigo_aleatorio.gd" id="99_spawn"]
+[ext_resource type="PackedScene" uid="uid://t80126t4jxyx" path="res://escenas/bloques/barrasLEFT.tscn" id="10_n5ovd"]
+[ext_resource type="PackedScene" uid="uid://b8udbv2k17s0t" path="res://escenas/bloques/barrasRIGHT.tscn" id="11_jal15"]
+[ext_resource type="Script" uid="uid://bikuitt7cx4mw" path="res://escenas/reusos/spawn_enemigo_aleatorio.gd" id="99_spawn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6xlf"]
 size = Vector2(3, 68)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yqns"]
 size = Vector2(6, 69)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m7re"]
+size = Vector2(347, 166)
 
 [node name="Test001" type="Node2D" unique_id=997104122]
 
@@ -40,11 +44,11 @@ objetivos = [NodePath("../../switchBlock"), NodePath("../../switchBlock2"), Node
 
 [node name="Enemigos" type="Node2D" parent="." unique_id=829273017]
 
-[node name="SpawnAleatorio1" type="Marker2D" parent="Enemigos"]
+[node name="SpawnAleatorio1" type="Marker2D" parent="Enemigos" unique_id=817085203]
 position = Vector2(195, 165)
 script = ExtResource("99_spawn")
 
-[node name="SpawnAleatorio2" type="Marker2D" parent="Enemigos"]
+[node name="SpawnAleatorio2" type="Marker2D" parent="Enemigos" unique_id=679055342]
 position = Vector2(297, 100)
 script = ExtResource("99_spawn")
 
@@ -77,6 +81,21 @@ shape = SubResource("RectangleShape2D_2yqns")
 [node name="Checkpoints" type="Node2D" parent="." unique_id=1507032498]
 
 [node name="otrasAreas" type="Node2D" parent="." unique_id=146467578]
+
+[node name="AreaCombate" parent="otrasAreas" unique_id=1859427827 node_paths=PackedStringArray("barras") instance=ExtResource("8_vair3")]
+visible = false
+position = Vector2(110, 170)
+barras = [NodePath("../BarrasLEFT"), NodePath("../BarrasRIGHT")]
+
+[node name="CollisionShape2D" parent="otrasAreas/AreaCombate" index="0" unique_id=720095582]
+position = Vector2(131.5, -55)
+shape = SubResource("RectangleShape2D_2m7re")
+
+[node name="BarrasLEFT" parent="otrasAreas" unique_id=745978843 instance=ExtResource("10_n5ovd")]
+position = Vector2(57, 162)
+
+[node name="BarrasRIGHT" parent="otrasAreas" unique_id=472923978 instance=ExtResource("11_jal15")]
+position = Vector2(425, 162)
 
 [node name="MuerteZona" parent="otrasAreas" unique_id=2135074123 instance=ExtResource("7_2m7re")]
 position = Vector2(240, 317)
@@ -119,3 +138,4 @@ tile_set = ExtResource("2_web1o")
 
 [editable path="Conexiones/ConexionLEFT"]
 [editable path="Conexiones/ConexionRIGHT"]
+[editable path="otrasAreas/AreaCombate"]

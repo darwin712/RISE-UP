@@ -18,6 +18,10 @@ var estado = Estado.perseguir
 var tiempo_estado: float = 0.0
 var tiempo_dano: float = 0.0
 
+signal haMuerto
+
+func _ready() -> void:
+	add_to_group("enemigos")
 
 func _physics_process(delta: float) -> void:
 
@@ -87,4 +91,5 @@ func quitar_vida(dano: int) -> void:
 	tiempo_estado = 1
 	velocity = Vector2.ZERO
 	if vida <= 0:
+		haMuerto.emit()
 		queue_free()

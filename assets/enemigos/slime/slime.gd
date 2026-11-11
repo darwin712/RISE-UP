@@ -5,6 +5,7 @@ extends CharacterBody2D
 func quitar_vida(dano: int) -> void:
 	vida -= dano
 	if vida <= 0:
+		haMuerto.emit()
 		queue_free()
 
 @onready var animacionSlime: AnimatedSprite2D = %animacionSlime
@@ -14,9 +15,10 @@ func quitar_vida(dano: int) -> void:
 var velocidad = 30.0
 var ultima_posicion_segura := Vector2.ZERO
 var tiene_posicion_segura := false
-
+signal haMuerto
 
 func _ready() -> void:
+	add_to_group("enemigos")
 	floor_snap_length = 4.0
 
 func _physics_process(delta: float) -> void:

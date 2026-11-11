@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://yd24m3jq5284" path="res://escenas/reusos/corazon.tscn" id="8_cse14"]
 [ext_resource type="PackedScene" uid="uid://c4kshtw780dqn" path="res://escenas/bloques/bloqueOjo.tscn" id="9_gb4v3"]
 [ext_resource type="PackedScene" uid="uid://csyctx66pvwqm" path="res://escenas/bloques/switchBlock.tscn" id="10_i2qho"]
-[ext_resource type="Script" path="res://escenas/reusos/spawn_enemigo_aleatorio.gd" id="99_spawn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6xlf"]
 size = Vector2(3, 68)
@@ -39,11 +38,6 @@ tile_map_data = PackedByteArray("AAD//wMAAQAAAAAAAAD//wIAAQAAAAAAAAD//wEAAQAAAAA
 tile_set = ExtResource("1_3hfx4")
 
 [node name="Enemigos" type="Node2D" parent="." unique_id=829273017]
-
-[node name="SpawnAleatorio1" type="Marker2D" parent="Enemigos"]
-position = Vector2(112, 180)
-script = ExtResource("99_spawn")
-permitir_slime = false
 
 [node name="RigidBody2D" parent="Enemigos" unique_id=1463565123 instance=ExtResource("8_71172")]
 position = Vector2(370, -55)
