@@ -76,6 +76,9 @@ func _physics_process(delta: float) -> void:
  
 func quitar_vida(dano: int) -> void:
 	vida -= dano
+	animacion.modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	animacion.modulate = Color.WHITE
 	if vida <= 0:
 		morir()
 	elif vida <= 80 and not fase2:

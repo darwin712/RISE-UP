@@ -6,4 +6,4 @@
 stream = ExtResource("1_mgmlb")
 volume_db = 0.756
 autoplay = true
-parameters/looping = false
+parameters/looping = true

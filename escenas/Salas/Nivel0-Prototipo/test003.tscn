@@ -40,7 +40,7 @@ size = Vector2(3, 68)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yqns"]
 size = Vector2(6, 69)
 
-[node name="Test001" type="Node2D" unique_id=997104122]
+[node name="Test003" type="Node2D" unique_id=997104122]
 
 [node name="Terreno" type="Node2D" parent="." unique_id=446357785]
 
@@ -75,6 +75,7 @@ permitir_slime = false
 
 [node name="ConexionUP" parent="Conexiones" unique_id=1584920316 instance=ExtResource("2_h41o8")]
 position = Vector2(223, 29)
+tipo = 2
 salaForzada = ExtResource("6_final")
 
 [node name="Entrada" parent="Conexiones/ConexionUP" index="0" unique_id=1731812365]

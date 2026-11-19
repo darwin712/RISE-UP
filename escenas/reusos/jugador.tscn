@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://x1sxy15s6248" path="res://assets/personaje/MantyMuerte.png" id="4_10btl"]
 [ext_resource type="AudioStream" uid="uid://bo5nnbmsk6wc3" path="res://assets/SFX/jugador/walljumpSFX.mp3" id="4_ol2kc"]
 [ext_resource type="Texture2D" uid="uid://kw04yssm4af" path="res://assets/personaje/MantySlide.png" id="5_10btl"]
+[ext_resource type="Script" uid="uid://0v83b6cjufc0" path="res://escenas/reusos/camaraJugador.gd" id="5_ol2kc"]
 [ext_resource type="AudioStream" uid="uid://duc5u6ilssaj6" path="res://assets/SFX/jugador/saltoSFX.mp3" id="7_mqg4x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3flwq"]
@@ -161,10 +162,12 @@ position = Vector2(0, -21.5)
 shape = SubResource("RectangleShape2D_3flwq")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=747022163]
-position = Vector2(195, 25)
+position = Vector2(0, 25)
 limit_left = 0
 limit_right = 480
 limit_bottom = 271
+position_smoothing_speed = 15.0
+script = ExtResource("5_ol2kc")
 
 [node name="animacion" type="AnimatedSprite2D" parent="." unique_id=1964985508]
 unique_name_in_owner = true

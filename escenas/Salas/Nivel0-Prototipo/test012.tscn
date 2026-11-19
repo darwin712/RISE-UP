@@ -55,6 +55,7 @@ permitir_fantasma = false
 [node name="ConexionDOWN" parent="Conexiones" unique_id=1046664548 node_paths=PackedStringArray("paredCierre") instance=ExtResource("4_ctrxv")]
 position = Vector2(241, 267)
 direccion = 1
+tipo = 1
 paredCierre = NodePath("../../Cierres/CierreDOWN")
 
 [node name="Entrada" parent="Conexiones/ConexionDOWN" index="0" unique_id=1731812365]
@@ -66,6 +67,7 @@ shape = SubResource("RectangleShape2D_i0qd7")
 
 [node name="ConexionUP" parent="Conexiones" unique_id=1981849732 node_paths=PackedStringArray("paredCierre") instance=ExtResource("4_ctrxv")]
 position = Vector2(237, -380)
+tipo = 2
 paredCierre = NodePath("../../Cierres/CierreUP")
 
 [node name="Entrada" parent="Conexiones/ConexionUP" index="0" unique_id=1731812365]

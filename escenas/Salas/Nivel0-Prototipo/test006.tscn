@@ -15,7 +15,7 @@ size = Vector2(3, 68)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uki6i"]
 size = Vector2(67.00001, 4)
 
-[node name="Test004" type="Node2D" unique_id=997104122]
+[node name="Test006" type="Node2D" unique_id=997104122]
 
 [node name="Terreno" type="Node2D" parent="." unique_id=446357785]
 

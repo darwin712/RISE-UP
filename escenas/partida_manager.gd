@@ -6,8 +6,14 @@ extends Node
 
 @onready var contenedorSala = get_node("../SalaActual")
 @onready var jugador = get_node("../Jugador")
+@onready var camara: Camera2D = get_node("../Jugador/Camera2D")
 @onready var transicion = get_node("../Transicion/Desvanecer")
 @onready var sfxActual: AudioStreamPlayer2D = $sfxActual
+
+const MUSICA_NORMAL: AudioStream = preload("res://assets/SFX/MusicaPrincipal.mp3")
+@export var musicaJefe: AudioStream
+@export var salaJefe: PackedScene
+@onready var musicaFondo := get_node_or_null("/root/MusicaFondo") as AudioStreamPlayer
 
 var salaActual: Node2D
 var idSalaActual: int = -1
@@ -28,6 +34,14 @@ func _ready():
 func reproducir(stream: AudioStream) -> void:
 	sfxActual.stream = stream
 	sfxActual.play()
+
+func cambiarMusica(stream: AudioStream) -> void:
+	if musicaFondo == null or stream == null:
+		return
+	if musicaFondo.stream == stream and musicaFondo.playing:
+		return
+	musicaFondo.stream = stream
+	musicaFondo.play()
 
 func generarMapa():
 	mapaSalas.clear()
@@ -85,7 +99,8 @@ func generarMapa():
 
 		agregarConexionesPendientes(nuevaSala, idNueva, pendientes, nombreConexionNueva)
 		print("Habitación generada: ", idNueva)
-
+	
+	conectarSalasSinSalida()
 	for plantilla in plantillas:
 		plantilla.free()
 	
@@ -213,8 +228,13 @@ func cambiarSala(idDestino: int, conexionDestino: String):
 
 	var destino = obtenerSala(idDestino)
 	contenedorSala.add_child(destino)
+	camara.ajustar_a_sala(destino)
 	salaActual = destino
 	idSalaActual = idDestino
+	if salaJefe != null and mapaSalas[idDestino]["escena"] == salaJefe:
+		cambiarMusica(musicaJefe)
+	else:
+		cambiarMusica(MUSICA_NORMAL)
 
 	var puntoEntrada = destino.get_node("Conexiones/" + conexionDestino + "/Entrada")
 	jugador.global_position = puntoEntrada.global_position
@@ -229,6 +249,49 @@ func cambiarSala(idDestino: int, conexionDestino: String):
 	await get_tree().create_timer(0.1).timeout
 	estaCambiandoSala = false
 
+func conectarSalasSinSalida():
+	var libres: Array[Dictionary] = []
+	for idSala in plantillas.size():
+		var sala = plantillas[idSala]
+		for conexion in sala.get_node("Conexiones").get_children():
+			if conexion.tipo != 0:
+				continue
+			if mapaSalas[idSala]["conexiones"].has(conexion.name):
+				continue
+			libres.append({
+				"sala": idSala,
+				"conexion": conexion.name,
+				"direccion": conexion.direccion
+			})
+
+	libres.shuffle()
+	var usados: Array[int] = []
+
+	for i in libres.size():
+		if usados.has(i):
+			continue
+		var a = libres[i]
+		for j in range(i + 1, libres.size()):
+			if usados.has(j):
+				continue
+			var b = libres[j]
+			if b["sala"] == a["sala"]:
+				continue
+			if b["direccion"] != direccionOpuesta(a["direccion"]):
+				continue
+
+			mapaSalas[a["sala"]]["conexiones"][a["conexion"]] = {
+				"sala": b["sala"],
+				"conexion": b["conexion"]
+			}
+			mapaSalas[b["sala"]]["conexiones"][b["conexion"]] = {
+				"sala": a["sala"],
+				"conexion": a["conexion"]
+			}
+			usados.append(i)
+			usados.append(j)
+			break
+
 func iniciarRun():
 	for sala in instanciasSalas:
 		if sala != null and is_instance_valid(sala):
@@ -242,8 +305,10 @@ func iniciarRun():
 	generarMapa()
 	var inicio = obtenerSala(0)
 	contenedorSala.add_child(inicio)
+	camara.ajustar_a_sala(inicio)
 	salaActual = inicio
 	idSalaActual = 0
+	cambiarMusica(MUSICA_NORMAL)
 
 	var puntoInicio = inicio.get_node("SpawnInicial")
 	jugador.global_position = puntoInicio.global_position
@@ -272,6 +337,7 @@ func enviarASalaEspecial(escena: PackedScene):
 
 	salaEspecial = escena.instantiate() as Node2D
 	contenedorSala.add_child(salaEspecial)
+	camara.ajustar_a_sala(salaEspecial)
 	salaActual = salaEspecial
 
 	var spawn = salaEspecial.get_node("SpawnJugador")
@@ -305,6 +371,7 @@ func volverDeSalaEspecial():
 	salaEspecial = null
 
 	contenedorSala.add_child(salaGuardada)
+	camara.ajustar_a_sala(salaGuardada)
 	salaActual = salaGuardada
 	salaGuardada = null
 
